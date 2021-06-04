@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card(props) {
+function Card() {
 
   return (
     <article className="cities__place-card place-card">

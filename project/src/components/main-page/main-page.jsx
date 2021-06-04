@@ -2,8 +2,7 @@ import React from 'react';
 import Card from '../card/card';
 import PropTypes from 'prop-types';
 
-function MainPage(props) {
-  const {cardsCount} = props;
+function MainPage({cardsCount}) {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -93,7 +92,7 @@ function MainPage(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array(cardsCount).fill(null).map((el, i) => el = <Card key={i.toString()}/>)}
+                {Array(cardsCount).fill(null).map((it, i) => <Card key={i} />)}
               </div>
             </section>
             <div className="cities__right-section">
