@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 function Card() {
 
@@ -8,9 +10,9 @@ function Card() {
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <button>
+        <Link to={AppRoute.ROOM}>
           <img className="place-card__image" src="img/apartment-01.jpg" width="260" height="200" alt="Place"/>
-        </button>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -32,7 +34,7 @@ function Card() {
           </div>
         </div>
         <h2 className="place-card__name">
-          <button>Beautiful &amp; luxurious apartment at great location</button>
+          <Link to={AppRoute.ROOM}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
