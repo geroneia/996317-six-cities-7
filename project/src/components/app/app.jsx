@@ -7,19 +7,21 @@ import Favorites from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import Room from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
+// import roomPageProp from '../room-page/room-page.prop';
 
-function App({cardsCount}) {
-
+function App(props) {
+  const {offers} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
-          <MainPage cardsCount={cardsCount} />
+          <MainPage offers={offers} />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
+          <Favorites offers={offers} />
           <Favorites />
         </Route>
         <Route exact path={AppRoute.ROOM}>
@@ -34,7 +36,7 @@ function App({cardsCount}) {
 }
 
 App.propTypes = {
-  cardsCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
