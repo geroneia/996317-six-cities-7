@@ -43,7 +43,7 @@ function FavoritesCard({favoriteOffer}) {
 }
 
 FavoritesCard.propTypes = {
-  favoriteOffer: roomPageProp,
+  favoriteOffer: roomPageProp.isRequired,
 };
 
 

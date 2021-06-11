@@ -7,11 +7,11 @@ import Favorites from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import Room from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
-// import roomPageProp from '../room-page/room-page.prop';
+import roomPageProp from '../room-page/room-page.prop';
 
 function App(props) {
   const {offers} = props;
-  const getfavoriteOffers = () => offers.filter(({isFavorite}) => isFavorite === true);
+  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite === true);
   return (
     <BrowserRouter>
       <Switch>
@@ -22,7 +22,7 @@ function App(props) {
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites favoriteOffers={getfavoriteOffers()} />
+          <Favorites favoriteOffers={favoriteOffers} />
           <Favorites />
         </Route>
         <Route exact path={AppRoute.ROOM}>
@@ -37,7 +37,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(roomPageProp).isRequired,
 };
 
 export default App;

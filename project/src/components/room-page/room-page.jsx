@@ -1,13 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import Header from '../page-header/page-header';
 import Form from '../form/form';
 import {getRatingInPercent, getType}from '../../utils';
 import roomPageProp from '../room-page/room-page.prop';
+import PropTypes from 'prop-types';
 
-function Room({offer}) {
-  const {price, rating, title, type, bedrooms, maxAdults, goods, host, description} = offer;
+function Room({offers}) {
+  const {id} = useParams();
+
+  const chosenOffer = offers.find((offer) => offer.id === id);
+  const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = chosenOffer;
   return (
     <div className="page">
       <Header/>
@@ -15,24 +19,13 @@ function Room({offer}) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Studio"/>
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Studio"/>
-              </div>
+              {images.map((image) => (
+                <React.Fragment key={image} >
+                  <div className="property__image-wrapper">
+                    <img className="property__image" src={image} alt={type}/>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
           </div>
           <div className="property__container container">
@@ -246,7 +239,7 @@ function Room({offer}) {
 }
 
 Room.propTypes = {
-  offer: roomPageProp,
+  offers: PropTypes.arrayOf(roomPageProp).isRequired,
 };
 
 export default Room;
