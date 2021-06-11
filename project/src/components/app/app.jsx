@@ -11,6 +11,7 @@ import SignIn from '../sign-in-page/sign-in-page';
 
 function App(props) {
   const {offers} = props;
+  const getfavoriteOffers = () => offers.filter(({isFavorite}) => isFavorite === true);
   return (
     <BrowserRouter>
       <Switch>
@@ -21,11 +22,11 @@ function App(props) {
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers={offers} />
+          <Favorites favoriteOffers={getfavoriteOffers()} />
           <Favorites />
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <Room />
+          <Room offers={offers} />
         </Route>
         <Route>
           <NotFound />

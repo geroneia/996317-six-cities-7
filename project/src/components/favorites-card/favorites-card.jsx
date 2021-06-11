@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {AppRoute} from '../../const';
 import roomPageProp from '../room-page/room-page.prop';
+// import PropTypes from 'prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 
-function FavoritesCard({offer}) {
-  const {previewImage, price, rating, title, type} = offer;
+function FavoritesCard({favoriteOffer}) {
+  const {previewImage, price, rating, title, type} = favoriteOffer;
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -42,7 +43,8 @@ function FavoritesCard({offer}) {
 }
 
 FavoritesCard.propTypes = {
-  offer: roomPageProp,
+  favoriteOffer: roomPageProp,
 };
+
 
 export default FavoritesCard;

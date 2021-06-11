@@ -1,7 +1,5 @@
 import {nanoid} from 'nanoid';
 
-const localNewOfferId = nanoid();
-
 const offers = [{
   'bedrooms': 3,
   'city': {
@@ -20,7 +18,7 @@ const offers = [{
     'isPro': true,
     'name': 'Angelina',
   },
-  'id': localNewOfferId,
+  'id': nanoid(),
   'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
   'isFavorite': false,
   'isPremium': true,
@@ -54,7 +52,7 @@ const offers = [{
     'isPro': true,
     'name': 'Rick',
   },
-  'id': localNewOfferId,
+  'id': nanoid(),
   'images': ['img/apartment-03.jpg', 'img/apartment-02.jpg'],
   'isFavorite': false,
   'isPremium': false,
@@ -88,9 +86,9 @@ const offers = [{
     'isPro': true,
     'name': 'Morty',
   },
-  'id': localNewOfferId,
+  'id': nanoid(),
   'images': ['img/room.jpg', 'img/room.jpg'],
-  'isFavorite': false,
+  'isFavorite': true,
   'isPremium': true,
   'location': {
     'latitude': 52.36114492233874,
@@ -122,7 +120,7 @@ const offers = [{
     'isPro': true,
     'name': 'Angelina',
   },
-  'id': localNewOfferId,
+  'id': nanoid(),
   'images': ['img/studio-01.jpg', 'img/studio-01.jpg'],
   'isFavorite': true,
   'isPremium': false,

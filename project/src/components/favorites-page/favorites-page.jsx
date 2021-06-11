@@ -4,8 +4,10 @@ import {AppRoute} from '../../const';
 import Header from '../page-header/page-header';
 import PropTypes from 'prop-types';
 import FavoritesCard from '../favorites-card/favorites-card';
+import roomPageProp from '../room-page/room-page.prop';
 
-function Favorites({offers}) {
+
+function Favorites({favoriteOffers}) {
   return (
     <div className="page">
       <Header/>
@@ -23,7 +25,7 @@ function Favorites({offers}) {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {offers.map((offer) => <FavoritesCard key={offer.id} offer={offer} />)}
+                  {favoriteOffers.map((favoriteOffer) => <FavoritesCard key={favoriteOffer.id} favoriteOffer={favoriteOffer} />)}
                 </div>
               </li>
             </ul>
@@ -40,7 +42,7 @@ function Favorites({offers}) {
 }
 
 Favorites.propTypes = {
-  offers: PropTypes.array.isRequired,
+  favoriteOffers: PropTypes.arrayOf(roomPageProp).isRequired,
 };
 
 export default Favorites;
