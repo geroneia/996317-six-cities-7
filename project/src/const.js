@@ -16,3 +16,5 @@ export const RATING_TITLES = {
   2: 'badly',
   1: 'terribly',
 };
+
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

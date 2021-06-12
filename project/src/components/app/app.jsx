@@ -7,11 +7,11 @@ import Favorites from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import Room from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
-import roomPageProp from '../room-page/room-page.prop';
+import roomPageProp from '../room-page/room-page';
 
 function App(props) {
   const {offers} = props;
-  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite === true);
+  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
   return (
     <BrowserRouter>
       <Switch>

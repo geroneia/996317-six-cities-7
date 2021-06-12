@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import {AppRoute} from '../../const';
 import roomPageProp from '../room-page/room-page.prop';
 import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../premium-mark/premium-mark';
@@ -9,7 +8,7 @@ function Card({offer}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
   return (
     <article className="cities__place-card place-card">
-      {isPremium ? <PremiumMark /> : ''}
+      {isPremium && <PremiumMark />}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>

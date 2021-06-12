@@ -87,11 +87,7 @@ function Room({offers}) {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {host.isPro ?
-                    `<span className="property__user-status">
-                      Pro
-                      </span>` :
-                    ''}
+                  {!!host.isPro && <span className="property__user-status">Pro</span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">

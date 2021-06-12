@@ -10,7 +10,7 @@ const offers = adaptToClient(mockOffers);
 ReactDOM.render(
   <React.StrictMode>
     <App
-      offers = {offers}
+      offers={offers}
     />
   </React.StrictMode>,
   document.getElementById('root'));

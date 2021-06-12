@@ -1,4 +1,4 @@
-import {MAX_RATING} from './const';
+import {MAX_RATING, CITIES} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / MAX_RATING}%`;
@@ -25,8 +25,24 @@ const changeCase = (obj) => {
 };
 
 
-export const adaptToClient = (object) => {
-  const transformedObj = JSON.parse(JSON.stringify(object));
+export const adaptToClient = (data) => {
+  const transformedObj = JSON.parse(JSON.stringify(data));
   changeCase(transformedObj);
   return transformedObj;
+};
+
+export const sortOffersByTown = (arr) => {
+  const sortedOffers = {};
+
+  arr.forEach((obj) => {
+    const currentCity = obj.city.name;
+
+    if (CITIES.includes(currentCity.toString())&& sortedOffers[currentCity] ===  undefined) {
+      sortedOffers[currentCity] = [];
+      sortedOffers[currentCity].push(obj);
+    } else {
+      sortedOffers[currentCity].push(obj);
+    }
+  });
+  return sortedOffers;
 };
