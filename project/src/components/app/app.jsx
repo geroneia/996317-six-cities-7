@@ -8,10 +8,11 @@ import NotFound from '../not-found-page/not-found-page';
 import Room from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
 import roomPageProp from '../room-page/room-page';
+import {sortOffersByTown} from '../../utils';
 
 function App(props) {
   const {offers} = props;
-  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
+  const favoriteOffers = sortOffersByTown(offers);
   return (
     <BrowserRouter>
       <Switch>
@@ -23,7 +24,6 @@ function App(props) {
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites favoriteOffers={favoriteOffers} />
-          <Favorites />
         </Route>
         <Route exact path={AppRoute.ROOM}>
           <Room offers={offers} />

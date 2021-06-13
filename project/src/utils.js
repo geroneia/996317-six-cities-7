@@ -31,17 +31,20 @@ export const adaptToClient = (data) => {
   return transformedObj;
 };
 
-export const sortOffersByTown = (arr) => {
+
+export const sortOffersByTown = (offers) => {
+
+  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
   const sortedOffers = {};
 
-  arr.forEach((obj) => {
-    const currentCity = obj.city.name;
+  favoriteOffers.forEach((offer) => {
+    const currentCity = offer.city.name;
 
-    if (CITIES.includes(currentCity.toString())&& sortedOffers[currentCity] ===  undefined) {
+    if (CITIES.includes(currentCity.toString())&& typeof sortedOffers[currentCity] ===  'undefined') {
       sortedOffers[currentCity] = [];
-      sortedOffers[currentCity].push(obj);
+      sortedOffers[currentCity].push(offer);
     } else {
-      sortedOffers[currentCity].push(obj);
+      sortedOffers[currentCity].push(offer);
     }
   });
   return sortedOffers;

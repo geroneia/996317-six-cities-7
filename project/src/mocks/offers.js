@@ -76,7 +76,7 @@ const mockOffers = [{
       'longitude': 4.895168,
       'zoom': 10,
     },
-    'name': 'Amsterdam',
+    'name': 'Cologne',
   },
   'description': 'Consectetur anim elit nostrud sunt dolore esse.',
   'goods': ['Heating', 'Kitchen', 'Split system', 'Washing machine'],

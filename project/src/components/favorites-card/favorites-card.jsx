@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {AppRoute} from '../../const';
 import roomPageProp from '../room-page/room-page.prop';
 import {getRatingInPercent, getType} from '../../utils';
 
-function FavoritesCard({favoriteOffer}) {
-  const {previewImage, price, rating, title, type} = favoriteOffer;
+function FavoritesCard({offer}) {
+  const {previewImage, price, rating, title, type, id} = offer;
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.ROOM}>
+        <Link Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place"/>
         </Link>
       </div>
@@ -33,7 +32,7 @@ function FavoritesCard({favoriteOffer}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.ROOM}>{title}</Link>
+          <Link Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{getType(type)}</p>
       </div>
@@ -42,7 +41,7 @@ function FavoritesCard({favoriteOffer}) {
 }
 
 FavoritesCard.propTypes = {
-  favoriteOffer: roomPageProp.isRequired,
+  offer: roomPageProp.isRequired,
 };
 
 export default FavoritesCard;

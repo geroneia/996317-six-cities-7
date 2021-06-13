@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import Header from '../page-header/page-header';
 import PropTypes from 'prop-types';
-import FavoritesCard from '../favorites-card/favorites-card';
-import roomPageProp from '../room-page/room-page.prop';
+import FavoriteCity from '../favorite-city/favorite-city';
 
 
 function Favorites({favoriteOffers}) {
+  const cities = Object.keys(favoriteOffers);
   return (
     <div className="page">
       <Header/>
@@ -16,18 +16,7 @@ function Favorites({favoriteOffers}) {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <Link className="locations__item-link" to={AppRoute.MAIN}>
-                      <span>Amsterdam</span>
-                    </Link>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {favoriteOffers.map((favoriteOffer) => <FavoritesCard key={favoriteOffer.id} favoriteOffer={favoriteOffer} />)}
-                </div>
-              </li>
+              {cities.map((city) => <FavoriteCity key={city} city={city} favoriteOffers={favoriteOffers[city]} />)}
             </ul>
           </section>
         </div>
@@ -42,7 +31,7 @@ function Favorites({favoriteOffers}) {
 }
 
 Favorites.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(roomPageProp).isRequired,
+  favoriteOffers: PropTypes.objectOf(PropTypes.string),
 };
 
 export default Favorites;
