@@ -20,11 +20,9 @@ function Room({offers}) {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {images.map((image) => (
-                <React.Fragment key={image} >
-                  <div className="property__image-wrapper">
-                    <img className="property__image" src={image} alt={type}/>
-                  </div>
-                </React.Fragment>
+                <div key={image} className="property__image-wrapper">
+                  <img className="property__image" src={image} alt={type}/>
+                </div>
               ))}
             </div>
           </div>
@@ -70,11 +68,9 @@ function Room({offers}) {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {goods.map((good) => (
-                    <React.Fragment key={good} >
-                      <li className="property__inside-item">
-                        {good}
-                      </li>
-                    </React.Fragment>
+                    <li key={good} className="property__inside-item">
+                      {good}
+                    </li>
                   ))}
                 </ul>
               </div>
