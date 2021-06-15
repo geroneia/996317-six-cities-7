@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 
+const locationPropTypes = PropTypes.shape({
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired,
+});
+
 export default PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
   city: PropTypes.shape({
-    location: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-      zoom: PropTypes.number.isRequired,
-    }).isRequired,
+    location: locationPropTypes.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   description: PropTypes.string.isRequired,
@@ -22,11 +24,7 @@ export default PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   isFavorite: PropTypes.bool,
   isPremium: PropTypes.bool,
-  location: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }).isRequired,
+  location: locationPropTypes.isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import Header from '../page-header/page-header';
+import PageHeader from '../page-header/page-header';
 import PropTypes from 'prop-types';
 import FavoriteCity from '../favorite-city/favorite-city';
 
@@ -10,7 +10,7 @@ function Favorites({favoriteOffers}) {
   const cities = Object.keys(favoriteOffers);
   return (
     <div className="page">
-      <Header/>
+      <PageHeader/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

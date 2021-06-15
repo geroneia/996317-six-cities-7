@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import FavoritesCard from '../favorites-card/favorites-card';
 import {AppRoute} from '../../const';
 import PropTypes from 'prop-types';
-import roomPageProp from '../room-page/room-page.prop';
+import roomProp from '../room-page/room-page.types';
 
 function FavoriteCity(props) {
   const {city, favoriteOffers} = props;
@@ -25,7 +25,7 @@ function FavoriteCity(props) {
 
 FavoriteCity.propTypes = {
   city: PropTypes.string.isRequired,
-  favoriteOffers: PropTypes.arrayOf(roomPageProp).isRequired,
+  favoriteOffers: PropTypes.arrayOf(roomProp).isRequired,
 };
 
 

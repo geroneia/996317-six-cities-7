@@ -1,20 +1,20 @@
 import React from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import Header from '../page-header/page-header';
+import PageHeader from '../page-header/page-header';
 import Form from '../form/form';
 import {getRatingInPercent, getType}from '../../utils';
-import roomPageProp from '../room-page/room-page.prop';
+import roomProp from './room-page.types';
 import PropTypes from 'prop-types';
 
-function Room({offers}) {
+function RoomPage({offers}) {
   const {id} = useParams();
 
   const chosenOffer = offers.find((offer) => offer.id === id);
   const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = chosenOffer;
   return (
     <div className="page">
-      <Header/>
+      <PageHeader/>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -230,8 +230,8 @@ function Room({offers}) {
   );
 }
 
-Room.propTypes = {
-  offers: PropTypes.arrayOf(roomPageProp).isRequired,
+RoomPage.propTypes = {
+  offers: PropTypes.arrayOf(roomProp).isRequired,
 };
 
-export default Room;
+export default RoomPage;

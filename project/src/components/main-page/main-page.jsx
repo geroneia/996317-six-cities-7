@@ -1,15 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import Header from '../page-header/page-header';
+import PageHeader from '../page-header/page-header';
 import OffersList from '../offers-list/offers-list';
-// import roomPageProp from '../room-page/room-page.prop';
 import PropTypes from 'prop-types';
+import roomProp from '../room-page/room-page.types';
 
 function MainPage({offers}) {
   return (
     <div className="page page--gray page--main">
-      <Header/>
+      <PageHeader/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -83,7 +83,7 @@ function MainPage({offers}) {
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(roomProp).isRequired,
 };
 
 export default MainPage;

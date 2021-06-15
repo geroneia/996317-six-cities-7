@@ -9,7 +9,7 @@ export const MAX_RATING = 5;
 
 export const RATINGS = [5, 4, 3, 2, 1];
 
-export const RATING_TITLES = {
+export const RatingTitles = {
   5: 'perfect',
   4: 'good',
   3: 'not bad',

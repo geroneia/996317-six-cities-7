@@ -5,9 +5,9 @@ import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
 import Favorites from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
-import Room from '../room-page/room-page';
+import RoomPage from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
-import roomPageProp from '../room-page/room-page';
+import roomProp from '../room-page/room-page';
 import {sortOffersByTown} from '../../utils';
 
 function App(props) {
@@ -26,7 +26,7 @@ function App(props) {
           <Favorites favoriteOffers={favoriteOffers} />
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <Room offers={offers} />
+          <RoomPage offers={offers} />
         </Route>
         <Route>
           <NotFound />
@@ -37,7 +37,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(roomPageProp).isRequired,
+  offers: PropTypes.arrayOf(roomProp).isRequired,
 };
 
 export default App;
