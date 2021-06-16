@@ -4,7 +4,7 @@ import {AppRoute} from '../../const';
 import PageHeader from '../page-header/page-header';
 import OffersList from '../offers-list/offers-list';
 import PropTypes from 'prop-types';
-import roomProp from '../room-page/room-page.types';
+import * as propType from '../../prop-types';
 
 function MainPage({offers}) {
   return (
@@ -83,7 +83,7 @@ function MainPage({offers}) {
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(roomProp).isRequired,
+  offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
 export default MainPage;

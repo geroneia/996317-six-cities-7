@@ -5,8 +5,7 @@ import PageHeader from '../page-header/page-header';
 import PropTypes from 'prop-types';
 import FavoriteCity from '../favorite-city/favorite-city';
 
-
-function Favorites({favoriteOffers}) {
+function FavoritesPage({favoriteOffers}) {
   const cities = Object.keys(favoriteOffers);
   return (
     <div className="page">
@@ -30,8 +29,8 @@ function Favorites({favoriteOffers}) {
   );
 }
 
-Favorites.propTypes = {
+FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.objectOf(PropTypes.string),
 };
 
-export default Favorites;
+export default FavoritesPage;

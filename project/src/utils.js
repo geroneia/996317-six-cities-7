@@ -6,12 +6,10 @@ export const getRatingInPercent = (rating) =>
 export const getType = (type) =>
   type[0].toUpperCase() + type.slice(1);
 
-
 const getChangedCase = (data) => {
   for (const key in data) {
-    if (typeof data[key] !== 'object'&&data[key] !== null) {
-
-      const newKey = key.replace(/_\w/, (match, offset, input) => input[offset+1].toUpperCase());
+    if (typeof data[key] !== 'object' && data[key] !== null) {
+      const newKey = key.replace(/_\w/, (match, offset, input) => input[offset + 1].toUpperCase());
       if (key !== newKey) {
         Object.defineProperty(data, newKey, Object.getOwnPropertyDescriptor(data, key));
         delete data[key];
@@ -23,7 +21,6 @@ const getChangedCase = (data) => {
   return data;
 };
 
-
 export const adaptToClient = (data) => getChangedCase(JSON.parse(JSON.stringify(data)));
 
 export const sortOffersByTown = (offers) => {
@@ -33,7 +30,7 @@ export const sortOffersByTown = (offers) => {
   favoriteOffers.forEach((offer) => {
     const currentCity = offer.city.name;
 
-    if (CITIES.includes(currentCity.toString())&&typeof sortedOffers[currentCity] === 'undefined') {
+    if (CITIES.includes(currentCity.toString()) && typeof sortedOffers[currentCity] === 'undefined') {
       sortedOffers[currentCity] = [offer];
     } else {
       sortedOffers[currentCity].push(offer);

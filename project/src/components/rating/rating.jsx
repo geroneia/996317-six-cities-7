@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RatingTitles} from '../../const';
+import {RATINGS_TITLES} from '../../const';
 
-function Rating({star}) {
+function Rating({value}) {
   return (
     <>
-      <input className="form__rating-input visually-hidden" name="rating" value={`${star}`} id={`${star}-stars`} type="radio"/>
-      <label htmlFor={`${star}-stars`} className="reviews__rating-label form__rating-label" title={`${RatingTitles[star]}`}>
+      <input className="form__rating-input visually-hidden" name="rating" value={`${value}`} id={`${value}-stars`} type="radio"/>
+      <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={`${RATINGS_TITLES[value - 1]}`}>
         <svg className="form__star-image" width="37" height="33">
           <use xlinkHref="#icon-star" />
         </svg>
@@ -16,7 +16,7 @@ function Rating({star}) {
 }
 
 Rating.propTypes = {
-  star: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default Rating;

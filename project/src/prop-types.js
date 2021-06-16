@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 
-const locationPropTypes = PropTypes.shape({
+const location = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
   zoom: PropTypes.number.isRequired,
 });
 
-export default PropTypes.shape({
+export const offer = PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
   city: PropTypes.shape({
-    location: locationPropTypes.isRequired,
+    location: location.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   description: PropTypes.string.isRequired,
@@ -24,7 +24,7 @@ export default PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   isFavorite: PropTypes.bool,
   isPremium: PropTypes.bool,
-  location: locationPropTypes.isRequired,
+  location: location.isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

@@ -3,17 +3,24 @@ import Rating from '../rating/rating';
 import {RATINGS} from '../../const';
 
 function Form() {
-  const [userComment, setUserComment] = useState({rating: '0', message: ''});
+  const [userComment, setUserComment] = useState({rating: '', message: ''});
 
-  const handleRatingChange = (evt) => setUserComment({...userComment, rating: evt.target.value});
-  const handleMessageChange = (evt) => setUserComment({...userComment, message: evt.target.value});
+  const handleRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
+  const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
 
   const {rating, message} = userComment;
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map((star) => <Rating key={star} star={star} checked={rating === `${star}`}onChange = {handleRatingChange} />)}
+        {RATINGS.map((name) => (
+          <Rating
+            key={name}
+            value={name}
+            checked={rating === `${name}`}
+            onChange={handleRatingChange}
+          />
+        ))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
         onChange = {handleMessageChange}

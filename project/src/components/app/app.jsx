@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
-import Favorites from '../favorites-page/favorites-page';
+import FavoritesPage from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import RoomPage from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
@@ -23,7 +23,7 @@ function App(props) {
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites favoriteOffers={favoriteOffers} />
+          <FavoritesPage favoriteOffers={favoriteOffers} />
         </Route>
         <Route exact path={AppRoute.ROOM}>
           <RoomPage offers={offers} />

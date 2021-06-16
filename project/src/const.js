@@ -9,12 +9,6 @@ export const MAX_RATING = 5;
 
 export const RATINGS = [5, 4, 3, 2, 1];
 
-export const RatingTitles = {
-  5: 'perfect',
-  4: 'good',
-  3: 'not bad',
-  2: 'badly',
-  1: 'terribly',
-};
+export const RATINGS_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

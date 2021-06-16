@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import roomProp from '../room-page/room-page.types';
+import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../premium-mark/premium-mark';
 
@@ -43,7 +43,7 @@ function Card({offer}) {
 }
 
 Card.propTypes = {
-  offer: roomProp,
+  offer: propType.offer,
 };
 
 export default Card;

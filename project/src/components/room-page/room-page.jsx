@@ -4,7 +4,7 @@ import {AppRoute} from '../../const';
 import PageHeader from '../page-header/page-header';
 import Form from '../form/form';
 import {getRatingInPercent, getType}from '../../utils';
-import roomProp from './room-page.types';
+import * as propType from '../../prop-types';
 import PropTypes from 'prop-types';
 
 function RoomPage({offers}) {
@@ -231,7 +231,7 @@ function RoomPage({offers}) {
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(roomProp).isRequired,
+  offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
 export default RoomPage;

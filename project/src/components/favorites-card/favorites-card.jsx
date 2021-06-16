@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import roomProp from '../room-page/room-page.types';
+import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 
 function FavoritesCard({offer}) {
@@ -41,7 +41,7 @@ function FavoritesCard({offer}) {
 }
 
 FavoritesCard.propTypes = {
-  offer: roomProp.isRequired,
+  offer: propType.offer.isRequired,
 };
 
 export default FavoritesCard;
