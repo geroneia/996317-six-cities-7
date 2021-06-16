@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import Header from '../page-header/page-header';
-import Card from '../card/card';
+import PageHeader from '../page-header/page-header';
+import OffersList from '../offers-list/offers-list';
 import PropTypes from 'prop-types';
+import * as propType from '../../prop-types';
 
-function MainPage({cardsCount}) {
+function MainPage({offers}) {
   return (
     <div className="page page--gray page--main">
-      <Header/>
+      <PageHeader/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -51,7 +52,7 @@ function MainPage({cardsCount}) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -68,7 +69,7 @@ function MainPage({cardsCount}) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array(cardsCount).fill(null).map((it, i) => <Card key={i} />)}
+                <OffersList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
@@ -82,7 +83,7 @@ function MainPage({cardsCount}) {
 }
 
 MainPage.propTypes = {
-  cardsCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
 export default MainPage;

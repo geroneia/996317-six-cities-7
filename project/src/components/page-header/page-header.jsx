@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 
-function Header() {
+function PageHeader() {
   return (
     <header className="header">
       <div className="container">
@@ -29,4 +29,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default PageHeader;
