@@ -28,5 +28,4 @@ FavoriteCity.propTypes = {
   favoriteOffers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
-
 export default FavoriteCity;

@@ -5,10 +5,10 @@ export const AppRoute = {
   ROOM: '/offer/:id',
 };
 
-export const MAX_RATING = 5;
+// export const MAX_RATING = 5;
 
-export const RATINGS = [5, 4, 3, 2, 1];
+export const RATINGS = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
-export const RATINGS_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
+// export const RATINGS_TITLES = [];
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

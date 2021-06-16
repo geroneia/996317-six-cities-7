@@ -4,29 +4,30 @@ import {RATINGS} from '../../const';
 
 function Form() {
   const [userComment, setUserComment] = useState({rating: '', message: ''});
-
   const handleRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
-
   const {rating, message} = userComment;
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map((name) => (
+        {RATINGS.map((name, i) => (
           <Rating
             key={name}
-            value={name}
-            checked={rating === `${name}`}
+            value={RATINGS.length - i}
+            title={name}
+            checked={rating === {name}}
             onChange={handleRatingChange}
           />
         ))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review" name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
         onChange = {handleMessageChange}
         value={message}
-      >
-      </textarea>
+      />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.

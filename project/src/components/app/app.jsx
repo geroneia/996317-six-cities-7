@@ -7,7 +7,7 @@ import FavoritesPage from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import RoomPage from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
-import roomProp from '../room-page/room-page';
+import * as propType from '../../prop-types';
 import {sortOffersByTown} from '../../utils';
 
 function App(props) {
@@ -37,7 +37,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(roomProp).isRequired,
+  offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
 export default App;

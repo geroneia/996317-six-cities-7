@@ -1,7 +1,7 @@
-import {MAX_RATING, CITIES} from './const';
+import {RATINGS, CITIES} from './const';
 
 export const getRatingInPercent = (rating) =>
-  `${rating * 100 / MAX_RATING}%`;
+  `${rating * 100 / RATINGS.length}%`;
 
 export const getType = (type) =>
   type[0].toUpperCase() + type.slice(1);
