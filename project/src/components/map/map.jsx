@@ -29,7 +29,6 @@ function Map({city, offers}) {
           .addTo(map);
       });
     }
-
   }, [map, offers]);
 
   return (
