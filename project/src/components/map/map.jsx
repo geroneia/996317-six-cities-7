@@ -18,7 +18,7 @@ function Map({city, offers}) {
 
   useEffect(() => {
     if (map) {
-      offers.forEach(({offer}) => {
+      offers.forEach((offer) => {
         leaflet
           .marker({
             lat: offer.location.latitude,
@@ -29,7 +29,7 @@ function Map({city, offers}) {
           .addTo(map);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [map, offers]);
 
   return (

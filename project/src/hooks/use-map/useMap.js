@@ -13,7 +13,7 @@ function useMap(mapRef, city) {
         zoomControl: false,
         marker: true,
       });
-      map.setView([latitude, longitude], zoom);
+      instance.setView([latitude, longitude], zoom);
 
       leaflet
         .tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
