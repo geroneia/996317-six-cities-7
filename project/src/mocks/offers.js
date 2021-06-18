@@ -4,8 +4,8 @@ const mockOffers = [{
   'bedrooms': 3,
   'city': {
     'location': {
-      'latitude': 52.370216,
-      'longitude': 4.895168,
+      'latitude': 52.38333,
+      'longitude': 4.9,
       'zoom': 10,
     },
     'name': 'Amsterdam',
@@ -23,8 +23,8 @@ const mockOffers = [{
   'is_favorite': false,
   'is_premium': true,
   'location': {
-    'latitude': 52.35514938496378,
-    'longitude': 4.673877537499948,
+    'latitude': 52.3909553943508,
+    'longitude': 4.85309666406198,
     'zoom': 8,
   },
   'max_adults': 4,
@@ -38,11 +38,11 @@ const mockOffers = [{
   'bedrooms': 1,
   'city': {
     'location': {
-      'latitude': 49.16351837062501,
-      'longitude': 2.325041060240048,
+      'latitude': 52.38333,
+      'longitude': 4.9,
       'zoom': 10,
     },
-    'name': 'Paris',
+    'name': 'Amsterdam',
   },
   'description': 'A quiet Eu amet ad cupidatat enim et dolore amet minim ex excepteur.',
   'goods': ['Heating', 'Kitchen', 'Cat', 'Washing machine', 'Coffee machine'],
@@ -57,8 +57,8 @@ const mockOffers = [{
   'is_favorite': false,
   'is_premium': false,
   'location': {
-    'latitude': 48.90124596102839,
-    'longitude': 2.3021282846332713,
+    'latitude': 52.369553943508,
+    'longitude': 4.85309666406198,
     'zoom': 8,
   },
   'max_adults': 2,
@@ -72,11 +72,11 @@ const mockOffers = [{
   'bedrooms': 2,
   'city': {
     'location': {
-      'latitude': 52.370216,
-      'longitude': 4.895168,
+      'latitude': 52.38333,
+      'longitude': 4.9,
       'zoom': 10,
     },
-    'name': 'Cologne',
+    'name': 'Amsterdam',
   },
   'description': 'Consectetur anim elit nostrud sunt dolore esse.',
   'goods': ['Heating', 'Kitchen', 'Split system', 'Washing machine'],
@@ -91,8 +91,8 @@ const mockOffers = [{
   'is_favorite': true,
   'is_premium': true,
   'location': {
-    'latitude': 52.36114492233874,
-    'longitude': 4.832547797973042,
+    'latitude': 52.3909553943508,
+    'longitude': 4.929309666406198,
     'zoom': 8,
   },
   'max_adults': 4,
@@ -106,8 +106,8 @@ const mockOffers = [{
   'bedrooms': 2,
   'city': {
     'location': {
-      'latitude': 52.370216,
-      'longitude': 4.895168,
+      'latitude': 52.38333,
+      'longitude': 4.9,
       'zoom': 10,
     },
     'name': 'Amsterdam',
@@ -125,8 +125,8 @@ const mockOffers = [{
   'is_favorite': true,
   'is_premium': false,
   'location': {
-    'latitude': 52.30932827128466,
-    'longitude': 4.7913490690654355,
+    'latitude': 52.3809553943508,
+    'longitude': 4.939309666406198,
     'zoom': 8,
   },
   'max_adults': 3,
