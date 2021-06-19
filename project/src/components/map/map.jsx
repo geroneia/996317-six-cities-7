@@ -7,8 +7,8 @@ import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_DEFAULT} from '../../const';
 
 function Map({city, offers}) {
-  const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const ref = useRef(null);
+  const map = useMap(ref, city);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -35,7 +35,7 @@ function Map({city, offers}) {
     <div
       id="map"
       style={{minHeight: 980}}
-      ref={mapRef}
+      ref={ref}
     />
   );
 }
