@@ -26,7 +26,7 @@ function Form() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange = {handleMessageChange}
+        onChange={handleMessageChange}
         value={message}
       />
       <div className="reviews__button-wrapper">

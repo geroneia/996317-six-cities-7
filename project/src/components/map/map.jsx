@@ -18,11 +18,11 @@ function Map({city, offers}) {
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
+      offers.forEach(({location: {latitude, longitude}}) => {
         leaflet
           .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
+            lat: latitude,
+            lng: longitude,
           }, {
             icon: defaultCustomIcon,
           })
@@ -36,8 +36,7 @@ function Map({city, offers}) {
       id="map"
       style={{minHeight: 980}}
       ref={mapRef}
-    >
-    </div>
+    />
   );
 }
 
