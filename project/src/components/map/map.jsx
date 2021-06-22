@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
-import useMap from '../../hooks/use-map/useMap';
+import useMap from '../../hooks/use-map/use-map';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_DEFAULT} from '../../const';
@@ -34,7 +34,6 @@ function Map({city, offers}) {
   return (
     <div
       id="map"
-      style={{minHeight: 980}}
       ref={ref}
     />
   );
