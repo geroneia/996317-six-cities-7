@@ -38,3 +38,7 @@ export const sortOffersByTown = (offers) => {
   });
   return sortedOffers;
 };
+
+export const getDateTime = (dateInISO) => dateInISO.split('T')[0];
+
+export const getDate = (dateInISO) => new Date(dateInISO).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});

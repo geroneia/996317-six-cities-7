@@ -11,7 +11,7 @@ import * as propType from '../../prop-types';
 import {sortOffersByTown} from '../../utils';
 
 function App(props) {
-  const {offers} = props;
+  const {offers, reviews} = props;
   const favoriteOffers = sortOffersByTown(offers);
   return (
     <BrowserRouter>
@@ -26,7 +26,7 @@ function App(props) {
           <FavoritesPage favoriteOffers={favoriteOffers} />
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <RoomPage offers={offers} />
+          <RoomPage offers={offers} reviews={reviews}/>
         </Route>
         <Route>
           <NotFound />
@@ -38,6 +38,7 @@ function App(props) {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(propType.offer).isRequired,
+  reviews: PropTypes.arrayOf(propType.review).isRequired,
 };
 
 export default App;

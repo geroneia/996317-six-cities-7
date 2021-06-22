@@ -30,7 +30,7 @@ function FavoritesPage({favoriteOffers}) {
 }
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.objectOf(PropTypes.string),
+  favoriteOffers: PropTypes.objectOf(PropTypes.array),
 };
 
 export default FavoritesPage;
