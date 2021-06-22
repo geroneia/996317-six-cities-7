@@ -6,12 +6,14 @@ const location = PropTypes.shape({
   zoom: PropTypes.number.isRequired,
 });
 
+export const city = PropTypes.shape({
+  location: location.isRequired,
+  name: PropTypes.string.isRequired,
+});
+
 export const offer = PropTypes.shape({
   bedrooms: PropTypes.number.isRequired,
-  city: PropTypes.shape({
-    location: location.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+  city: city.isRequired,
   description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
   host: PropTypes.shape({

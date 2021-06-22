@@ -16,16 +16,17 @@ function Form() {
             key={name}
             value={RATINGS.length - i}
             title={name}
-            checked={rating === {name}}
+            checked={rating === name}
             onChange={handleRatingChange}
           />
         ))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
-        id="review" name="review"
+        id="review"
+        name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange = {handleMessageChange}
+        onChange={handleMessageChange}
         value={message}
       />
       <div className="reviews__button-wrapper">

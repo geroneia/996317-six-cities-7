@@ -5,6 +5,7 @@ import PageHeader from '../page-header/page-header';
 import OffersList from '../offers-list/offers-list';
 import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
+import Map from '../map/map';
 
 function MainPage({offers}) {
   return (
@@ -73,7 +74,9 @@ function MainPage({offers}) {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={offers[0].city} offers={offers}/>
+              </section>
             </div>
           </div>
         </div>
