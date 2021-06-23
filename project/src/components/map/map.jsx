@@ -29,6 +29,7 @@ function Map({city, offers}) {
           .addTo(map);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, offers]);
 
   return (

@@ -1,15 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../premium-mark/premium-mark';
 
-function Card({offer}) {
+function Card({className, offer}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
   return (
-    <article className="cities__place-card place-card">
+    <article className={`${className ? className : 'cities__place-card'} place-card`}>
       {isPremium && <PremiumMark />}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${className ? className : 'cities__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
         </Link>
@@ -43,7 +44,8 @@ function Card({offer}) {
 }
 
 Card.propTypes = {
-  offer: propType.offer.isRequired,
+  offer: propType.offer,
+  className: PropTypes.string,
 };
 
 export default Card;
