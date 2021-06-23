@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {connect} from 'react-redux';
 import PageHeader from '../page-header/page-header';
 import OffersList from '../offers-list/offers-list';
 import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import Map from '../map/map';
+import CitiesList from '../cities-list/cities-list';
 
 function MainPage({offers}) {
   return (
@@ -14,40 +14,7 @@ function MainPage({offers}) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.MAIN}>
-                  <span>Paris</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.MAIN}>
-                  <span>Cologne</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.MAIN}>
-                  <span>Brussels</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item tabs__item--active" to={AppRoute.MAIN}>
-                  <span>Amsterdam</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.MAIN}>
-                  <span>Hamburg</span>
-                </Link>
-              </li>
-              <li className="locations__item">
-                <Link className="locations__item-link tabs__item" to={AppRoute.MAIN}>
-                  <span>Dusseldorf</span>
-                </Link>
-              </li>
-            </ul>
-          </section>
+          <CitiesList />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -89,4 +56,9 @@ MainPage.propTypes = {
   offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {MainPage};
+export default connect(mapStateToProps, null)(MainPage);

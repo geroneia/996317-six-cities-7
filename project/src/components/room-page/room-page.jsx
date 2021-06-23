@@ -1,5 +1,6 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PageHeader from '../page-header/page-header';
 import ReviewsList from '../review-list/review-list';
 import Form from '../form/form';
@@ -106,7 +107,7 @@ function RoomPage({offers, reviews}) {
           </section>
         </section>
         <div className="container">
-          <NearPlacesList offers={nearOffers}/>
+          <NearPlacesList offers={nearOffers} />
         </div>
       </main>
     </div>
@@ -118,4 +119,10 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(propType.review).isRequired,
 };
 
-export default RoomPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  reviews: state.reviews,
+});
+
+export {RoomPage};
+export default connect(mapStateToProps, null)(RoomPage);

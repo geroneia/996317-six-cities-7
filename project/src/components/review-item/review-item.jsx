@@ -3,7 +3,7 @@ import * as propType from '../../prop-types';
 import {getRatingInPercent, getDateTime, getDate} from '../../utils';
 
 function ReviewItem({review}) {
-  const {user:{avatarUrl, name}, rating, comment, date} = review;
+  const {user: {avatarUrl, name}, rating, comment, date} = review;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

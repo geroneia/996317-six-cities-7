@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import Card from '../card/card';
 
-function NearPlace(props) {
-  const {className = '', ...offer} = props;
+function NearPlace({className = '', ...offer}) {
   return (
     <Card
       className={`near-places__card ${className}`}

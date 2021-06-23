@@ -106,11 +106,11 @@ const mockOffers = [{
   'bedrooms': 2,
   'city': {
     'location': {
-      'latitude': 52.38333,
-      'longitude': 4.9,
+      'latitude': 48.8589507,
+      'longitude': 2.2770205,
       'zoom': 10,
     },
-    'name': 'Amsterdam',
+    'name': 'Paris',
   },
   'description': 'Sint eiusmod officia officia esse deserunt anim.',
   'goods': ['Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher', 'WiFi'],
@@ -125,8 +125,8 @@ const mockOffers = [{
   'is_favorite': true,
   'is_premium': false,
   'location': {
-    'latitude': 52.3809553943508,
-    'longitude': 4.939309666406198,
+    'latitude': 48.8589507,
+    'longitude': 2.2770205,
     'zoom': 8,
   },
   'max_adults': 3,
@@ -136,7 +136,40 @@ const mockOffers = [{
   'title': 'Canal View Prinsengracht',
   'type': 'room',
 },
-
+{
+  'bedrooms': 2,
+  'city': {
+    'location': {
+      'latitude': 48.8589507,
+      'longitude': 2.2770205,
+      'zoom': 10,
+    },
+    'name': 'Paris',
+  },
+  'description': 'Sint eiusmod officia officia esse deserunt anim.',
+  'goods': ['Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher', 'WiFi'],
+  'host': {
+    'avatar_url': 'img/avatar-angelina.jpg',
+    'id': 3,
+    'is_pro': true,
+    'name': 'Angelina',
+  },
+  'id': nanoid(),
+  'images': ['img/studio-01.jpg', 'img/studio-02.jpg'],
+  'is_favorite': true,
+  'is_premium': false,
+  'location': {
+    'latitude': 48.8589507,
+    'longitude': 2.2770205,
+    'zoom': 8,
+  },
+  'max_adults': 3,
+  'preview_image': 'img/studio-01.jpg',
+  'price': 180,
+  'rating': 4.5,
+  'title': 'Canal View Prinsengracht',
+  'type': 'room',
+},
 ];
 
 export default mockOffers;
