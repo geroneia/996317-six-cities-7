@@ -1,26 +1,43 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import * as propType from '../../prop-types';
-import {CITIES} from '../../const';
+import PropTypes from 'prop-types';
+import * as propType from '../../prop-types';
+import City from '../city/city';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 
-function CitiesList() {
+function CitiesList({city, cities, onChange}) {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {CITIES.map((city) => (
-          <li
-            key={city}
-            className="locations__item"
-          >
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{city}</span>
-            </a>
-          </li>
+        {cities.map((el) => (
+          <City
+            key={el.name}
+            name={el.name}
+            isActive={el.name === city.name}
+            onChange = {onChange}
+          />
         ))}
       </ul>
     </section>
   );
 }
 
-export default CitiesList;
+CitiesList.propTypes = {
+  city: propType.city.isRequired,
+  cities: PropTypes.arrayOf(propType.city).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  city: state.city,
+  cities: state.cities,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChange(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+export {CitiesList};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

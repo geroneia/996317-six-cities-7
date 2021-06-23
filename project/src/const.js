@@ -7,8 +7,6 @@ export const AppRoute = {
 
 export const RATINGS = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
 
-export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
 export const Cities = {
   PARIS: {
     'location': {
@@ -60,7 +58,7 @@ export const Cities = {
   },
 };
 
-export const DEFAULT_CITY = Cities[0];
+export const DEFAULT_CITY = Cities.PARIS;
 
 export const URL_MARKER_DEFAULT = '../img/pin.svg';
 

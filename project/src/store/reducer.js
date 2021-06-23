@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return {
         ...state,
-        city: action.payload,
+        city: state.cities.find((city) => city.name === action.payload),
       };
     // case ActionType.FILL_OFFERS_LIST:
     //   return {
