@@ -59,10 +59,10 @@ MainPage.propTypes = {
   city: propType.city.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  city: state.city,
+const mapStateToProps = ({offers, city}) => ({
+  offers,
+  city,
 });
 
 export {MainPage};
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps)(MainPage);

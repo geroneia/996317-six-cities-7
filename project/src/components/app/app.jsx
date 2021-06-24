@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.MAIN}>
+        <Route path={AppRoute.MAIN} exact component={MainPage}>
           <MainPage />
         </Route>
         <Route exact path={AppRoute.LOGIN}>

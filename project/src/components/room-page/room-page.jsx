@@ -119,11 +119,11 @@ RoomPage.propTypes = {
   city: propType.city.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews,
-  city: state.city,
+const mapStateToProps = ({offers, city, reviews}) => ({
+  offers,
+  reviews,
+  city,
 });
 
 export {RoomPage};
-export default connect(mapStateToProps, null)(RoomPage);
+export default connect(mapStateToProps)(RoomPage);

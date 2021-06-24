@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
-import City from '../city/city';
+import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
+import {Link} from 'react-router-dom';
 
 function CitiesList({city, cities, onChange}) {
+  const {id} = useParams();
+  onChange(id);
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {cities.map((el) => (
-          <City
-            key={el.name}
-            name={el.name}
-            isActive={el.name === city.name}
-            onChange = {onChange}
-          />
+        {cities.map(({name}) => (
+          <li className="locations__item"
+            key={name}
+          >
+            <Link
+              className={`${name === city.name && 'tabs__item--active'} locations__item-link tabs__item`}
+              to={`/${name}`}
+            >
+              <span>{name}</span>
+            </Link>
+          </li>
         ))}
       </ul>
     </section>
@@ -28,9 +35,9 @@ CitiesList.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  city: state.city,
-  cities: state.cities,
+const mapStateToProps = ({cities, city}) => ({
+  city,
+  cities,
 });
 
 const mapDispatchToProps = (dispatch) => ({

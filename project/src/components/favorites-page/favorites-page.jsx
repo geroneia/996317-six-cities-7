@@ -37,9 +37,9 @@ FavoritesPage.propTypes = {
   offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({offers}) => ({
+  offers,
 });
 
 export {FavoritesPage};
-export default connect(mapStateToProps, null)(FavoritesPage);
+export default connect(mapStateToProps)(FavoritesPage);

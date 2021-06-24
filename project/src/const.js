@@ -1,5 +1,5 @@
 export const AppRoute = {
-  MAIN: '/',
+  MAIN: '/:id?',
   LOGIN: '/login',
   FAVORITES: '/favorites',
   ROOM: '/offer/:id',

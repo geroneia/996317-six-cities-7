@@ -11,9 +11,9 @@ const cities = Object.values(Cities);
 
 const initialState = {
   city: DEFAULT_CITY,
-  offers: offers,
-  reviews: reviews,
-  cities: cities,
+  offers,
+  reviews,
+  cities,
 };
 
 const reducer = (state = initialState, action) => {
