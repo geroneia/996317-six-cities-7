@@ -10,9 +10,8 @@ import PropTypes from 'prop-types';
 import Map from '../map/map';
 import NearPlacesList from '../near-places-list/near-places-list';
 
-function RoomPage({offers, reviews}) {
+function RoomPage({offers, reviews, city}) {
   const {id} = useParams();
-
   const chosenOffer = offers.find((offer) => offer.id === id);
   const nearOffers = offers.slice(0, 3);
   const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = chosenOffer;
@@ -103,7 +102,7 @@ function RoomPage({offers, reviews}) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={offers[0].city} offers={nearOffers} />
+            <Map city={city} offers={nearOffers} key={city.name} />
           </section>
         </section>
         <div className="container">
@@ -117,11 +116,13 @@ function RoomPage({offers, reviews}) {
 RoomPage.propTypes = {
   offers: PropTypes.arrayOf(propType.offer).isRequired,
   reviews: PropTypes.arrayOf(propType.review).isRequired,
+  city: propType.city.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
   reviews: state.reviews,
+  city: state.city,
 });
 
 export {RoomPage};

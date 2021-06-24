@@ -23,15 +23,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: state.cities.find((city) => city.name === action.payload),
       };
-    // case ActionType.FILL_OFFERS_LIST:
-    //   return {
-    //     ...state,
-    //     offers: action.payload,
-    //   };
     default:
       return state;
   }
 };
-
 
 export {reducer};

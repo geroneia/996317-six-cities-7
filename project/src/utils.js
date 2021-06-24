@@ -42,6 +42,16 @@ export const sortOffersByTown = (offers) => {
   return sortedOffers;
 };
 
+export const getCityOffers = (offers, name) => {
+  const sortedOffers = [];
+  offers.forEach((offer) => {
+    if(offer.city.name === name) {
+      sortedOffers.push(offer);
+    }
+  });
+  return sortedOffers;
+};
+
 export const getDateTime = (dateInISO) => dateInISO.split('T')[0];
 
 export const getDate = (dateInISO) => new Date(dateInISO).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
