@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 function CitiesList({city, cities, onChange}) {
   const {id} = useParams();
-  onChange(id);
+  onChange(id||city.name);
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -43,6 +43,7 @@ const mapStateToProps = ({cities, city}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChange(city) {
     dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.fillOffersList());
   },
 });
 

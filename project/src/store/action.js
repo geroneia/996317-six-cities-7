@@ -8,4 +8,8 @@ export const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: name,
   }),
+  fillOffersList: (offers) => ({
+    type: ActionType.FILL_OFFERS_LIST,
+    payload: offers,
+  }),
 };

@@ -6,10 +6,9 @@ import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import Map from '../map/map';
 import CitiesList from '../cities-list/cities-list';
-import {getCityOffers} from '../../utils';
 
-function MainPage({offers, city, city: {name}}) {
-  const cityOffers = getCityOffers(offers, name);
+
+function MainPage({city, city: {name}, popularOffers}) {
   return (
     <div className="page page--gray page--main">
       <PageHeader/>
@@ -22,7 +21,7 @@ function MainPage({offers, city, city: {name}}) {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in {name}</b>
+              <b className="places__found">{popularOffers.length} places to stay in {name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -39,12 +38,12 @@ function MainPage({offers, city, city: {name}}) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={cityOffers} />
+                <OffersList offers={popularOffers} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={cityOffers} key={city.name} />
+                <Map city={city} offers={popularOffers} key={city.name} />
               </section>
             </div>
           </div>
@@ -55,14 +54,15 @@ function MainPage({offers, city, city: {name}}) {
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(propType.offer).isRequired,
+  popularOffers: PropTypes.arrayOf(propType.offer).isRequired,
   city: propType.city.isRequired,
 };
 
-const mapStateToProps = ({offers, city}) => ({
-  offers,
+const mapStateToProps = ({popularOffers, city}) => ({
+  popularOffers,
   city,
 });
+
 
 export {MainPage};
 export default connect(mapStateToProps)(MainPage);
