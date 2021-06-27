@@ -1,30 +1,48 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import SortType from '../../const';
+import {SortTypes} from '../../const';
 
-function Sort({sortType}) {
+const types = Object.values(SortTypes);
 
+function Sort({sortType, onSortChange}) {
+  const [opened, setOpened] = useState(false);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex="0">
+      <span
+        className="places__sorting-type"
+        tabIndex="0"
+        onClick={() => setOpened(true)}
+      >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
-        <li className="places__option places__option--active" tabIndex="0">{SortType.DEFAULT}</li>
-        <li className="places__option" tabIndex="0">{SortType.PRICE_LOW_HIGH}</li>
-        <li className="places__option" tabIndex="0">{SortType.PRICE_HIGH_LOW}</li>
-        <li className="places__option" tabIndex="0">{SortType.TOP_RATED}</li>
-      </ul>
+      {opened && (
+        <ul className="places__options places__options--custom places__options--opened">
+          {types.map((type) => (
+            <li
+              key={type}
+              className={`places__option ${type === sortType && 'places__option--active'}`}
+              tabIndex="0"
+              onClick={() => {
+                onSortChange(type);
+                setOpened(false);
+              }}
+            >
+              {type}
+            </li>
+          ))}
+        </ul>
+      )}
     </form>
   );
 }
 
 Sort.propTypes = {
   sortType: PropTypes.string.isRequired,
+  onSortChange: PropTypes.func.isRequired,
 };
 
 export default Sort;

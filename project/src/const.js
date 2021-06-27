@@ -64,7 +64,7 @@ export const URL_MARKER_DEFAULT = '../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../img/pin-active.svg';
 
-export const SortType = {
+export const SortTypes = {
   DEFAULT: 'Popular',
   PRICE_LOW_HIGH: 'Price: low to high',
   PRICE_HIGH_LOW: 'Price: high to low',

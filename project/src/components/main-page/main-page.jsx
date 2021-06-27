@@ -6,44 +6,37 @@ import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import Map from '../map/map';
 import CitiesList from '../cities-list/cities-list';
+import {useParams} from 'react-router-dom';
+import {ActionCreator} from '../../store/action';
+import Sort from '../sort/sort';
+// start
 
-
-function MainPage({city, city: {name}, popularOffers}) {
+function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange}) {
+  const {id} = useParams();
+  if (id !== name && id !== 'undefined') {
+    onChange(id);
+  }
   return (
     <div className="page page--gray page--main">
       <PageHeader/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList />
+          <CitiesList city={city} cities={cities} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{popularOffers.length} places to stay in {name}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+              <b className="places__found">{sortedOffers.length} places to stay in {name}</b>
+              <Sort sortType={sortType} onSortChange={onSortChange} />
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={popularOffers} />
+                <OffersList offers={sortedOffers} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={popularOffers} key={city.name} />
+                <Map city={city} offers={sortedOffers} key={city.name} />
               </section>
             </div>
           </div>
@@ -54,15 +47,31 @@ function MainPage({city, city: {name}, popularOffers}) {
 }
 
 MainPage.propTypes = {
-  popularOffers: PropTypes.arrayOf(propType.offer).isRequired,
+  sortedOffers: PropTypes.arrayOf(propType.offer).isRequired,
   city: propType.city.isRequired,
+  cities: PropTypes.arrayOf(propType.city).isRequired,
+  onChange: PropTypes.func.isRequired,
+  sortType: PropTypes.string.isRequired,
+  onSortChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({popularOffers, city}) => ({
-  popularOffers,
+const mapStateToProps = ({sortedOffers, city, cities, sortType}) => ({
+  sortedOffers,
   city,
+  cities,
+  sortType,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onChange(city) {
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.fillOffersList(city));
+  },
+  onSortChange(type) {
+    dispatch(ActionCreator.setSortType(type));
+    dispatch(ActionCreator.sortOffers(type));
+  },
+});
 
 export {MainPage};
-export default connect(mapStateToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
