@@ -23,7 +23,7 @@ export const offer = PropTypes.shape({
   city: city.isRequired,
   description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-  host:user.isRequired,
+  host: user.isRequired,
   id: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   isFavorite: PropTypes.bool,

@@ -41,7 +41,7 @@ function FavoritesCard({offer}) {
 }
 
 FavoritesCard.propTypes = {
-  offer: propType.offer.isRequired,
+  offer: propType.offer,
 };
 
 export default FavoritesCard;

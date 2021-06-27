@@ -1,4 +1,4 @@
-import {RATINGS, CITIES} from './const';
+import {RATINGS, Cities} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / RATINGS.length}%`;
@@ -26,11 +26,12 @@ export const adaptToClient = (data) => getChangedCase(JSON.parse(JSON.stringify(
 export const sortOffersByTown = (offers) => {
   const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
   const sortedOffers = {};
+  const cities = Object.values(Cities).map(({name}) => name);
 
   favoriteOffers.forEach((offer) => {
     const currentCity = offer.city.name;
 
-    if (CITIES.includes(currentCity.toString()) && typeof sortedOffers[currentCity] === 'undefined') {
+    if (cities.includes(currentCity.toString()) && typeof sortedOffers[currentCity] === 'undefined') {
       sortedOffers[currentCity] = [offer];
     } else {
       sortedOffers[currentCity].push(offer);
@@ -38,6 +39,8 @@ export const sortOffersByTown = (offers) => {
   });
   return sortedOffers;
 };
+
+export const getCityOffers = (offers, name) => offers.filter(({city}) => city.name === name);
 
 export const getDateTime = (dateInISO) => dateInISO.split('T')[0];
 

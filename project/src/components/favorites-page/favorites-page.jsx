@@ -1,11 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {AppRoute} from '../../const';
 import PageHeader from '../page-header/page-header';
 import PropTypes from 'prop-types';
+import * as propType from '../../prop-types';
 import FavoriteCity from '../favorite-city/favorite-city';
+import {sortOffersByTown} from '../../utils';
 
-function FavoritesPage({favoriteOffers}) {
+function FavoritesPage({offers}) {
+  const favoriteOffers = sortOffersByTown(offers);
   const cities = Object.keys(favoriteOffers);
   return (
     <div className="page">
@@ -30,7 +34,12 @@ function FavoritesPage({favoriteOffers}) {
 }
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.objectOf(PropTypes.array),
+  offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = ({offers}) => ({
+  offers,
+});
+
+export {FavoritesPage};
+export default connect(mapStateToProps)(FavoritesPage);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../main-page/main-page';
@@ -7,26 +6,22 @@ import FavoritesPage from '../favorites-page/favorites-page';
 import NotFound from '../not-found-page/not-found-page';
 import RoomPage from '../room-page/room-page';
 import SignIn from '../sign-in-page/sign-in-page';
-import * as propType from '../../prop-types';
-import {sortOffersByTown} from '../../utils';
 
-function App(props) {
-  const {offers, reviews} = props;
-  const favoriteOffers = sortOffersByTown(offers);
+function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.MAIN}>
-          <MainPage offers={offers} />
+        <Route path={AppRoute.MAIN} exact component={MainPage}>
+          <MainPage />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesPage favoriteOffers={favoriteOffers} />
+          <FavoritesPage />
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <RoomPage offers={offers} reviews={reviews}/>
+          <RoomPage />
         </Route>
         <Route>
           <NotFound />
@@ -35,10 +30,5 @@ function App(props) {
     </BrowserRouter>
   );
 }
-
-App.propTypes = {
-  offers: PropTypes.arrayOf(propType.offer).isRequired,
-  reviews: PropTypes.arrayOf(propType.review).isRequired,
-};
 
 export default App;
