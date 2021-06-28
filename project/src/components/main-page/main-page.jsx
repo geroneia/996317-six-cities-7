@@ -9,9 +9,8 @@ import CitiesList from '../cities-list/cities-list';
 import {useParams} from 'react-router-dom';
 import {ActionCreator} from '../../store/action';
 import Sort from '../sort/sort';
-// start
 
-function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange}) {
+function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();
   if (id !== name && id !== 'undefined') {
     onChange(id);
@@ -31,12 +30,12 @@ function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType,
               <b className="places__found">{sortedOffers.length} places to stay in {name}</b>
               <Sort sortType={sortType} onSortChange={onSortChange} />
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={sortedOffers} />
+                <OffersList offers={sortedOffers} onOfferChange={onOfferChange} />
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={sortedOffers} key={city.name} />
+                <Map city={city} offers={sortedOffers} key={city.name} activeOfferId={activeOfferId} />
               </section>
             </div>
           </div>
@@ -53,13 +52,16 @@ MainPage.propTypes = {
   onChange: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   onSortChange: PropTypes.func.isRequired,
+  activeOfferId: PropTypes.string.isRequired,
+  onOfferChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({sortedOffers, city, cities, sortType}) => ({
+const mapStateToProps = ({sortedOffers, city, cities, sortType, activeOfferId}) => ({
   sortedOffers,
   city,
   cities,
   sortType,
+  activeOfferId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -70,6 +72,9 @@ const mapDispatchToProps = (dispatch) => ({
   onSortChange(type) {
     dispatch(ActionCreator.setSortType(type));
     dispatch(ActionCreator.sortOffers(type));
+  },
+  onOfferChange(id) {
+    dispatch(ActionCreator.setActiveOfferId(id));
   },
 });
 

@@ -5,10 +5,13 @@ import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../premium-mark/premium-mark';
 
-function Card({className, offer}) {
+function Card({className, offer, onOfferChange}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
   return (
-    <article className={`${className ? className : 'cities__place-card'} place-card`}>
+    <article
+      className={`${className ? className : 'cities__place-card'} place-card`}
+      onMouseEnter={() => onOfferChange(id)}
+    >
       {isPremium && <PremiumMark />}
       <div className={`${className ? className : 'cities__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
@@ -46,6 +49,7 @@ function Card({className, offer}) {
 Card.propTypes = {
   offer: propType.offer,
   className: PropTypes.string,
+  onOfferChange: PropTypes.func,
 };
 
 export default Card;

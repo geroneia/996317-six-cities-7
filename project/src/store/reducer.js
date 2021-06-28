@@ -18,6 +18,7 @@ const initialState = {
   reviews,
   cities,
   sortType: SortTypes.DEFAULT,
+  activeOfferId: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +28,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         city: state.cities.find((city) => city.name === action.payload),
         sortType: SortTypes.DEFAULT,
+      };
+    case ActionType.SET_ACTIVE_OFFER:
+      return {
+        ...state,
+        activeOfferId: action.payload,
       };
     case ActionType.SET_SORT_TYPE:
       return {
