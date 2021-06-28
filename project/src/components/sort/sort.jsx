@@ -6,13 +6,19 @@ const types = Object.values(SortTypes);
 
 function Sort({sortType, onSortChange}) {
   const [opened, setOpened] = useState(false);
+  const openSort = () => setOpened(true);
+  const getNewSortType = (evt, newType) => {
+    evt.stopPropagation(evt);
+    onSortChange(newType);
+    setOpened(false);
+  };
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={() => setOpened(true)}
+        onClick={openSort}
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -26,10 +32,7 @@ function Sort({sortType, onSortChange}) {
               key={type}
               className={`places__option ${type === sortType && 'places__option--active'}`}
               tabIndex="0"
-              onClick={() => {
-                onSortChange(type);
-                setOpened(false);
-              }}
+              onClick = {(evt) => getNewSortType(evt, type)}
             >
               {type}
             </li>

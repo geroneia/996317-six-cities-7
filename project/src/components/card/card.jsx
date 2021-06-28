@@ -7,13 +7,14 @@ import PremiumMark from '../premium-mark/premium-mark';
 
 function Card({className, offer, onOfferChange}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
+  const getNewActiveOfferId = () => onOfferChange(id);
   return (
     <article
-      className={`${className ? className : 'cities__place-card'} place-card`}
-      onMouseEnter={() => onOfferChange(id)}
+      className={`${className || 'cities__place-card'} place-card`}
+      onMouseEnter={getNewActiveOfferId}
     >
       {isPremium && <PremiumMark />}
-      <div className={`${className ? className : 'cities__image-wrapper'} place-card__image-wrapper`}>
+      <div className={`${className || 'cities__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
         </Link>
