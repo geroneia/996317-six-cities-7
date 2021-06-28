@@ -9,10 +9,9 @@ import CitiesList from '../cities-list/cities-list';
 import {useParams} from 'react-router-dom';
 import {ActionCreator} from '../../store/action';
 import Sort from '../sort/sort';
-
 function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();
-  if (id !== name && id !== 'undefined') {
+  if (id !== name && id !== undefined) {
     onChange(id);
   }
   return (
