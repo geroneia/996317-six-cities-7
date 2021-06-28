@@ -36,7 +36,7 @@ function Map({city, offers, activeOfferId}) {
       });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [map, offers]);
+  }, [map, offers, activeOfferId]);
 
   return (
     <div
