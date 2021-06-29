@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import PageHeader from '../page-header/page-header';
-import OffersList from '../offers-list/offers-list';
+import PageHeader from '../../common/page-header/page-header';
+import OffersList from '../../offers-list/offers-list';
 import PropTypes from 'prop-types';
-import * as propType from '../../prop-types';
-import Map from '../map/map';
-import CitiesList from '../cities-list/cities-list';
+import * as propType from '../../../prop-types';
+import Map from '../../map/map';
+import CitiesList from '../../cities-list/cities-list';
 import {useParams} from 'react-router-dom';
-import {ActionCreator} from '../../store/action';
-import Sort from '../sort/sort';
+import {ActionCreator} from '../../../store/action';
+import Sort from '../../sort/sort';
 
 function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();

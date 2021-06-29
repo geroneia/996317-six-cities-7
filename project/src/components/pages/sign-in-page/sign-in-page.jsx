@@ -1,7 +1,7 @@
 import React from 'react';
-import {AppRoute} from '../../const';
+import {AppRoute} from '../../../const';
 import {Link} from 'react-router-dom';
-import PageHeader from '../page-header/page-header';
+import PageHeader from '../../common/page-header/page-header';
 
 function SignIn() {
   return (

@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {AppRoute} from '../../const';
-import PageHeader from '../page-header/page-header';
+import {AppRoute} from '../../../const';
+import PageHeader from '../../common/page-header/page-header';
 import PropTypes from 'prop-types';
-import * as propType from '../../prop-types';
-import FavoriteCity from '../favorite-city/favorite-city';
-import {sortOffersByTown} from '../../utils';
+import * as propType from '../../../prop-types';
+import FavoriteCity from '../../favorites/favorite-city/favorite-city';
+import {sortOffersByTown} from '../../../utils';
 
 function FavoritesPage({offers}) {
   const favoriteOffers = sortOffersByTown(offers);

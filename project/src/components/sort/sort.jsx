@@ -6,10 +6,9 @@ const types = Object.values(SortTypes);
 
 function Sort({sortType, onSortChange}) {
   const [opened, setOpened] = useState(false);
-  const openSort = () => setOpened(true);
-  const getNewSortType = (evt, newType) => {
-    evt.stopPropagation(evt);
-    onSortChange(newType);
+  const handleMenu = () => setOpened(true);
+  const handleSort = (evt) => {
+    onSortChange(evt.target.dataset.type);
     setOpened(false);
   };
   return (
@@ -18,7 +17,7 @@ function Sort({sortType, onSortChange}) {
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={openSort}
+        onClick={handleMenu}
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -32,7 +31,8 @@ function Sort({sortType, onSortChange}) {
               key={type}
               className={`places__option ${type === sortType && 'places__option--active'}`}
               tabIndex="0"
-              onClick = {(evt) => getNewSortType(evt, type)}
+              data-type={type}
+              onClick = {handleSort}
             >
               {type}
             </li>

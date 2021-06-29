@@ -1,11 +1,11 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import MainPage from '../main-page/main-page';
-import FavoritesPage from '../favorites-page/favorites-page';
-import NotFound from '../not-found-page/not-found-page';
-import RoomPage from '../room-page/room-page';
-import SignIn from '../sign-in-page/sign-in-page';
+import MainPage from '../pages/main-page/main-page';
+import FavoritesPage from '../pages/favorites-page/favorites-page';
+import NotFound from '../pages/not-found-page/not-found-page';
+import RoomPage from '../pages/room-page/room-page';
+import SignIn from '../pages/sign-in-page/sign-in-page';
 
 function App() {
   return (
