@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import * as propType from '../../prop-types';
-import {getRatingInPercent, getType} from '../../utils';
+import * as propType from '../../../prop-types';
+import {getRatingInPercent, getType} from '../../../utils';
 
 function FavoritesCard({offer}) {
   const {previewImage, price, rating, title, type, id} = offer;

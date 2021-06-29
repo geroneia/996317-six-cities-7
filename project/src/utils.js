@@ -1,4 +1,4 @@
-import {RATINGS, Cities} from './const';
+import {RATINGS, Cities, SortTypes} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / RATINGS.length}%`;
@@ -45,3 +45,22 @@ export const getCityOffers = (offers, name) => offers.filter(({city}) => city.na
 export const getDateTime = (dateInISO) => dateInISO.split('T')[0];
 
 export const getDate = (dateInISO) => new Date(dateInISO).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
+
+const getSortedLowToHighPrice = (offers) => offers.sort((a, b) => a.price - b.price);
+
+const getSortedHighToLowPrice = (offers) => offers.sort((a, b) => b.price - a.price);
+
+const getSortedHighToLowRating = (offers) => offers.sort((a, b) => b.rating - a.rating);
+
+export const getSortAction = (offers, type) => {
+  switch (type) {
+    case SortTypes.PRICE_LOW_HIGH:
+      return getSortedLowToHighPrice(offers);
+    case SortTypes.PRICE_HIGH_LOW:
+      return getSortedHighToLowPrice(offers);
+    case SortTypes.TOP_RATED:
+      return getSortedHighToLowRating(offers);
+    default:
+      return offers;
+  }
+};

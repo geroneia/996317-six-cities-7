@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Rating from '../rating/rating';
+import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 
 function Form() {

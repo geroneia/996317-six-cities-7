@@ -1,14 +1,14 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import PageHeader from '../page-header/page-header';
-import ReviewsList from '../review-list/review-list';
-import Form from '../form/form';
-import {getRatingInPercent, getType}from '../../utils';
-import * as propType from '../../prop-types';
+import PageHeader from '../../common/page-header/page-header';
+import ReviewsList from '../../reviewes/review-list/review-list';
+import Form from '../../form/form';
+import {getRatingInPercent, getType}from '../../../utils';
+import * as propType from '../../../prop-types';
 import PropTypes from 'prop-types';
-import Map from '../map/map';
-import NearPlacesList from '../near-places-list/near-places-list';
+import Map from '../../map/map';
+import NearPlacesList from '../../near-places-list/near-places-list';
 
 function RoomPage({offers, reviews, city}) {
   const {id} = useParams();

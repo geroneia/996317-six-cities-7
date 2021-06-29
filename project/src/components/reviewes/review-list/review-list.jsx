@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as propType from '../../prop-types';
+import * as propType from '../../../prop-types';
 import ReviewItem from '../review-item/review-item';
 
 function ReviewsList({reviews}) {
