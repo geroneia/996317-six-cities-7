@@ -32,7 +32,7 @@ function Sort({sortType, onSortChange}) {
               className={`places__option ${type === sortType && 'places__option--active'}`}
               tabIndex="0"
               data-type={type}
-              onClick = {handleSort}
+              onClick={handleSort}
             >
               {type}
             </li>
