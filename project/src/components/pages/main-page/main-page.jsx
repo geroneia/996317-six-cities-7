@@ -52,7 +52,7 @@ MainPage.propTypes = {
   onChange: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   onSortChange: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.string.isRequired,
+  activeOfferId: PropTypes.number.isRequired,
   onOfferChange: PropTypes.func.isRequired,
 };
 

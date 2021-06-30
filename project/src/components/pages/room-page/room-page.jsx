@@ -12,7 +12,7 @@ import NearPlacesList from '../../near-places-list/near-places-list';
 
 function RoomPage({offers, reviews, city}) {
   const {id} = useParams();
-  const chosenOffer = offers.find((offer) => offer.id === id);
+  const chosenOffer = offers.find((offer) => offer.id === +id);
   const nearOffers = offers.slice(0, 3);
   const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = chosenOffer;
   return (

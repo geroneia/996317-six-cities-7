@@ -1,24 +1,23 @@
-import {DEFAULT_CITY} from '../const';
+import {DEFAULT_CITY, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {adaptToClient, getCityOffers, getSortAction} from '../utils';
-import mockOffers from '../mocks/offers';
+import {adaptToClient, getCityOffers, getSortAction, getInitialStateOfOffers} from '../utils';
 import {mockReviews} from '../mocks/reviews';
 import {Cities, SortTypes} from '../const';
 
-const offers = adaptToClient(mockOffers);
 const reviews = adaptToClient(mockReviews);
 const cities = Object.values(Cities);
-const popularOffers = getCityOffers(offers, DEFAULT_CITY.name);
 
 const initialState = {
   city: DEFAULT_CITY,
-  popularOffers,
-  sortedOffers: popularOffers,
-  offers,
+  popularOffers: [],
+  sortedOffers: [],
+  offers: [],
   reviews,
   cities,
   sortType: SortTypes.DEFAULT,
-  activeOfferId: '',
+  activeOfferId: 0,
+  isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,13 +41,31 @@ const reducer = (state = initialState, action) => {
     case ActionType.FILL_OFFERS_LIST:
       return {
         ...state,
-        popularOffers: getCityOffers(offers, action.payload),
+        popularOffers: getCityOffers(state.offers, action.payload),
         sortedOffers: state.popularOffers,
       };
     case ActionType.SORT_OFFERS:
       return {
         ...state,
         sortedOffers: getSortAction(state.popularOffers, action.payload),
+      };
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: adaptToClient(action.payload),
+        popularOffers: getInitialStateOfOffers(action.payload),
+        sortedOffers: getInitialStateOfOffers(action.payload),
+        isDataLoaded: true,
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       };
     default:
       return state;
