@@ -6,9 +6,9 @@ const types = Object.values(SortTypes);
 
 function Sort({sortType, onSortChange}) {
   const [opened, setOpened] = useState(false);
-  const handleMenu = () => setOpened(true);
-  const handleSort = (evt) => {
-    onSortChange(evt.target.dataset.type);
+  const handleMenuClick = () => setOpened(true);
+  const handleSortClick = ({target: {dataset : {type}}}) => {
+    onSortChange(type);
     setOpened(false);
   };
   return (
@@ -17,11 +17,11 @@ function Sort({sortType, onSortChange}) {
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={handleMenu}
+        onClick={handleMenuClick}
       >
         {sortType}
         <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select"></use>
+          <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
       {opened && (
@@ -29,10 +29,10 @@ function Sort({sortType, onSortChange}) {
           {types.map((type) => (
             <li
               key={type}
-              className={`places__option ${type === sortType && 'places__option--active'}`}
+              className={`places__option ${type === sortType ? 'places__option--active' : ''}`}
               tabIndex="0"
               data-type={type}
-              onClick={handleSort}
+              onClick={handleSortClick}
             >
               {type}
             </li>
