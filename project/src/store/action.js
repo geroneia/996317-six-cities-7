@@ -4,6 +4,10 @@ export const ActionType = {
   SET_SORT_TYPE: 'SET_SORT_TYPE',
   SORT_OFFERS: 'SORT_OFFERS',
   SET_ACTIVE_OFFER: 'SET_ACTIVE_OFFER',
+  LOAD_OFFERS: 'LOAD_OFFERS',
+  LOAD_REVIEWS: 'LOAD_REVIEWS',
+  REQUIRED_AUTHORIZATION: 'REQUIRED_AUTHORIZATION',
+  LOGOUT: 'LOGOUT',
 };
 
 export const ActionCreator = {
@@ -26,5 +30,16 @@ export const ActionCreator = {
   sortOffers: (type) => ({
     type: ActionType.SORT_OFFERS,
     payload: type,
+  }),
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  logout: () => ({
+    type: ActionType.LOGOUT,
   }),
 };

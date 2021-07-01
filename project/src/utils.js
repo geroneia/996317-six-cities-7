@@ -1,4 +1,4 @@
-import {RATINGS, Cities, SortTypes} from './const';
+import {RATINGS, Cities, SortTypes, AuthorizationStatus, DEFAULT_CITY} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / RATINGS.length}%`;
@@ -64,3 +64,8 @@ export const getSortAction = (offers, type) => {
       return offers;
   }
 };
+
+export const isCheckedAuth = (authorizationStatus) =>
+  authorizationStatus === AuthorizationStatus.UNKNOWN;
+
+export const getInitialStateOfOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);

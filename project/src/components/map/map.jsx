@@ -49,7 +49,7 @@ function Map({city, offers, activeOfferId}) {
 Map.propTypes = {
   city: propType.city.isRequired,
   offers: PropTypes.arrayOf(propType.offer).isRequired,
-  activeOfferId: PropTypes.string,
+  activeOfferId: PropTypes.number,
 };
 
 export default Map;
