@@ -1,6 +1,6 @@
 import {DEFAULT_CITY, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {adaptToClient, getCityOffers, getSortAction, getInitialStateOfOffers} from '../utils';
+import {adaptToClient, getCityOffers, getSortAction, getInitialOffers} from '../utils';
 import {mockReviews} from '../mocks/reviews';
 import {Cities, SortTypes} from '../const';
 
@@ -53,8 +53,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: adaptToClient(action.payload),
-        popularOffers: getInitialStateOfOffers(action.payload),
-        sortedOffers: getInitialStateOfOffers(action.payload),
+        popularOffers: getInitialOffers(action.payload),
+        sortedOffers: getInitialOffers(action.payload),
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
