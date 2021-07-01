@@ -18,6 +18,13 @@ const initialState = {
   activeOfferId: 0,
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  authInfo: {
+    avatarUrl: '',
+    email: '',
+    id: 0,
+    isPro: false,
+    name: '',
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -61,6 +68,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.GET_AUTH_INFO:
+      return {
+        ...state,
+        authInfo: action.payload,
       };
     case ActionType.LOGOUT:
       return {
