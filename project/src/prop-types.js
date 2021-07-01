@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 
-const user = PropTypes.shape({
+export const user = PropTypes.shape({
   avatarUrl: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   isPro: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  email: PropTypes.string,
 });
 
 const location = PropTypes.shape({
@@ -43,12 +44,4 @@ export const review = PropTypes.shape({
   id: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   user: user.isRequired,
-}).isRequired;
-
-export const authInfo = PropTypes.shape({
-  avatarUrl: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  isPro: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
 }).isRequired;

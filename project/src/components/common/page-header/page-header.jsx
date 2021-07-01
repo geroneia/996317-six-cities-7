@@ -6,7 +6,7 @@ import {AppRoute, AuthorizationStatus} from '../../../const';
 import {connect} from 'react-redux';
 import {logout} from '../../../store/api-actions';
 
-function PageHeader({authorizationStatus, authInfo: {avatarUrl, email}, onLogout}) {
+function PageHeader({authorizationStatus, authInfo: {avatarUrl, email, name}, onLogout}) {
   const handleLogoutClick = (evt) => {
     evt.preventDefault();
     onLogout();
@@ -31,7 +31,7 @@ function PageHeader({authorizationStatus, authInfo: {avatarUrl, email}, onLogout
                         to={AppRoute.FAVORITES}
                       >
                         <div className="header__avatar-wrapper user__avatar-wrapper">
-                          <img src={avatarUrl} alt="" />
+                          <img src={avatarUrl} alt={`${name}'s avatar`} />
                         </div>
                         <span className="header__user-name user__name">{email}</span>
                       </Link>
@@ -66,7 +66,7 @@ function PageHeader({authorizationStatus, authInfo: {avatarUrl, email}, onLogout
 
 PageHeader.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  authInfo: propType.authInfo,
+  authInfo: propType.user,
   onLogout: PropTypes.func.isRequired,
 };
 

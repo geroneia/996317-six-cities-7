@@ -14,14 +14,9 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
-    .then(({ data }) => {
+    .then(({data}) => {
       localStorage.setItem('token', data.token);
-      dispatch(ActionCreator.getUserInfo({
-        avatarUrl: data.avatar_url,
-        email: data.email,
-        id: data.id,
-        isPro: data.is_pro,
-        name: data.name}));
+      dispatch(ActionCreator.getUserInfo(data));
     })
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN)))
