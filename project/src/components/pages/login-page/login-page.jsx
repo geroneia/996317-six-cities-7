@@ -41,7 +41,7 @@ function LogInPage({city: {name}, onSubmit}) {
                   name="email"
                   id="email"
                   placeholder="Email"
-                  required=""
+                  required
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -53,7 +53,7 @@ function LogInPage({city: {name}, onSubmit}) {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  required=""
+                  required
                 />
               </div>
               <button

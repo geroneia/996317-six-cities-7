@@ -37,20 +37,19 @@ function PageHeader({authorizationStatus, authInfo: {avatarUrl, email, name}, on
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <Link
-                        className="header__nav-link"
+                      <button
+                        className="header__nav-link header__nav-link-button"
                         onClick={handleLogoutClick}
-                        to='/'
+
                       >
                         <span className="header__signout">Sign out</span>
-                      </ Link>
+                      </ button>
                     </li>
                   </>
                 ) : (
                   <li className="header__nav-item user">
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.LOGIN}>
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
+                      <div className="header__avatar-wrapper user__avatar-wrapper" />
                       <span className="header__login">Sign in</span>
                     </Link>
                   </li>
