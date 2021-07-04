@@ -68,4 +68,4 @@ export const getSortAction = (offers, type) => {
 export const isCheckedAuth = (authorizationStatus) =>
   authorizationStatus === AuthorizationStatus.UNKNOWN;
 
-export const getInitialStateOfOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);
+export const getInitialOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);

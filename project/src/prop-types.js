@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 
-const user = PropTypes.shape({
+export const user = PropTypes.shape({
   avatarUrl: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   isPro: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  email: PropTypes.string,
 });
 
 const location = PropTypes.shape({

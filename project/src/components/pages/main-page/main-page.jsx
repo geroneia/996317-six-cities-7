@@ -12,7 +12,7 @@ import Sort from '../../sort/sort';
 
 function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();
-  if (id !== name && typeof id !== 'undefined') {
+  if (id !== name && typeof id !== 'undefined' && id !== ':id') {
     onChange(id);
   }
   return (

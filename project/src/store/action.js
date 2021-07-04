@@ -7,7 +7,9 @@ export const ActionType = {
   LOAD_OFFERS: 'LOAD_OFFERS',
   LOAD_REVIEWS: 'LOAD_REVIEWS',
   REQUIRED_AUTHORIZATION: 'REQUIRED_AUTHORIZATION',
+  GET_AUTH_INFO: 'GET_AUTH_INFO',
   LOGOUT: 'LOGOUT',
+  REDIRECT_TO_ROUTE: 'REDIRECT_TO_ROUTE',
 };
 
 export const ActionCreator = {
@@ -39,7 +41,15 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   }),
+  getUserInfo: (authInfo) => ({
+    type: ActionType.GET_AUTH_INFO,
+    payload: authInfo,
+  }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   }),
 };

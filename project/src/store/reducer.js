@@ -1,6 +1,6 @@
 import {DEFAULT_CITY, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {adaptToClient, getCityOffers, getSortAction, getInitialStateOfOffers} from '../utils';
+import {adaptToClient, getCityOffers, getSortAction, getInitialOffers} from '../utils';
 import {mockReviews} from '../mocks/reviews';
 import {Cities, SortTypes} from '../const';
 
@@ -18,6 +18,7 @@ const initialState = {
   activeOfferId: 0,
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  authInfo: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,14 +54,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: adaptToClient(action.payload),
-        popularOffers: getInitialStateOfOffers(action.payload),
-        sortedOffers: getInitialStateOfOffers(action.payload),
+        popularOffers: getInitialOffers(action.payload),
+        sortedOffers: getInitialOffers(action.payload),
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.GET_AUTH_INFO:
+      return {
+        ...state,
+        authInfo: adaptToClient(action.payload),
       };
     case ActionType.LOGOUT:
       return {
