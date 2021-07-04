@@ -34,7 +34,7 @@ function App({authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.ROOM}>
           <RoomPage />
         </Route>
-        <Route path={AppRoute.MAIN} exact component={MainPage}>
+        <Route path={AppRoute.MAIN}>
           <MainPage />
         </Route>
         <Route>

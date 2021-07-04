@@ -6,9 +6,7 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 
 function PrivateRoute({path, exact, authorizationStatus, children}) {
   return (
-    <Route path={path}
-      exact={exact}
-    >
+    <Route path={path} exact={exact}>
       {authorizationStatus === AuthorizationStatus.AUTH
         ? children
         : <Redirect to={AppRoute.LOGIN} />}
