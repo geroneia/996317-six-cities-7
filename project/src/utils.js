@@ -1,4 +1,4 @@
-import {RATINGS, Cities, SortTypes, AuthorizationStatus, DEFAULT_CITY} from './const';
+import {RATINGS, Cities, SortTypes, AuthorizationStatus, DEFAULT_CITY, HttpCode} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / RATINGS.length}%`;
@@ -69,3 +69,5 @@ export const isCheckedAuth = (authorizationStatus) =>
   authorizationStatus === AuthorizationStatus.UNKNOWN;
 
 export const getInitialOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);
+
+export const getStatus = (status) => status === HttpCode.NOT_FOUND;

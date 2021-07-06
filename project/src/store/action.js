@@ -1,15 +1,23 @@
 export const ActionType = {
-  CHANGE_CITY: 'CHANGE_CITY',
-  FILL_OFFERS_LIST: 'FILL_OFFERS_LIST',
-  SET_SORT_TYPE: 'SET_SORT_TYPE',
-  SORT_OFFERS: 'SORT_OFFERS',
-  SET_ACTIVE_OFFER: 'SET_ACTIVE_OFFER',
-  LOAD_OFFERS: 'LOAD_OFFERS',
-  LOAD_REVIEWS: 'LOAD_REVIEWS',
-  REQUIRED_AUTHORIZATION: 'REQUIRED_AUTHORIZATION',
-  GET_AUTH_INFO: 'GET_AUTH_INFO',
-  LOGOUT: 'LOGOUT',
-  REDIRECT_TO_ROUTE: 'REDIRECT_TO_ROUTE',
+  CHANGE_CITY: 'app/changeCity',
+  FILL_OFFERS_LIST: 'app/fillOffersList',
+  SET_SORT_TYPE: 'app/setSortType',
+  SORT_OFFERS: 'app/sortOffers',
+  SET_ACTIVE_OFFER: 'app/setActiveOffer',
+  LOAD_OFFERS: 'data/loadOffers',
+  LOAD_OFFER_DETAILS: 'data/loadOfferDetails',
+  LOAD_NEARBY_OFFERS: 'data/loadNerbyOffers',
+  LOAD_REVIEWS: 'data/loadReviews',
+  POST_REVIEW: 'data/postReview',
+  CLEAR_OFFER_DETAILS: 'data/clearOfferDetails',
+  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  GET_AUTH_INFO: 'user/getAuthtInfo',
+  LOGOUT: 'user/logout',
+  REDIRECT_TO_ROUTE: 'app/redirectToRoute',
+  SET_MESSAGE: 'app/setMessage',
+  SET_RATING: 'app/setRating',
+  CLEAR_FORM: 'app/clearForm',
+  SET_NOT_FOUND: 'app/setNotFound',
 };
 
 export const ActionCreator = {
@@ -37,8 +45,31 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFERS,
     payload: offers,
   }),
+  loadOfferDetails: (offer) => ({
+    type: ActionType.LOAD_OFFER_DETAILS,
+    payload: offer,
+  }),
+  loadNearbyOffers: (offers) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: offers,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
+  clearOfferDetails: () => ({
+    type: ActionType.CLEAR_OFFER_DETAILS,
+  }),
+  postReview: (review) => ({
+    type: ActionType.POST_REVIEW,
+    payload: review,
+  }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  setNotFound: (status) => ({
+    type: ActionType.SET_NOT_FOUND,
     payload: status,
   }),
   getUserInfo: (authInfo) => ({
@@ -51,5 +82,16 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+  setMessage: (message) => ({
+    type: ActionType.SET_MESSAGE,
+    payload: message,
+  }),
+  setRating: (rating) => ({
+    type: ActionType.SET_RATING,
+    payload: rating,
+  }),
+  clearForm: () => ({
+    type: ActionType.CLEAR_FORM,
   }),
 };

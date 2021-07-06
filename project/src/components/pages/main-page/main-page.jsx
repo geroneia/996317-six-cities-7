@@ -8,7 +8,7 @@ import Map from '../../map/map';
 import CitiesList from '../../cities-list/cities-list';
 import {useParams} from 'react-router-dom';
 import {ActionCreator} from '../../../store/action';
-import Sort from '../../sort/sort';
+import Sort from './sort';
 
 function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();
@@ -52,7 +52,7 @@ MainPage.propTypes = {
   onChange: PropTypes.func.isRequired,
   sortType: PropTypes.string.isRequired,
   onSortChange: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.number.isRequired,
+  activeOfferId: PropTypes.number,
   onOfferChange: PropTypes.func.isRequired,
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { shape } from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -14,7 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 
 function App({authorizationStatus, isDataLoaded}) {
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded.offers) {
     return (
       <LoadingPage />
     );
@@ -31,13 +31,14 @@ function App({authorizationStatus, isDataLoaded}) {
         >
           <FavoritesPage />
         </PrivateRoute>
-        <Route exact path={AppRoute.ROOM}>
-          <RoomPage />
+        <Route exact path={`${AppRoute.ROOM}/:id`}
+          render={({match}) => <RoomPage id={+match.params.id}/>}
+        >
         </Route>
         <Route path={AppRoute.MAIN}>
           <MainPage />
         </Route>
-        <Route>
+        <Route path={AppRoute.NOT_FOUND}>
           <NotFound />
         </Route>
       </Switch>
@@ -47,12 +48,20 @@ function App({authorizationStatus, isDataLoaded}) {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
+  isDataLoaded: shape({
+    offers: PropTypes.bool.isRequired,
+    offerDetails: PropTypes.bool.isRequired,
+    nearbyOffers: PropTypes.bool.isRequired,
+    reviews: PropTypes.bool.isRequired,
+  }),
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
+  isDataLoaded: {
+    ...state.isDataLoaded,
+    offers: true,
+  },
 });
 
 export {App};

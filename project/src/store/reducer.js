@@ -1,10 +1,8 @@
 import {DEFAULT_CITY, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {adaptToClient, getCityOffers, getSortAction, getInitialOffers} from '../utils';
-import {mockReviews} from '../mocks/reviews';
+import {adaptToClient, getCityOffers, getSortAction, getInitialOffers, getStatus} from '../utils';
 import {Cities, SortTypes} from '../const';
 
-const reviews = adaptToClient(mockReviews);
 const cities = Object.values(Cities);
 
 const initialState = {
@@ -12,12 +10,20 @@ const initialState = {
   popularOffers: [],
   sortedOffers: [],
   offers: [],
-  reviews,
+  offerDetails: {},
+  nearbyOffers: [],
+  reviews: [],
   cities,
   sortType: SortTypes.DEFAULT,
-  activeOfferId: 0,
-  isDataLoaded: false,
+  activeOfferId: null,
+  isDataLoaded: {
+    offers: false,
+    offerDetails: false,
+    nearbyOffers: false,
+    reviews: false,
+  },
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  isNotFound: false,
   authInfo: {},
 };
 
@@ -45,6 +51,67 @@ const reducer = (state = initialState, action) => {
         popularOffers: getCityOffers(state.offers, action.payload),
         sortedOffers: state.popularOffers,
       };
+    case ActionType.LOAD_OFFER_DETAILS:
+      return {
+        ...state,
+        offerDetails: adaptToClient(action.payload),
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          offerDetails: true,
+        },
+      };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return {
+        ...state,
+        nearbyOffers: adaptToClient(action.payload),
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          nearbyOffers: true,
+        },
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: adaptToClient(action.payload),
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          reviews: true,
+        },
+      };
+    case ActionType.SET_NOT_FOUND:
+      return {
+        ...state,
+        isNotFound: getStatus(action.payload),
+      };
+    case ActionType.CLEAR_OFFER_DETAILS:
+      return {
+        ...state,
+        offerDetails: {},
+        nearbyOffers: [],
+        reviews: [],
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          offerDetails: false,
+          nearbyOffers: false,
+          reviews: false,
+        },
+      };
+    case ActionType.SET_MESSAGE:
+      return {
+        ...state,
+        commentPost: {
+          ...state.commentPost,
+          comment: action.payload,
+        },
+      };
+    case ActionType.SET_RATING:
+      return {
+        ...state,
+        commentPost: {
+          ...state.commentPost,
+          rating: action.payload,
+        },
+      };
     case ActionType.SORT_OFFERS:
       return {
         ...state,
@@ -56,7 +123,10 @@ const reducer = (state = initialState, action) => {
         offers: adaptToClient(action.payload),
         popularOffers: getInitialOffers(action.payload),
         sortedOffers: getInitialOffers(action.payload),
-        isDataLoaded: true,
+        isDataLoaded: {
+          ...state.isDataLoaded,
+          offers: true,
+        },
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
