@@ -9,17 +9,20 @@ function Form({id, onSubmitReview}) {
   const buttonRef = useRef();
   const formRef = useRef();
   const disableButton = () => buttonRef.current.disabled = true;
+  const enableButton = () => buttonRef.current.disabled = false;
 
   const [userComment, setUserComment] = useState({rating: '', message: ''});
   const handleRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     disableButton();
     onSubmitReview(id, message, rating);
     setUserComment({rating: '', message: ''});
     formRef.current.reset();
+    enableButton();
   };
 
   return (

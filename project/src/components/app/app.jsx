@@ -25,21 +25,18 @@ function App({authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.LOGIN}>
           <LogInPage />
         </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
-        >
+        <PrivateRoute exact path={AppRoute.FAVORITES}>
           <FavoritesPage />
         </PrivateRoute>
         <Route exact path={`${AppRoute.ROOM}/:id`}
           render={({match}) => <RoomPage id={+match.params.id}/>}
         >
         </Route>
+        <Route exact path={AppRoute.NOT_FOUND}>
+          <NotFound />
+        </Route>
         <Route path={AppRoute.MAIN}>
           <MainPage />
-        </Route>
-        <Route path={AppRoute.NOT_FOUND}>
-          <NotFound />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 import {DEFAULT_CITY, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {adaptToClient, getCityOffers, getSortAction, getInitialOffers, getStatus} from '../utils';
+import {adaptToClient, getCityOffers, getSortAction, getInitialOffers} from '../utils';
 import {Cities, SortTypes} from '../const';
 
 const cities = Object.values(Cities);
@@ -23,7 +23,6 @@ const initialState = {
     reviews: false,
   },
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  isNotFound: false,
   authInfo: {},
 };
 
@@ -77,11 +76,6 @@ const reducer = (state = initialState, action) => {
           ...state.isDataLoaded,
           reviews: true,
         },
-      };
-    case ActionType.SET_NOT_FOUND:
-      return {
-        ...state,
-        isNotFound: getStatus(action.payload),
       };
     case ActionType.CLEAR_OFFER_DETAILS:
       return {

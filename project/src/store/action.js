@@ -17,7 +17,6 @@ export const ActionType = {
   SET_MESSAGE: 'app/setMessage',
   SET_RATING: 'app/setRating',
   CLEAR_FORM: 'app/clearForm',
-  SET_NOT_FOUND: 'app/setNotFound',
 };
 
 export const ActionCreator = {
@@ -66,10 +65,6 @@ export const ActionCreator = {
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  setNotFound: (status) => ({
-    type: ActionType.SET_NOT_FOUND,
     payload: status,
   }),
   getUserInfo: (authInfo) => ({

@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import ReviewsList from '../../reviewes/review-list/review-list';
@@ -12,24 +11,55 @@ import NearPlacesList from '../../near-places-list/near-places-list';
 import {fetchOfferDetails, fetchNearbyList, fetchReviewsList} from '../../../store/api-actions';
 import {AuthorizationStatus} from '../../../const';
 import LoadingPage from '../loading-page/loading-page';
+import {ActionCreator} from '../../../store/action';
 
-function RoomPage({authorizationStatus, id, reviews, city, onOfferDetailsLoad, offerDetails, nearbyOffers, clearOfferInfo, isDataLoaded, onNearbyLoad, onReviewsLoad}) {
+function RoomPage(props) {
+
+  const {
+    authorizationStatus,
+    id,
+    reviews,
+    city,
+    onOfferDetailsLoad,
+    offerDetails,
+    nearbyOffers,
+    clearOfferInfo,
+    isDataLoaded,
+    onNearbyLoad,
+    onReviewsLoad,
+  } = props;
+
   useEffect(() => {
     onOfferDetailsLoad(id);
     onNearbyLoad(id);
     onReviewsLoad(id);
-
     return () => {
       clearOfferInfo();
     };
-  }, [id, onOfferDetailsLoad, onNearbyLoad, onReviewsLoad, clearOfferInfo]);
+  }, [
+    id,
+    onOfferDetailsLoad,
+    onNearbyLoad,
+    onReviewsLoad,
+    clearOfferInfo,
+  ]);
 
-
-  if (!isDataLoaded.offerDetails && !isDataLoaded.nearbyOffers && !isDataLoaded.reviews) {
+  if (!isDataLoaded.offerDetails) {
     return <LoadingPage />;
   }
 
-  const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = offerDetails;
+  const {
+    price,
+    rating,
+    title,
+    type,
+    bedrooms,
+    maxAdults,
+    goods,
+    host,
+    description,
+    images,
+  } = offerDetails;
 
   return (
     <div className="page" key={id}>
@@ -102,7 +132,8 @@ function RoomPage({authorizationStatus, id, reviews, city, onOfferDetailsLoad, o
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {!!host.isPro && <span className="property__user-status">Pro</span>}
+                  {!!host.isPro &&
+                  <span className="property__user-status">Pro</span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -111,9 +142,14 @@ function RoomPage({authorizationStatus, id, reviews, city, onOfferDetailsLoad, o
                 </div>
               </div>
               <section className="property__reviews reviews">
+                {reviews.length > 0 &&
+              <>
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList reviews={reviews} />
-                {authorizationStatus === AuthorizationStatus.AUTH && <Form id={id}/>}
+              </>}
+
+                {authorizationStatus === AuthorizationStatus.AUTH &&
+                <Form id={id}/>}
               </section>
             </div>
           </div>
@@ -168,7 +204,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviewsList(id));
   },
   clearOfferInfo() {
-    dispatch(clearOfferDetails());
+    dispatch(ActionCreator.clearOfferDetails());
   },
 });
 

@@ -9,6 +9,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 export const fetchOfferDetails = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadOfferDetails(data)))
+    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
