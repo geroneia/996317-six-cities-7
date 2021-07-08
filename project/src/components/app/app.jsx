@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { shape } from 'prop-types';
+import PropTypes, {shape} from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -28,10 +28,11 @@ function App({authorizationStatus, isDataLoaded}) {
         <PrivateRoute exact path={AppRoute.FAVORITES}>
           <FavoritesPage />
         </PrivateRoute>
-        <Route exact path={`${AppRoute.ROOM}/:id`}
-          render={({match}) => <RoomPage id={+match.params.id}/>}
-        >
-        </Route>
+        <Route
+          exact
+          path={`${AppRoute.ROOM}/:id`}
+          render={({match}) => <RoomPage id={+match.params.id} />}
+        />
         <Route exact path={AppRoute.NOT_FOUND}>
           <NotFound />
         </Route>
@@ -53,10 +54,10 @@ App.propTypes = {
   }),
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({authorizationStatus, isDataLoaded}) => ({
+  authorizationStatus: authorizationStatus,
   isDataLoaded: {
-    ...state.isDataLoaded,
+    ...isDataLoaded,
     offers: true,
   },
 });

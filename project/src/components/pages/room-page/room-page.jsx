@@ -14,7 +14,6 @@ import LoadingPage from '../loading-page/loading-page';
 import {ActionCreator} from '../../../store/action';
 
 function RoomPage(props) {
-
   const {
     authorizationStatus,
     id,
@@ -132,8 +131,9 @@ function RoomPage(props) {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {!!host.isPro &&
-                  <span className="property__user-status">Pro</span>}
+                  {!!host.isPro && (
+                    <span className="property__user-status">Pro</span>
+                  )}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -142,14 +142,14 @@ function RoomPage(props) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                {reviews.length > 0 &&
-              <>
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviews} />
-              </>}
-
-                {authorizationStatus === AuthorizationStatus.AUTH &&
-                <Form id={id}/>}
+                {!!reviews.length && (
+                  <>
+                    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                    <ReviewsList reviews={reviews} />
+                  </>)}
+                {authorizationStatus === AuthorizationStatus.AUTH && (
+                  <Form id={id}/>
+                )}
               </section>
             </div>
           </div>

@@ -11,7 +11,8 @@ function Form({id, onSubmitReview}) {
   const disableButton = () => buttonRef.current.disabled = true;
   const enableButton = () => buttonRef.current.disabled = false;
 
-  const [userComment, setUserComment] = useState({rating: '', message: ''});
+  const emptyUserComment = {rating: '', message: ''};
+  const [userComment, setUserComment] = useState(emptyUserComment);
   const handleRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
@@ -20,13 +21,19 @@ function Form({id, onSubmitReview}) {
     evt.preventDefault();
     disableButton();
     onSubmitReview(id, message, rating);
-    setUserComment({rating: '', message: ''});
+    setUserComment(emptyUserComment);
     formRef.current.reset();
     enableButton();
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit = {handleSubmit} ref={formRef}>
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit = {handleSubmit}
+      ref={formRef}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATINGS.map((name, i) => (
