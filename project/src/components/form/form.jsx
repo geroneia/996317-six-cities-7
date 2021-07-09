@@ -1,4 +1,4 @@
-import React, {useRef, useState}from 'react';
+import React, {useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
