@@ -20,10 +20,13 @@ function RoomPage(props) {
     reviews,
     city,
     onOfferDetailsLoad,
-    offerDetails,
+    offerDetails:
+    {
+      data,
+      isDataLoaded,
+    },
     nearbyOffers,
     clearOfferInfo,
-    isDataLoaded,
     onNearbyLoad,
     onReviewsLoad,
   } = props;
@@ -43,7 +46,7 @@ function RoomPage(props) {
     clearOfferInfo,
   ]);
 
-  if (!isDataLoaded.offerDetails) {
+  if (!isDataLoaded) {
     return <LoadingPage />;
   }
 
@@ -58,7 +61,7 @@ function RoomPage(props) {
     host,
     description,
     images,
-  } = offerDetails;
+  } = data;
 
   return (
     <div className="page" key={id}>
@@ -168,7 +171,10 @@ function RoomPage(props) {
 RoomPage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  offerDetails: propType.offer,
+  offerDetails: PropTypes.shape({
+    data: propType.offer,
+    isDataLoaded: PropTypes.bool.isRequired,
+  }),
   nearbyOffers: PropTypes.arrayOf(propType.offer).isRequired,
   reviews: PropTypes.arrayOf(propType.review).isRequired,
   city: propType.city.isRequired,
@@ -176,21 +182,14 @@ RoomPage.propTypes = {
   onNearbyLoad: PropTypes.func.isRequired,
   onReviewsLoad: PropTypes.func.isRequired,
   clearOfferInfo: PropTypes.func.isRequired,
-  isDataLoaded: PropTypes.shape({
-    offers: PropTypes.bool.isRequired,
-    offerDetails: PropTypes.bool.isRequired,
-    nearbyOffers: PropTypes.bool.isRequired,
-    reviews: PropTypes.bool.isRequired,
-  }),
 };
 
-const mapStateToProps = ({authorizationStatus, city, reviews, offerDetails, nearbyOffers, isDataLoaded}) => ({
+const mapStateToProps = ({authorizationStatus, city, reviews, offerDetails, nearbyOffers}) => ({
   authorizationStatus,
   reviews,
   city,
   offerDetails,
   nearbyOffers,
-  isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

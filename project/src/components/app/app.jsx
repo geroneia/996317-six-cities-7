@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, {shape} from 'prop-types';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoute} from '../../const';
@@ -14,7 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 
 function App({authorizationStatus, isDataLoaded}) {
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded.offers) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingPage />
     );
@@ -46,20 +46,12 @@ function App({authorizationStatus, isDataLoaded}) {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  isDataLoaded: shape({
-    offers: PropTypes.bool.isRequired,
-    offerDetails: PropTypes.bool.isRequired,
-    nearbyOffers: PropTypes.bool.isRequired,
-    reviews: PropTypes.bool.isRequired,
-  }),
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded}) => ({
+const mapStateToProps = ({authorizationStatus, offers: {isDataLoaded}}) => ({
   authorizationStatus: authorizationStatus,
-  isDataLoaded: {
-    ...isDataLoaded,
-    offers: true,
-  },
+  isDataLoaded: true,
 });
 
 export {App};

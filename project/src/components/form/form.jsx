@@ -13,7 +13,7 @@ function Form({id, onSubmitReview}) {
 
   const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
-  const handleRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
+  const onRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
 
@@ -42,7 +42,7 @@ function Form({id, onSubmitReview}) {
             value={RATINGS.length - i}
             title={name}
             checked={rating === name}
-            handleRatingChange={handleRatingChange}
+            onRatingChange={onRatingChange}
           />
         ))}
       </div>

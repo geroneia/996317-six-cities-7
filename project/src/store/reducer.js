@@ -9,8 +9,14 @@ const initialState = {
   city: DEFAULT_CITY,
   popularOffers: [],
   sortedOffers: [],
-  offers: [],
-  offerDetails: {},
+  offers: {
+    data: [],
+    isDataLoaded: false,
+  },
+  offerDetails: {
+    data: {},
+    isDataLoaded: false,
+  },
   nearbyOffers: [],
   reviews: [],
   cities,
@@ -18,9 +24,6 @@ const initialState = {
   activeOfferId: null,
   isDataLoaded: {
     offers: false,
-    offerDetails: false,
-    nearbyOffers: false,
-    reviews: false,
   },
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   authInfo: {},
@@ -47,48 +50,36 @@ const reducer = (state = initialState, action) => {
     case ActionType.FILL_OFFERS_LIST:
       return {
         ...state,
-        popularOffers: getCityOffers(state.offers, action.payload),
+        popularOffers: getCityOffers(state.offers.data, action.payload),
         sortedOffers: state.popularOffers,
       };
     case ActionType.LOAD_OFFER_DETAILS:
       return {
         ...state,
-        offerDetails: adaptToClient(action.payload),
-        isDataLoaded: {
-          ...state.isDataLoaded,
-          offerDetails: true,
+        offerDetails: {
+          data: adaptToClient(action.payload),
+          isDataLoaded: true,
         },
       };
     case ActionType.LOAD_NEARBY_OFFERS:
       return {
         ...state,
         nearbyOffers: adaptToClient(action.payload),
-        isDataLoaded: {
-          ...state.isDataLoaded,
-          nearbyOffers: true,
-        },
       };
     case ActionType.LOAD_REVIEWS:
       return {
         ...state,
         reviews: adaptToClient(action.payload),
-        isDataLoaded: {
-          ...state.isDataLoaded,
-          reviews: true,
-        },
       };
     case ActionType.CLEAR_OFFER_DETAILS:
       return {
         ...state,
-        offerDetails: {},
+        offerDetails: {
+          data: {},
+          isDataLoaded: false,
+        },
         nearbyOffers: [],
         reviews: [],
-        isDataLoaded: {
-          ...state.isDataLoaded,
-          offerDetails: false,
-          nearbyOffers: false,
-          reviews: false,
-        },
       };
     case ActionType.SET_MESSAGE:
       return {
@@ -114,13 +105,12 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return {
         ...state,
-        offers: adaptToClient(action.payload),
+        offers: {
+          data: adaptToClient(action.payload),
+          isDataLoaded: true,
+        },
         popularOffers: getInitialOffers(action.payload),
         sortedOffers: getInitialOffers(action.payload),
-        isDataLoaded: {
-          ...state.isDataLoaded,
-          offers: true,
-        },
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
