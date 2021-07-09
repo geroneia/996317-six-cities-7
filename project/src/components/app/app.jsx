@@ -25,20 +25,19 @@ function App({authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.LOGIN}>
           <LogInPage />
         </Route>
-        <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
-        >
+        <PrivateRoute exact path={AppRoute.FAVORITES}>
           <FavoritesPage />
         </PrivateRoute>
-        <Route exact path={AppRoute.ROOM}>
-          <RoomPage />
+        <Route
+          exact
+          path={`${AppRoute.ROOM}/:id`}
+          render={({match}) => <RoomPage id={+match.params.id} />}
+        />
+        <Route exact path={AppRoute.NOT_FOUND}>
+          <NotFound />
         </Route>
         <Route path={AppRoute.MAIN}>
           <MainPage />
-        </Route>
-        <Route>
-          <NotFound />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -50,9 +49,9 @@ App.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({authorizationStatus, offers: {isDataLoaded}}) => ({
+  authorizationStatus: authorizationStatus,
+  isDataLoaded: true,
 });
 
 export {App};

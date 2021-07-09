@@ -7,7 +7,7 @@ import PremiumMark from '../common/premium-mark/premium-mark';
 
 function Card({className, offer, onOfferChange}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
-  const getNewActiveOfferId = () => onOfferChange(id);
+  const getNewActiveOfferId = () => !className && onOfferChange(id);
   return (
     <article
       className={`${className || 'cities__place-card'} place-card`}

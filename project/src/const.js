@@ -2,7 +2,8 @@ export const AppRoute = {
   MAIN: '/:id?',
   LOGIN: '/login',
   FAVORITES: '/favorites',
-  ROOM: '/offer/:id',
+  ROOM: '/offer',
+  NOT_FOUND: '/notFound',
 };
 
 export const RATINGS = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
@@ -75,10 +76,18 @@ export const APIRoute = {
   OFFERS: '/hotels',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  NEARBY: '/nearby',
+  REVIEWS: '/comments',
 };
 
 export const AuthorizationStatus = {
   AUTH: 'AUTH',
   NO_AUTH: 'NO_AUTH',
   UNKNOWN: 'UNKNOWN',
+};
+
+export const HttpCode = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
 };

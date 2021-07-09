@@ -1,5 +1,4 @@
-import React from 'react';
-import {useParams} from 'react-router-dom';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import ReviewsList from '../../reviewes/review-list/review-list';
@@ -9,14 +8,63 @@ import * as propType from '../../../prop-types';
 import PropTypes from 'prop-types';
 import Map from '../../map/map';
 import NearPlacesList from '../../near-places-list/near-places-list';
+import {fetchOfferDetails, fetchNearbyList, fetchReviewsList} from '../../../store/api-actions';
+import {AuthorizationStatus} from '../../../const';
+import LoadingPage from '../loading-page/loading-page';
+import {ActionCreator} from '../../../store/action';
 
-function RoomPage({offers, reviews, city}) {
-  const {id} = useParams();
-  const chosenOffer = offers.find((offer) => offer.id === +id);
-  const nearOffers = offers.slice(0, 3);
-  const {price, rating, title, type, bedrooms, maxAdults, goods, host, description, images} = chosenOffer;
+function RoomPage(props) {
+  const {
+    authorizationStatus,
+    id,
+    reviews,
+    city,
+    onOfferDetailsLoad,
+    offerDetails:
+    {
+      data,
+      isDataLoaded,
+    },
+    nearbyOffers,
+    clearOfferInfo,
+    onNearbyLoad,
+    onReviewsLoad,
+  } = props;
+
+  useEffect(() => {
+    onOfferDetailsLoad(id);
+    onNearbyLoad(id);
+    onReviewsLoad(id);
+    return () => {
+      clearOfferInfo();
+    };
+  }, [
+    id,
+    onOfferDetailsLoad,
+    onNearbyLoad,
+    onReviewsLoad,
+    clearOfferInfo,
+  ]);
+
+  if (!isDataLoaded) {
+    return <LoadingPage />;
+  }
+
+  const {
+    price,
+    rating,
+    title,
+    type,
+    bedrooms,
+    maxAdults,
+    goods,
+    host,
+    description,
+    images,
+  } = data;
+
   return (
-    <div className="page">
+    <div className="page" key={id}>
       <PageHeader/>
       <main className="page__main page__main--property">
         <section className="property">
@@ -86,7 +134,9 @@ function RoomPage({offers, reviews, city}) {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {!!host.isPro && <span className="property__user-status">Pro</span>}
+                  {!!host.isPro && (
+                    <span className="property__user-status">Pro</span>
+                  )}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -95,18 +145,24 @@ function RoomPage({offers, reviews, city}) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList reviews={reviews} />
-                <Form />
+                {!!reviews.length && (
+                  <>
+                    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                    <ReviewsList reviews={reviews} />
+                  </>
+                )}
+                {authorizationStatus === AuthorizationStatus.AUTH && (
+                  <Form id={id}/>
+                )}
               </section>
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} offers={nearOffers} key={city.name} />
+            <Map city={city} offers={nearbyOffers} key={city.name} />
           </section>
         </section>
         <div className="container">
-          <NearPlacesList offers={nearOffers} />
+          <NearPlacesList offers={nearbyOffers} />
         </div>
       </main>
     </div>
@@ -114,16 +170,43 @@ function RoomPage({offers, reviews, city}) {
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(propType.offer).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  offerDetails: PropTypes.shape({
+    data: propType.offer,
+    isDataLoaded: PropTypes.bool.isRequired,
+  }),
+  nearbyOffers: PropTypes.arrayOf(propType.offer).isRequired,
   reviews: PropTypes.arrayOf(propType.review).isRequired,
   city: propType.city.isRequired,
+  onOfferDetailsLoad: PropTypes.func.isRequired,
+  onNearbyLoad: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
+  clearOfferInfo: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offers, city, reviews}) => ({
-  offers,
+const mapStateToProps = ({authorizationStatus, city, reviews, offerDetails, nearbyOffers}) => ({
+  authorizationStatus,
   reviews,
   city,
+  offerDetails,
+  nearbyOffers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onOfferDetailsLoad(id) {
+    dispatch(fetchOfferDetails(id));
+  },
+  onNearbyLoad(id) {
+    dispatch(fetchNearbyList(id));
+  },
+  onReviewsLoad(id) {
+    dispatch(fetchReviewsList(id));
+  },
+  clearOfferInfo() {
+    dispatch(ActionCreator.clearOfferDetails());
+  },
 });
 
 export {RoomPage};
-export default connect(mapStateToProps)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

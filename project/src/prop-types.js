@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 export const user = PropTypes.shape({
-  avatarUrl: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  avatarUrl: PropTypes.string,
+  id: PropTypes.number,
   isPro: PropTypes.bool,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   email: PropTypes.string,
 });
 
