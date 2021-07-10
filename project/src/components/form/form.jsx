@@ -1,13 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
 
-function Form({id, onSubmitReview}) {
+function Form({id}) {
   const buttonRef = useRef();
   const formRef = useRef();
+  const dispatch = useDispatch();
   const disableButton = () => buttonRef.current.disabled = true;
   const enableButton = () => buttonRef.current.disabled = false;
 
@@ -20,7 +21,7 @@ function Form({id, onSubmitReview}) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     disableButton();
-    onSubmitReview(id, message, rating);
+    dispatch(postReview(id, message, rating));
     setUserComment(emptyUserComment);
     formRef.current.reset();
     enableButton();
@@ -70,14 +71,6 @@ Form.propTypes = {
     message: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }),
-  onSubmitReview: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmitReview(id, message, rating) {
-    dispatch(postReview(id, message, rating));
-  },
-});
-
-export {Form};
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;

@@ -1,15 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import * as propType from '../../../prop-types';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../../const';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {logout} from '../../../store/api-actions';
+import {getAuthorizationStatus, getAuthInfo} from '../../../store/user/selectors';
 
-function PageHeader({authorizationStatus, authInfo: {avatarUrl, email, name}, onLogout}) {
+function PageHeader() {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const authInfo = useSelector(getAuthInfo);
+  const {avatarUrl, email, name} = authInfo;
+  const dispatch = useDispatch();
   const handleLogoutClick = (evt) => {
     evt.preventDefault();
-    onLogout();
+    dispatch(logout());
   };
   return (
     <header className="header">
@@ -62,22 +65,4 @@ function PageHeader({authorizationStatus, authInfo: {avatarUrl, email, name}, on
   );
 }
 
-PageHeader.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  authInfo: propType.user,
-  onLogout: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({authorizationStatus, authInfo}) => ({
-  authorizationStatus,
-  authInfo,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLogout() {
-    dispatch(logout());
-  },
-});
-
-export {PageHeader};
-export default connect(mapStateToProps, mapDispatchToProps)(PageHeader);
+export default PageHeader;

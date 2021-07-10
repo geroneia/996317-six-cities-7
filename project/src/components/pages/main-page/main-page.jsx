@@ -1,22 +1,35 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import OffersList from '../main-page/offers-list';
-import PropTypes from 'prop-types';
-import * as propType from '../../../prop-types';
 import Map from '../../map/map';
 import CitiesList from './cities-list';
 import {useParams} from 'react-router-dom';
-import {ActionCreator} from '../../../store/action';
+import {changeCity, fillOffersList, setSortType, sortOffers, setActiveOfferId} from '../../../store/action';
 import Sort from './sort';
+import {getSortedOffers} from '../../../store/data/selectors';
+import {getCity, getCities, getSortType, getActiveOfferId} from '../../../store/app/selectors';
 
-function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
+function MainPage() {
   const {id} = useParams();
-  useEffect (() => {
-    if (id !== name && typeof id !== 'undefined' && id !== ':id') {
-      onChange(id);
-    }
-  }, [id, name, onChange]);
+  const dispatch = useDispatch();
+  const city = useSelector(getCity);
+  const sortedOffers = useSelector(getSortedOffers);
+  const cities = useSelector(getCities);
+  const sortType = useSelector(getSortType);
+  const activeOfferId = useSelector(getActiveOfferId);
+  const onSortChange = (type) => {
+    dispatch(setSortType(type));
+    dispatch(sortOffers(type));
+  };
+  const onOfferChange = (activeId) => {
+    dispatch(setActiveOfferId(activeId));
+  };
+
+  if (id !== city.name && typeof id !== 'undefined' && id !== ':id') {
+    dispatch(changeCity(id));
+    dispatch(fillOffersList(id));
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -30,7 +43,7 @@ function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType,
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedOffers.length} places to stay in {name}</b>
+              <b className="places__found">{sortedOffers.length} places to stay in {city.name}</b>
               <Sort sortType={sortType} onSortChange={onSortChange} />
               <div className="cities__places-list places__list tabs__content">
                 <OffersList offers={sortedOffers} onOfferChange={onOfferChange} />
@@ -48,38 +61,4 @@ function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType,
   );
 }
 
-MainPage.propTypes = {
-  sortedOffers: PropTypes.arrayOf(propType.offer).isRequired,
-  city: propType.city.isRequired,
-  cities: PropTypes.arrayOf(propType.city).isRequired,
-  onChange: PropTypes.func.isRequired,
-  sortType: PropTypes.string.isRequired,
-  onSortChange: PropTypes.func.isRequired,
-  activeOfferId: PropTypes.number,
-  onOfferChange: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({sortedOffers, city, cities, sortType, activeOfferId}) => ({
-  sortedOffers,
-  city,
-  cities,
-  sortType,
-  activeOfferId,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChange(city) {
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.fillOffersList(city));
-  },
-  onSortChange(type) {
-    dispatch(ActionCreator.setSortType(type));
-    dispatch(ActionCreator.sortOffers(type));
-  },
-  onOfferChange(id) {
-    dispatch(ActionCreator.setActiveOfferId(id));
-  },
-});
-
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default MainPage;

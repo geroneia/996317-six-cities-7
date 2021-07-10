@@ -1,3 +1,5 @@
+import {createAction} from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CITY: 'app/changeCity',
   FILL_OFFERS_LIST: 'app/fillOffersList',
@@ -19,74 +21,57 @@ export const ActionType = {
   CLEAR_FORM: 'app/clearForm',
 };
 
-export const ActionCreator = {
-  changeCity: (name) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: name,
-  }),
-  setSortType: (type) => ({
-    type: ActionType.SET_SORT_TYPE,
-    payload: type,
-  }),
-  setActiveOfferId: (id) => ({
-    type: ActionType.SET_ACTIVE_OFFER,
-    payload: id,
-  }),
-  fillOffersList: (offers) => ({
-    type: ActionType.FILL_OFFERS_LIST,
-    payload: offers,
-  }),
-  sortOffers: (type) => ({
-    type: ActionType.SORT_OFFERS,
-    payload: type,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadOfferDetails: (offer) => ({
-    type: ActionType.LOAD_OFFER_DETAILS,
-    payload: offer,
-  }),
-  loadNearbyOffers: (offers) => ({
-    type: ActionType.LOAD_NEARBY_OFFERS,
-    payload: offers,
-  }),
-  loadReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
-  clearOfferDetails: () => ({
-    type: ActionType.CLEAR_OFFER_DETAILS,
-  }),
-  postReview: (review) => ({
-    type: ActionType.POST_REVIEW,
-    payload: review,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  getUserInfo: (authInfo) => ({
-    type: ActionType.GET_AUTH_INFO,
-    payload: authInfo,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  setMessage: (message) => ({
-    type: ActionType.SET_MESSAGE,
-    payload: message,
-  }),
-  setRating: (rating) => ({
-    type: ActionType.SET_RATING,
-    payload: rating,
-  }),
-  clearForm: () => ({
-    type: ActionType.CLEAR_FORM,
-  }),
-};
+
+export const changeCity = createAction(ActionType.CHANGE_CITY, (name) => ({
+  payload: name,
+}));
+
+export const setSortType = createAction(ActionType.SET_SORT_TYPE, (type) => ({
+  payload: type,
+}));
+
+export const setActiveOfferId = createAction(ActionType.SET_ACTIVE_OFFER, (id) => ({
+  payload: id,
+}));
+
+export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (offers) => ({
+  payload: offers,
+}));
+
+export const sortOffers = createAction(ActionType.SORT_OFFERS, (type) => ({
+  payload: type,
+}));
+
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const loadOfferDetails = createAction(ActionType.LOAD_OFFER_DETAILS, (offer) => ({
+  payload: offer,
+}));
+
+export const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
+  payload: reviews,
+}));
+
+export const clearOfferDetails = createAction(ActionType.CLEAR_OFFER_DETAILS);
+
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
+  payload: status,
+}));
+
+export const getAuthInfo = createAction(ActionType.GET_AUTH_INFO, (authInfo) => ({
+  payload: authInfo,
+}));
+
+export const logout = createAction(ActionType.LOGOUT);
+
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
+  payload: url,
+}));
+
+export const clearForm = createAction(ActionType.CLEAR_FORM);

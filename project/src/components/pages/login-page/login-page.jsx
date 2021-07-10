@@ -1,22 +1,23 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import * as propType from '../../../prop-types';
+import {getCity} from '../../../store/app/selectors';
 
-function LogInPage({city: {name}, onSubmit}) {
+function LogInPage() {
   const loginRef = useRef();
   const passwordRef = useRef();
+  const {name} = useSelector(getCity);
+  const dispatch = useDispatch();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onSubmit({
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
+    }));
   };
 
   return (
@@ -77,21 +78,4 @@ function LogInPage({city: {name}, onSubmit}) {
   );
 }
 
-LogInPage.propTypes = {
-  city: propType.city.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({city}) => ({
-  city,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  },
-});
-
-
-export {LogInPage};
-export default connect(mapStateToProps, mapDispatchToProps)(LogInPage);
+export default LogInPage;

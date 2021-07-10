@@ -98,3 +98,5 @@ export const PremiumPlaceClass = {
 };
 
 export const MAX_COUNT_IMAGES = 6;
+
+export const MAX_COUNT_REVIEWS = 6;

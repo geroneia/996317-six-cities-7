@@ -1,4 +1,4 @@
-import {RATINGS, Cities, SortTypes, AuthorizationStatus, DEFAULT_CITY} from './const';
+import {RATINGS, Cities, SortTypes, AuthorizationStatus, DEFAULT_CITY, MAX_COUNT_REVIEWS} from './const';
 
 export const getRatingInPercent = (rating) =>
   `${rating * 100 / RATINGS.length}%`;
@@ -69,3 +69,7 @@ export const isCheckedAuth = (authorizationStatus) =>
   authorizationStatus === AuthorizationStatus.UNKNOWN;
 
 export const getInitialOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);
+
+export const getAdaptedReviews = (reviews) => reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, MAX_COUNT_REVIEWS);
+
+export const validateId = (id) => id === ':id' || Object.keys(Cities).includes(id.toUpperCase());
