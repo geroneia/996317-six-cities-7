@@ -1,20 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
-import OffersList from '../../offers-list/offers-list';
+import OffersList from '../main-page/offers-list';
 import PropTypes from 'prop-types';
 import * as propType from '../../../prop-types';
 import Map from '../../map/map';
-import CitiesList from '../../cities-list/cities-list';
+import CitiesList from './cities-list';
 import {useParams} from 'react-router-dom';
 import {ActionCreator} from '../../../store/action';
 import Sort from './sort';
 
 function MainPage({city, city: {name}, sortedOffers, onChange, cities, sortType, onSortChange, activeOfferId, onOfferChange}) {
   const {id} = useParams();
-  if (id !== name && typeof id !== 'undefined' && id !== ':id') {
-    onChange(id);
-  }
+  useEffect (() => {
+    if (id !== name && typeof id !== 'undefined' && id !== ':id') {
+      onChange(id);
+    }
+  }, [id, name, onChange]);
+
   return (
     <div className="page page--gray page--main">
       <PageHeader/>

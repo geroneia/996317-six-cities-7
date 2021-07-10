@@ -1,7 +1,7 @@
 import React from 'react';
-import Card from '../card/card';
+import Card from '../../card/card';
 import PropTypes from 'prop-types';
-import * as propType from '../../prop-types';
+import * as propType from '../../../prop-types';
 
 function OffersList({offers, onOfferChange}) {
   return (

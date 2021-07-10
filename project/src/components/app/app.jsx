@@ -6,7 +6,7 @@ import {AppRoute} from '../../const';
 import MainPage from '../pages/main-page/main-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import NotFound from '../pages/not-found-page/not-found-page';
-import RoomPage from '../pages/room-page/room-page';
+import OfferPage from '../pages/offer-page/offer-page';
 import LogInPage from '../pages/login-page/login-page';
 import LoadingPage from '../pages/loading-page/loading-page';
 import {isCheckedAuth} from '../../utils';
@@ -31,7 +31,7 @@ function App({authorizationStatus, isDataLoaded}) {
         <Route
           exact
           path={`${AppRoute.ROOM}/:id`}
-          render={({match}) => <RoomPage id={+match.params.id} />}
+          render={({match}) => <OfferPage id={+match.params.id} />}
         />
         <Route exact path={AppRoute.NOT_FOUND}>
           <NotFound />

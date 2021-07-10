@@ -1,7 +1,7 @@
 import React from 'react';
-import NearPlace from '../near-place/near-place';
+import NearPlace from './near-place';
 import PropTypes from 'prop-types';
-import * as propType from '../../prop-types';
+import * as propType from '../../../prop-types';
 
 function NearPlacesList({offers}) {
   return (

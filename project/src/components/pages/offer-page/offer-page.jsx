@@ -1,19 +1,22 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
+import Gallery from './gallery';
 import ReviewsList from '../../reviewes/review-list/review-list';
 import Form from '../../form/form';
 import {getRatingInPercent, getType}from '../../../utils';
 import * as propType from '../../../prop-types';
 import PropTypes from 'prop-types';
 import Map from '../../map/map';
-import NearPlacesList from '../../near-places-list/near-places-list';
+import NearPlacesList from './near-places-list';
 import {fetchOfferDetails, fetchNearbyList, fetchReviewsList} from '../../../store/api-actions';
 import {AuthorizationStatus} from '../../../const';
 import LoadingPage from '../loading-page/loading-page';
 import {ActionCreator} from '../../../store/action';
+import PremiumPlace from '../../common/premium-mark/premium-mark';
+import {PremiumPlaceClass} from '../../../const';
 
-function RoomPage(props) {
+function OfferPage(props) {
   const {
     authorizationStatus,
     id,
@@ -61,27 +64,22 @@ function RoomPage(props) {
     host,
     description,
     images,
+    isPremium,
   } = data;
+
+  const premiumClass = PremiumPlaceClass.PROPERTY;
 
   return (
     <div className="page" key={id}>
       <PageHeader/>
       <main className="page__main page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <div className="property__gallery">
-              {images.map((image) => (
-                <div key={image} className="property__image-wrapper">
-                  <img className="property__image" src={image} alt={type}/>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Gallery images={images} type={type} />
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium && (
+                <PremiumPlace premiumClass={premiumClass} />
+              )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -158,7 +156,7 @@ function RoomPage(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} offers={nearbyOffers} key={city.name} />
+            <Map city={city} offers={nearbyOffers.concat(data)} key={city.name} />
           </section>
         </section>
         <div className="container">
@@ -169,7 +167,7 @@ function RoomPage(props) {
   );
 }
 
-RoomPage.propTypes = {
+OfferPage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   offerDetails: PropTypes.shape({
@@ -208,5 +206,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {RoomPage};
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+export {OfferPage};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);

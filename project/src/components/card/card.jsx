@@ -3,17 +3,21 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
-import PremiumMark from '../common/premium-mark/premium-mark';
+import PremiumPlace from '../common/premium-mark/premium-mark';
+import {PremiumPlaceClass} from '../../const';
 
 function Card({className, offer, onOfferChange}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
   const getNewActiveOfferId = () => !className && onOfferChange(id);
+  const premiumClass = PremiumPlaceClass.PLACE_CARD;
   return (
     <article
       className={`${className || 'cities__place-card'} place-card`}
       onMouseEnter={getNewActiveOfferId}
     >
-      {isPremium && <PremiumMark />}
+      {isPremium && (
+        <PremiumPlace premiumClass={premiumClass} />
+      )}
       <div className={`${className || 'cities__image-wrapper'} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>

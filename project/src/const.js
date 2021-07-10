@@ -91,3 +91,10 @@ export const HttpCode = {
   UNAUTHORIZED: 401,
   NOT_FOUND: 404,
 };
+
+export const PremiumPlaceClass = {
+  PLACE_CARD: 'place-card',
+  PROPERTY: 'property',
+};
+
+export const MAX_COUNT_IMAGES = 6;
