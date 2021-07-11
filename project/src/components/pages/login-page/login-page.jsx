@@ -4,6 +4,7 @@ import PageHeader from '../../common/page-header/page-header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
+import {shake, validateEmail, validatePassword} from '../../../utils';
 
 function LogInPage() {
   const loginRef = useRef();
@@ -13,11 +14,18 @@ function LogInPage() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    !validateEmail(loginRef.current.value) && onEror(loginRef);
+    !validatePassword(passwordRef.current.value) && onEror(passwordRef);
 
+    validateEmail(loginRef.current.value) && validatePassword(passwordRef.current.value) &&
     dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     }));
+  };
+
+  const onEror = (formRef) => {
+    shake(formRef.current);
   };
 
   return (

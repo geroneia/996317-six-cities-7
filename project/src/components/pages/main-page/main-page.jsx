@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import OffersList from '../main-page/offers-list';
 import Map from '../../map/map';
 import CitiesList from './cities-list';
+import NotFound from '../not-found-page/not-found-page';
 import {useParams} from 'react-router-dom';
 import {changeCity, fillOffersList, setSortType, sortOffers, setActiveOfferId} from '../../../store/action';
 import Sort from './sort';
 import {getSortedOffers} from '../../../store/data/selectors';
 import {getCity, getCities, getSortType, getActiveOfferId} from '../../../store/app/selectors';
+import {validateId} from '../../../utils';
 
 function MainPage() {
   const {id} = useParams();
@@ -26,9 +28,15 @@ function MainPage() {
     dispatch(setActiveOfferId(activeId));
   };
 
-  if (id !== city.name && typeof id !== 'undefined' && id !== ':id') {
-    dispatch(changeCity(id));
-    dispatch(fillOffersList(id));
+  useEffect(() => {
+    if (validateId(id) && id !== city.name && typeof id !== 'undefined' && id !== ':id') {
+      dispatch(changeCity(id));
+      dispatch(fillOffersList(id));
+    }
+  }, [id, city.name, dispatch]);
+
+  if (!validateId(id))
+  {return <NotFound />;
   }
 
   return (

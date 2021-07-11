@@ -83,7 +83,7 @@ export const getInitialOffers = (data) => getCityOffers(adaptToClient(data), DEF
 
 export const getAdaptedReviews = (reviews) => reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, MAX_COUNT_REVIEWS);
 
-export const validateId = (id) => id === ':id' || Object.keys(Cities).includes(id.toUpperCase());
+export const validateId = (id) => !id || id === ':id' || Object.keys(Cities).includes(id.toUpperCase());
 
 export const shake = (target) => {
   target.style.animation = `shake ${SHAKE_ANIMATION_TIMEOUT / MILLISECONDS_IN_SECOND}s`;
@@ -93,3 +93,10 @@ export const shake = (target) => {
 };
 
 export const validateMessage = (text) => !!text.length && text.length >= MIN_MESAGE_LENGTH && text.length <= MAX_MESSAGE_LENGTH;
+
+export const validateEmail = (email) => {
+  const regEx = /\S+@\S+\.\S+/;
+  return regEx.test(email);
+};
+
+export const validatePassword = (password) => !!password.trim();
