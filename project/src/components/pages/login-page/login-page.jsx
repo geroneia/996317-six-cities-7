@@ -4,28 +4,30 @@ import PageHeader from '../../common/page-header/page-header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
-import {shake, validateEmail, validatePassword} from '../../../utils';
+import {validateEmail, validatePassword} from '../../../utils';
+import {ErrorNotification} from '../../common/error-notification/error-notification';
+import PropTypes from 'prop-types';
 
-function LogInPage() {
+function LogInPage(props) {
   const loginRef = useRef();
   const passwordRef = useRef();
   const {name} = useSelector(getCity);
   const dispatch = useDispatch();
+  const {onError} = props;
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    !validateEmail(loginRef.current.value) && onEror(loginRef);
-    !validatePassword(passwordRef.current.value) && onEror(passwordRef);
+    const isEmailValid = validateEmail(loginRef.current.value);
+    const isPasswordValid = validatePassword(passwordRef.current.value);
+    !isEmailValid && onError(loginRef);
+    !isPasswordValid && onError(passwordRef);
 
     validateEmail(loginRef.current.value) && validatePassword(passwordRef.current.value) &&
     dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     }));
-  };
-
-  const onEror = (formRef) => {
-    shake(formRef.current);
   };
 
   return (
@@ -86,4 +88,8 @@ function LogInPage() {
   );
 }
 
-export default LogInPage;
+LogInPage.propTypes = {
+  onError: PropTypes.func.isRequired,
+};
+
+export default ErrorNotification(LogInPage);

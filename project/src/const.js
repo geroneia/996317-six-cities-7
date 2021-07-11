@@ -92,7 +92,7 @@ export const HttpCode = {
   NOT_FOUND: 404,
 };
 
-export const PremiumPlaceClass = {
+export const PlaceMark = {
   PLACE_CARD: 'place-card',
   PROPERTY: 'property',
 };

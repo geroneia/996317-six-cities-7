@@ -13,7 +13,7 @@ function Host({host: {avatarUrl, name, isPro}, description}) {
         <span className="property__user-name">
           {name}
         </span>
-        {!!isPro && (
+        {isPro && (
           <span className="property__user-status">Pro</span>
         )}
       </div>

@@ -4,19 +4,18 @@ import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
-import {shake, validateMessage} from '../../utils';
+import {validateMessage} from '../../utils';
 
 function Form({id}) {
-  const buttonRef = useRef();
   const formRef = useRef();
   const dispatch = useDispatch();
-  const disableButton = () => buttonRef.current.disabled = true;
-  const enableButton = () => buttonRef.current.disabled = false;
-  const disableForm = () => formRef.current.disabled = true;
-  const enableForm = () => formRef.current.disabled = false;
 
   const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
+  const [disableButton, setDisableButton] = useState(true);
+  const [disableInput, setdisableInput] = useState(false);
+  const disableForm = () => setdisableInput(true);
+  const enableForm = () => setdisableInput(false);
   const onRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
@@ -28,26 +27,26 @@ function Form({id}) {
       onEror();
     }
     else {
-      disableButton();
+      setDisableButton(true);
       disableForm();
       dispatch(postReview(id, message, rating));
       setUserComment(emptyUserComment);
+      enableForm();
       formRef.current.reset();
-      enableButton();
+      setDisableButton(false);
     }
   };
 
   const onEror = (evt) => {
-    enableButton();
+    setDisableButton(false);
     enableForm();
-    shake(formRef.current);
   };
 
   useEffect(() => {
-    validateMessage(message) && rating.length !== 0 ?
-      enableButton()
+    validateMessage(message) && rating.length ?
+      setDisableButton(false)
       :
-      disableButton();
+      setDisableButton(true);
 
   }, [message, rating.length]);
 
@@ -68,6 +67,7 @@ function Form({id}) {
             title={name}
             checked={rating === name}
             onRatingChange={onRatingChange}
+            isDisabled={disableInput}
           />
         ))}
       </div>
@@ -78,12 +78,13 @@ function Form({id}) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleMessageChange}
         value={message}
+        disabled={disableInput}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" ref={buttonRef}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={disableButton}>Submit</button>
       </div>
     </form>
   );

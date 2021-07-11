@@ -15,7 +15,7 @@ import {AuthorizationStatus} from '../../../const';
 import LoadingPage from '../loading-page/loading-page';
 import {clearOfferDetails} from '../../../store/action';
 import PremiumMark from '../../common/premium-mark/premium-mark';
-import {PremiumPlaceClass} from '../../../const';
+import {PlaceMark} from '../../../const';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
 import {getReviews, getOfferDetails, getNearbyOffers} from '../../../store/data/selectors';
 import {getCity, getActiveOfferId} from '../../../store/app/selectors';
@@ -61,7 +61,7 @@ function OfferPage(props) {
     isPremium,
   } = data;
 
-  const premiumClass = PremiumPlaceClass.PROPERTY;
+  const mark = PlaceMark.PROPERTY;
 
   return (
     <div className="page" key={id}>
@@ -72,7 +72,7 @@ function OfferPage(props) {
           <div className="property__container container">
             <div className="property__wrapper">
               {isPremium && (
-                <PremiumMark premiumClass={premiumClass} />
+                <PremiumMark mark={mark} />
               )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
@@ -132,7 +132,12 @@ function OfferPage(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} offers={nearbyOffers.concat(data)} key={city.name} activeOfferId={activeOfferId} />
+            <Map
+              city={city}
+              offers={nearbyOffers.concat(data)}
+              key={city.name}
+              activeOfferId={activeOfferId}
+            />
           </section>
         </section>
         <div className="container">

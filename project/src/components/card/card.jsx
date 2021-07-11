@@ -4,21 +4,31 @@ import PropTypes from 'prop-types';
 import * as propType from '../../prop-types';
 import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../common/premium-mark/premium-mark';
-import {PremiumPlaceClass} from '../../const';
+import {PlaceMark} from '../../const';
+import cx from 'classnames';
 
-function Card({className, offer, onOfferChange}) {
+function Card({place, offer, onOfferChange}) {
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
-  const getNewActiveOfferId = () => !className && onOfferChange(id);
-  const premiumClass = PremiumPlaceClass.PLACE_CARD;
+  const getNewActiveOfferId = () => place === PlaceMark.PLACE_CARD && onOfferChange(id);
+  const mark = PlaceMark.PLACE_CARD;
   return (
     <article
-      className={`${className || 'cities__place-card'} place-card`}
+      className={cx({
+        'place-card' : true,
+        'cities__place-card' : place === PlaceMark.PLACE_CARD,
+        'near-places__card' : place === PlaceMark.PROPERTY,
+      })}
       onMouseEnter={getNewActiveOfferId}
     >
       {isPremium && (
-        <PremiumMark premiumClass={premiumClass} />
+        <PremiumMark mark={mark} />
       )}
-      <div className={`${className || 'cities__image-wrapper'} place-card__image-wrapper`}>
+      <div className={cx({
+        'place-card__image-wrapper' : true,
+        'cities__image-wrapper' : place === PlaceMark.PLACE_CARD,
+        'near-places__card' : place === PlaceMark.PROPERTY,
+      })}
+      >
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
         </Link>
@@ -53,7 +63,7 @@ function Card({className, offer, onOfferChange}) {
 
 Card.propTypes = {
   offer: propType.offer,
-  className: PropTypes.string,
+  place: PropTypes.string,
   onOfferChange: PropTypes.func,
 };
 

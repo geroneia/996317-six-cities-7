@@ -59,7 +59,12 @@ function MainPage() {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} offers={sortedOffers} key={city.name} activeOfferId={activeOfferId} />
+                <Map
+                  city={city}
+                  offers={sortedOffers}
+                  key={city.name}
+                  activeOfferId={activeOfferId}
+                />
               </section>
             </div>
           </div>
