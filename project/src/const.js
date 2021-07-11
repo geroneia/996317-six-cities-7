@@ -100,3 +100,11 @@ export const PremiumPlaceClass = {
 export const MAX_COUNT_IMAGES = 6;
 
 export const MAX_COUNT_REVIEWS = 6;
+
+export const SHAKE_ANIMATION_TIMEOUT = 600;
+
+export const MILLISECONDS_IN_SECOND = 1000;
+
+export const MAX_MESSAGE_LENGTH = 300;
+
+export const MIN_MESAGE_LENGTH = 50;

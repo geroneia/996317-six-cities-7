@@ -1,9 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
+import {shake, validateMessage} from '../../utils';
 
 function Form({id}) {
   const buttonRef = useRef();
@@ -11,6 +12,8 @@ function Form({id}) {
   const dispatch = useDispatch();
   const disableButton = () => buttonRef.current.disabled = true;
   const enableButton = () => buttonRef.current.disabled = false;
+  const disableForm = () => formRef.current.disabled = true;
+  const enableForm = () => formRef.current.disabled = false;
 
   const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
@@ -20,12 +23,33 @@ function Form({id}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    disableButton();
-    dispatch(postReview(id, message, rating));
-    setUserComment(emptyUserComment);
-    formRef.current.reset();
-    enableButton();
+    if (!validateMessage(message) || rating.length === 0)
+    {
+      onEror();
+    }
+    else {
+      disableButton();
+      disableForm();
+      dispatch(postReview(id, message, rating));
+      setUserComment(emptyUserComment);
+      formRef.current.reset();
+      enableButton();
+    }
   };
+
+  const onEror = (evt) => {
+    enableButton();
+    enableForm();
+    shake(formRef.current);
+  };
+
+  useEffect(() => {
+    validateMessage(message) && rating.length !== 0 ?
+      enableButton()
+      :
+      disableButton();
+
+  }, [message, rating.length]);
 
   return (
     <form
@@ -59,7 +83,7 @@ function Form({id}) {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" ref={buttonRef}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" ref={buttonRef} disable>Submit</button>
       </div>
     </form>
   );
