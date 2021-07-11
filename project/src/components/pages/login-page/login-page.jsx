@@ -5,7 +5,7 @@ import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
 import {validateEmail, validatePassword} from '../../../utils';
-import {ErrorNotification} from '../../common/error-notification/error-notification';
+import {WithErrorNotification} from '../../common/with-error-notification/with-error-notification';
 import PropTypes from 'prop-types';
 
 function LogInPage(props) {
@@ -20,8 +20,8 @@ function LogInPage(props) {
     evt.preventDefault();
     const isEmailValid = validateEmail(loginRef.current.value);
     const isPasswordValid = validatePassword(passwordRef.current.value);
-    !isEmailValid && onError(loginRef);
-    !isPasswordValid && onError(passwordRef);
+    !isEmailValid && onError(loginRef.current);
+    !isPasswordValid && onError(passwordRef.current);
 
     validateEmail(loginRef.current.value) && validatePassword(passwordRef.current.value) &&
     dispatch(login({
@@ -92,4 +92,4 @@ LogInPage.propTypes = {
   onError: PropTypes.func.isRequired,
 };
 
-export default ErrorNotification(LogInPage);
+export default WithErrorNotification(LogInPage);
