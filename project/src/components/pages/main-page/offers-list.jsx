@@ -14,7 +14,8 @@ function OffersList({offers, onOfferChange}) {
           offer={offer}
           onOfferChange={onOfferChange}
           place={place}
-        />))}
+        />
+      ))}
     </>
   );
 }

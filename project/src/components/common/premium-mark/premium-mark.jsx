@@ -5,10 +5,11 @@ import {PlaceMark} from '../../../const';
 
 function PremiumMark({mark}) {
   return (
-    <div className={cx({
-      'place-card__mark' : mark === PlaceMark.PLACE_CARD,
-      'property__mark' : mark === PlaceMark.PROPERTY,
-    })}
+    <div
+      className={cx({
+        'place-card__mark': mark === PlaceMark.PLACE_CARD,
+        'property__mark': mark === PlaceMark.PROPERTY,
+      })}
     >
       <span>Premium</span>
     </div>

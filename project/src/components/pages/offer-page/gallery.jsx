@@ -9,7 +9,7 @@ function Gallery({images, type}) {
       <div className="property__gallery">
         {galleryImages.map((image) => (
           <div key={image} className="property__image-wrapper">
-            <img className="property__image" src={image} alt={type}/>
+            <img className="property__image" src={image} alt={type} />
           </div>
         ))}
       </div>

@@ -15,22 +15,23 @@ function Card({place, offer, onOfferChange}) {
     <article
       className={cx({
         'place-card' : true,
-        'cities__place-card' : place === PlaceMark.PLACE_CARD,
-        'near-places__card' : place === PlaceMark.PROPERTY,
+        'cities__place-card': place === PlaceMark.PLACE_CARD,
+        'near-places__card': place === PlaceMark.PROPERTY,
       })}
       onMouseEnter={getNewActiveOfferId}
     >
       {isPremium && (
         <PremiumMark mark={mark} />
       )}
-      <div className={cx({
-        'place-card__image-wrapper' : true,
-        'cities__image-wrapper' : place === PlaceMark.PLACE_CARD,
-        'near-places__card' : place === PlaceMark.PROPERTY,
-      })}
+      <div
+        className={cx({
+          'place-card__image-wrapper': true,
+          'cities__image-wrapper': place === PlaceMark.PLACE_CARD,
+          'near-places__card': place === PlaceMark.PROPERTY,
+        })}
       >
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
       <div className="place-card__info">

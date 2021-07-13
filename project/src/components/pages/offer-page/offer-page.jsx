@@ -126,7 +126,7 @@ function OfferPage(props) {
                   </>
                 )}
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <Form id={id}/>
+                  <Form id={id} />
                 )}
               </section>
             </div>

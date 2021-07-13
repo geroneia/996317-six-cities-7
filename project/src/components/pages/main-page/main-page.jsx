@@ -35,8 +35,8 @@ function MainPage() {
     }
   }, [id, city.name, dispatch]);
 
-  if (!validateId(id))
-  {return <NotFound />;
+  if (!validateId(id)) {
+    return <NotFound />;
   }
 
   return (
