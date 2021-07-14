@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Rating({value, title, onRatingChange}) {
+function Rating({value, title, onRatingChange, isDisabled}) {
   return (
     <>
       <input
@@ -11,6 +11,7 @@ function Rating({value, title, onRatingChange}) {
         id={`${value}-stars`}
         type="radio"
         onClick={onRatingChange}
+        disabled={isDisabled}
       />
       <label
         htmlFor={`${value}-stars`}
@@ -29,6 +30,7 @@ Rating.propTypes = {
   value: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   onRatingChange: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
 };
 
 export default Rating;

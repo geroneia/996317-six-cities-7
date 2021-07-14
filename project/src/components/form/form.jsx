@@ -1,30 +1,54 @@
-import React, {useRef, useState} from 'react';
-import {connect} from 'react-redux';
+import React, {useRef, useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
+import {validateMessage} from '../../utils';
 
-function Form({id, onSubmitReview}) {
-  const buttonRef = useRef();
+function Form({id}) {
   const formRef = useRef();
-  const disableButton = () => buttonRef.current.disabled = true;
-  const enableButton = () => buttonRef.current.disabled = false;
+  const dispatch = useDispatch();
 
   const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
+  const [disableButton, setDisableButton] = useState(true);
+  const [disableInput, setdisableInput] = useState(false);
+  const disableForm = () => setdisableInput(true);
+  const enableForm = () => setdisableInput(false);
   const onRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    disableButton();
-    onSubmitReview(id, message, rating);
-    setUserComment(emptyUserComment);
-    formRef.current.reset();
-    enableButton();
+    if (!validateMessage(message) || rating.length === 0)
+    {
+      onEror();
+    }
+    else {
+      setDisableButton(true);
+      disableForm();
+      dispatch(postReview(id, message, rating));
+      setUserComment(emptyUserComment);
+      enableForm();
+      formRef.current.reset();
+      setDisableButton(false);
+    }
   };
+
+  const onEror = (evt) => {
+    setDisableButton(false);
+    enableForm();
+  };
+
+  useEffect(() => {
+    validateMessage(message) && rating.length ?
+      setDisableButton(false)
+      :
+      setDisableButton(true);
+
+  }, [message, rating.length]);
 
   return (
     <form
@@ -43,6 +67,7 @@ function Form({id, onSubmitReview}) {
             title={name}
             checked={rating === name}
             onRatingChange={onRatingChange}
+            isDisabled={disableInput}
           />
         ))}
       </div>
@@ -53,12 +78,13 @@ function Form({id, onSubmitReview}) {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleMessageChange}
         value={message}
+        disabled={disableInput}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" ref={buttonRef}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={disableButton}>Submit</button>
       </div>
     </form>
   );
@@ -70,14 +96,6 @@ Form.propTypes = {
     message: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
   }),
-  onSubmitReview: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmitReview(id, message, rating) {
-    dispatch(postReview(id, message, rating));
-  },
-});
-
-export {Form};
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;

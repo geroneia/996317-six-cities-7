@@ -1,22 +1,34 @@
 import React, {useRef} from 'react';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
+import {getCity} from '../../../store/app/selectors';
+import {validateEmail, validatePassword} from '../../../utils';
+import {withErrorNotification} from '../../common/with-error-notification/with-error-notification';
 import PropTypes from 'prop-types';
-import * as propType from '../../../prop-types';
 
-function LogInPage({city: {name}, onSubmit}) {
+function LogInPage(props) {
   const loginRef = useRef();
   const passwordRef = useRef();
+  const {name} = useSelector(getCity);
+  const dispatch = useDispatch();
+  const {onError} = props;
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    const isEmailValid = validateEmail(loginRef.current.value);
+    const isPasswordValid = validatePassword(passwordRef.current.value);
+    !isEmailValid && onError(loginRef.current);
+    !isPasswordValid && onError(passwordRef.current);
 
-    onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
+    if(isEmailValid && isPasswordValid) {
+      dispatch(login({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      }));
+    }
   };
 
   return (
@@ -78,20 +90,7 @@ function LogInPage({city: {name}, onSubmit}) {
 }
 
 LogInPage.propTypes = {
-  city: propType.city.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({city}) => ({
-  city,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  },
-});
-
-
-export {LogInPage};
-export default connect(mapStateToProps, mapDispatchToProps)(LogInPage);
+export default withErrorNotification(LogInPage);

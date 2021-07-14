@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import FavoritesCard from '../favorites-card/favorites-card';
+import FavoritesCard from './favorites-card';
 import {AppRoute} from '../../../const';
 import PropTypes from 'prop-types';
 import * as propType from '../../../prop-types';

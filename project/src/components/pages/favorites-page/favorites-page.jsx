@@ -5,7 +5,7 @@ import {AppRoute} from '../../../const';
 import PageHeader from '../../common/page-header/page-header';
 import PropTypes from 'prop-types';
 import * as propType from '../../../prop-types';
-import FavoriteCity from '../../favorites/favorite-city/favorite-city';
+import FavoriteCity from './favorite-city';
 import {sortOffersByTown} from '../../../utils';
 
 function FavoritesPage({offers}) {
@@ -26,7 +26,7 @@ function FavoritesPage({offers}) {
       </main>
       <footer className="footer container">
         <Link className="footer__logo-link" to={AppRoute.MAIN}>
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
+          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>
       </footer>
     </div>
@@ -37,8 +37,8 @@ FavoritesPage.propTypes = {
   offers: PropTypes.arrayOf(propType.offer).isRequired,
 };
 
-const mapStateToProps = ({offers}) => ({
-  offers,
+const mapStateToProps = ({DATA}) => ({
+  offer: DATA.offers.data,
 });
 
 export {FavoritesPage};
