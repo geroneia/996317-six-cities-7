@@ -1,9 +1,9 @@
 import React from 'react';
 import {SHAKE_ANIMATION_TIMEOUT, MILLISECONDS_IN_SECOND} from '../../../const';
 
-export const withErrorNotification = (Component) => {
+export const withErrorAlert = (Component) => {
   const {displayName, name} = Component;
-  function WithErrorNotification(props) {
+  function WithErrorAlert(props) {
     const onError = (target) => {
       target.style.animation = `shake ${SHAKE_ANIMATION_TIMEOUT / MILLISECONDS_IN_SECOND}s`;
       setTimeout(() => {
@@ -17,7 +17,7 @@ export const withErrorNotification = (Component) => {
       />
     );
   }
-  WithErrorNotification.displayName = `WithErrorNotification(${displayName || name || 'Component'})`;
+  WithErrorAlert.displayName = `WithErrorAlert(${displayName || name || 'Component'})`;
 
-  return WithErrorNotification;
+  return WithErrorAlert;
 };

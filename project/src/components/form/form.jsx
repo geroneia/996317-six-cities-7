@@ -12,7 +12,7 @@ function Form({id}) {
 
   const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
-  const [disableButton, setDisableButton] = useState(true);
+  const [canSubmit, toggleSubmissionAbility] = useState(true);
   const [disableInput, setdisableInput] = useState(false);
   const disableForm = () => setdisableInput(true);
   const enableForm = () => setdisableInput(false);
@@ -22,31 +22,27 @@ function Form({id}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!validateMessage(message) || rating.length === 0)
+    if (!validateMessage(message) || !rating.length)
     {
       onEror();
-    }
-    else {
-      setDisableButton(true);
+    } else {
+      toggleSubmissionAbility(true);
       disableForm();
       dispatch(postReview(id, message, rating));
       setUserComment(emptyUserComment);
       enableForm();
       formRef.current.reset();
-      setDisableButton(false);
+      toggleSubmissionAbility(false);
     }
   };
 
   const onEror = (evt) => {
-    setDisableButton(false);
+    toggleSubmissionAbility(false);
     enableForm();
   };
 
   useEffect(() => {
-    validateMessage(message) && rating.length ?
-      setDisableButton(false)
-      :
-      setDisableButton(true);
+    toggleSubmissionAbility(!(validateMessage(message) && rating.length));
 
   }, [message, rating.length]);
 
@@ -84,7 +80,7 @@ function Form({id}) {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={disableButton}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={canSubmit}>Submit</button>
       </div>
     </form>
   );
