@@ -11,6 +11,7 @@ import Sort from './sort';
 import {getSortedOffers} from '../../../store/data/selectors';
 import {getCity, getCities, getSortType, getActiveOfferId} from '../../../store/app/selectors';
 import {validateId} from '../../../utils';
+import PlacesEmptyList from './places-empty-list';
 
 function MainPage() {
   const {id} = useParams();
@@ -48,26 +49,28 @@ function MainPage() {
           <CitiesList city={city} cities={cities} />
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedOffers.length} places to stay in {city.name}</b>
-              <Sort sortType={sortType} onSortChange={onSortChange} />
-              <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={sortedOffers} onOfferChange={onOfferChange} />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={city}
-                  offers={sortedOffers}
-                  key={city.name}
-                  activeOfferId={activeOfferId}
-                />
+          {!sortedOffers ?
+            <PlacesEmptyList name={city.name}/> :
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{sortedOffers.length} places to stay in {city.name}</b>
+                <Sort sortType={sortType} onSortChange={onSortChange} />
+                <div className="cities__places-list places__list tabs__content">
+                  <OffersList offers={sortedOffers} onOfferChange={onOfferChange} />
+                </div>
               </section>
-            </div>
-          </div>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map
+                    city={city}
+                    offers={sortedOffers}
+                    key={city.name}
+                    activeOfferId={activeOfferId}
+                  />
+                </section>
+              </div>
+            </div>}
         </div>
       </main>
     </div>
