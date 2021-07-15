@@ -51,6 +51,7 @@ export const postReview = (id, comment, rating) => (dispatch, _getState, api) =>
 export const postFavoritesStatus = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITES}/${id}/${status}`)
     .then(({data}) => dispatch(toggleFavoriteStatus(data)))
+    .catch(() => {})
 );
 
 export const logout = () => (dispatch, _getState, api) => (

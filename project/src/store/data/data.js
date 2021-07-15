@@ -34,19 +34,17 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(toggleFavoriteStatus, (state, action) => {
       state.offers = {
-        data: replaceOffer(state.offers.data, action.payload),
+        data: replaceOffer(state.offers.data, adaptToClient(action.payload)),
         isLoaded: true,
       };
-      state.popularOffers = replaceOffer(state.popularOffers, action.payload);
-      state.sortedOffers = replaceOffer(state.sortedOffers, action.payload);
+      state.popularOffers = replaceOffer(state.popularOffers, adaptToClient(action.payload));
+      state.sortedOffers = replaceOffer(state.sortedOffers, adaptToClient(action.payload));
     })
     .addCase(loadFavorites, (state, action) => {
       state.favoriteOffers = {
         data: adaptToClient(action.payload),
         isLoaded: true,
       };
-      state.popularOffers = getInitialOffers(action.payload);
-      state.sortedOffers = getInitialOffers(action.payload);
     })
     .addCase(loadOfferDetails, (state, action) => {
       state.offerDetails = {

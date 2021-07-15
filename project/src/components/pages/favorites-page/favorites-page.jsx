@@ -19,13 +19,14 @@ function FavoritesPage() {
     dispatch(fetchFavoritesList());
   }, [dispatch]);
 
+  if (data.length === 0) {
+    return <FavoritesEmptyPage />;
+  }
+
   if (!isLoaded) {
     return <LoadingPage />;
   }
 
-  if (!favoriteOffers.length) {
-    return <FavoritesEmptyPage />;
-  }
   return (
     <div className="page">
       <PageHeader/>

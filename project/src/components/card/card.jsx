@@ -6,10 +6,10 @@ import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../common/premium-mark/premium-mark';
 import {PlaceMark} from '../../const';
 import cx from 'classnames';
-// import Bookmark from '../common/bookmark/bookmark';
+import Bookmark from '../common/bookmark/bookmark';
 
 function Card({place, offer, onOfferChange}) {
-  const {isPremium, previewImage, price, rating, title, type, id} = offer;
+  const {isPremium, previewImage, price, rating, title, type, id, isFavorite} = offer;
   const getNewActiveOfferId = () => place === PlaceMark.PLACE_CARD && onOfferChange(id);
   const mark = PlaceMark.PLACE_CARD;
 
@@ -42,7 +42,7 @@ function Card({place, offer, onOfferChange}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          {/* <Bookmark id={id} isFavorite={isFavorite} /> */}
+          <Bookmark id={id} isFavorite={isFavorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

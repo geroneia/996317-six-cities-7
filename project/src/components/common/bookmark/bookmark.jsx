@@ -1,17 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import {useDispatch} from 'react-redux';
-import {postFavoritesStatus} from '../../../store/api-actions';
+import {useSelector, useDispatch} from 'react-redux';
+import {postFavoritesStatus, fetchFavoritesList} from '../../../store/api-actions';
+import {AuthorizationStatus} from '../../../const';
+import {getAuthorizationStatus} from '../../../store/user/selectors';
+import {redirectToRoute} from '../../../store/action';
+import {AppRoute} from '../../../const';
+import {getFavoritesLoadStatus} from '../../../store/data/selectors';
 
 function Bookmark({id, isFavorite}) {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
+  const isFavoritesLoad = useSelector(getFavoritesLoadStatus);
   let status = +isFavorite;
   const handleFavoriteStatus = () => {
-    status === 0 ?
-      status = 1 :
-      status = 0;
-    dispatch(postFavoritesStatus(id, status));
+    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      dispatch(redirectToRoute(AppRoute.LOGIN));
+    } else {
+      status === 0 ?
+        status = 1 :
+        status = 0;
+      dispatch(postFavoritesStatus(id, status));
+      isFavoritesLoad && dispatch(fetchFavoritesList());
+    }
   };
   return (
     <button
