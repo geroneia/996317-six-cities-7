@@ -19,7 +19,7 @@ function FavoritesPage() {
     dispatch(fetchFavoritesList());
   }, [dispatch]);
 
-  if (data.length === 0) {
+  if (!data.length) {
     return <FavoritesEmptyPage />;
   }
 
@@ -29,7 +29,7 @@ function FavoritesPage() {
 
   return (
     <div className="page">
-      <PageHeader/>
+      <PageHeader />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

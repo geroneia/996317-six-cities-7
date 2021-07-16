@@ -65,7 +65,7 @@ function OfferPage(props) {
 
   return (
     <div className="page" key={id}>
-      <PageHeader/>
+      <PageHeader />
       <main className="page__main page__main--property">
         <section className="property">
           <Gallery images={images} type={type} />

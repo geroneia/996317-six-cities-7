@@ -42,15 +42,16 @@ function MainPage() {
 
   return (
     <div className="page page--gray page--main">
-      <PageHeader/>
+      <PageHeader />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <CitiesList city={city} cities={cities} />
         </div>
         <div className="cities">
-          {!sortedOffers ?
-            <PlacesEmptyList name={city.name}/> :
+          {!sortedOffers.length ? (
+            <PlacesEmptyList name={city.name} />
+          ) : (
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -70,7 +71,8 @@ function MainPage() {
                   />
                 </section>
               </div>
-            </div>}
+            </div>
+          )}
         </div>
       </main>
     </div>
