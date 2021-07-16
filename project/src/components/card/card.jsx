@@ -6,11 +6,13 @@ import {getRatingInPercent, getType} from '../../utils';
 import PremiumMark from '../common/premium-mark/premium-mark';
 import {PlaceMark} from '../../const';
 import cx from 'classnames';
+import Bookmark from '../common/bookmark/bookmark';
 
 function Card({place, offer, onOfferChange}) {
-  const {isPremium, previewImage, price, rating, title, type, id} = offer;
+  const {isPremium, previewImage, price, rating, title, type, id, isFavorite} = offer;
   const getNewActiveOfferId = () => place === PlaceMark.PLACE_CARD && onOfferChange(id);
   const mark = PlaceMark.PLACE_CARD;
+
   return (
     <article
       className={cx({
@@ -40,12 +42,7 @@ function Card({place, offer, onOfferChange}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <Bookmark id={id} isFavorite={isFavorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

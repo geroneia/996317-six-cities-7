@@ -1,16 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
 import {AppRoute} from '../../../const';
 import PageHeader from '../../common/page-header/page-header';
-import PropTypes from 'prop-types';
-import * as propType from '../../../prop-types';
 import FavoriteCity from './favorite-city';
 import {sortOffersByTown} from '../../../utils';
+import {getFavoriteOffers} from '../../../store/data/selectors';
+import {fetchFavoritesList} from '../../../store/api-actions';
+import LoadingPage from '../loading-page/loading-page';
+import FavoritesEmptyPage from './favorites-empty-page';
 
-function FavoritesPage({offers}) {
-  const favoriteOffers = sortOffersByTown(offers);
+function FavoritesPage() {
+  const {data, isLoaded} = useSelector(getFavoriteOffers);
+  const favoriteOffers = sortOffersByTown(data);
+  const dispatch = useDispatch();
   const cities = Object.keys(favoriteOffers);
+  useEffect(() => {
+    dispatch(fetchFavoritesList());
+  }, [dispatch]);
+
+  if (data.length === 0) {
+    return <FavoritesEmptyPage />;
+  }
+
+  if (!isLoaded) {
+    return <LoadingPage />;
+  }
+
   return (
     <div className="page">
       <PageHeader/>
@@ -33,13 +49,5 @@ function FavoritesPage({offers}) {
   );
 }
 
-FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(propType.offer).isRequired,
-};
+export default FavoritesPage;
 
-const mapStateToProps = ({DATA}) => ({
-  offer: DATA.offers.data,
-});
-
-export {FavoritesPage};
-export default connect(mapStateToProps)(FavoritesPage);

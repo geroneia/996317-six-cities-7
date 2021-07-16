@@ -7,6 +7,7 @@ export const ActionType = {
   SORT_OFFERS: 'app/sortOffers',
   SET_ACTIVE_OFFER: 'app/setActiveOffer',
   LOAD_OFFERS: 'data/loadOffers',
+  LOAD_FAVORITES: 'data/loadFavorites',
   LOAD_OFFER_DETAILS: 'data/loadOfferDetails',
   LOAD_NEARBY_OFFERS: 'data/loadNerbyOffers',
   LOAD_REVIEWS: 'data/loadReviews',
@@ -19,6 +20,7 @@ export const ActionType = {
   SET_MESSAGE: 'app/setMessage',
   SET_RATING: 'app/setRating',
   CLEAR_FORM: 'app/clearForm',
+  TOGGLE_FAVORITE_STATUS: 'data/toggleFavoriteStatus',
 };
 
 
@@ -43,6 +45,10 @@ export const sortOffers = createAction(ActionType.SORT_OFFERS, (type) => ({
 }));
 
 export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
+  payload: offers,
+}));
+
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({
   payload: offers,
 }));
 
@@ -75,3 +81,7 @@ export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) 
 }));
 
 export const clearForm = createAction(ActionType.CLEAR_FORM);
+
+export const toggleFavoriteStatus = createAction(ActionType.TOGGLE_FAVORITE_STATUS, (offer) => ({
+  payload: offer,
+}));

@@ -100,3 +100,10 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => !!password.trim();
+
+export const replaceOffer = (offers, offer) => {
+  const offersUpdateOffer = [...offers.slice(0, (offers.findIndex((el) => el.id === offer.id))),
+    offer,
+    ...offers.slice((offers.findIndex((el) => el.id === offer.id)) + 1)];
+  return offersUpdateOffer;
+};

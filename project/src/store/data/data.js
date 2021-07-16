@@ -1,10 +1,14 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers} from '../action';
-import {adaptToClient,getInitialOffers, getCityOffers, getSortAction} from '../../utils';
+import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers, loadFavorites, toggleFavoriteStatus} from '../action';
+import {adaptToClient,getInitialOffers, getCityOffers, getSortAction, replaceOffer} from '../../utils';
 
 const initialState = {
   popularOffers: [],
   sortedOffers: [],
+  favoriteOffers: {
+    data: [],
+    isLoaded: false,
+  },
   offers: {
     data: [],
     isLoaded: false,
@@ -19,6 +23,7 @@ const initialState = {
 
 const data = createReducer(initialState, (builder) => {
   builder
+
     .addCase(loadOffers, (state, action) => {
       state.offers = {
         data: adaptToClient(action.payload),
@@ -26,6 +31,20 @@ const data = createReducer(initialState, (builder) => {
       };
       state.popularOffers = getInitialOffers(action.payload);
       state.sortedOffers = getInitialOffers(action.payload);
+    })
+    .addCase(toggleFavoriteStatus, (state, action) => {
+      state.offers = {
+        data: replaceOffer(state.offers.data, adaptToClient(action.payload)),
+        isLoaded: true,
+      };
+      state.popularOffers = replaceOffer(state.popularOffers, adaptToClient(action.payload));
+      state.sortedOffers = replaceOffer(state.sortedOffers, adaptToClient(action.payload));
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favoriteOffers = {
+        data: adaptToClient(action.payload),
+        isLoaded: true,
+      };
     })
     .addCase(loadOfferDetails, (state, action) => {
       state.offerDetails = {
