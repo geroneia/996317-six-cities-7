@@ -48,4 +48,4 @@ Sort.propTypes = {
   onSortChange: PropTypes.func.isRequired,
 };
 
-export default Sort;
+export default React.memo(Sort, (prevProps, nextProps) => prevProps === nextProps);

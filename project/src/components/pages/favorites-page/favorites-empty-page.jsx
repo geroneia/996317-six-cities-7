@@ -27,4 +27,4 @@ function FavoritesEmptyPage() {
   );
 }
 
-export default FavoritesEmptyPage;
+export default React.memo(FavoritesEmptyPage);

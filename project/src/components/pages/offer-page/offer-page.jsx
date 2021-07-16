@@ -19,6 +19,7 @@ import {PlaceMark} from '../../../const';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
 import {getReviews, getOfferDetails, getNearbyOffers} from '../../../store/data/selectors';
 import {getCity, getActiveOfferId} from '../../../store/app/selectors';
+import Bookmark from '../../common/bookmark/bookmark';
 
 function OfferPage(props) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
@@ -59,6 +60,7 @@ function OfferPage(props) {
     description,
     images,
     isPremium,
+    isFavorite,
   } = data;
 
   const mark = PlaceMark.PROPERTY;
@@ -78,12 +80,7 @@ function OfferPage(props) {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark id={id} isFavorite={isFavorite} place={mark} />
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">

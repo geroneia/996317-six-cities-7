@@ -96,6 +96,7 @@ export const HttpCode = {
 export const PlaceMark = {
   PLACE_CARD: 'place-card',
   PROPERTY: 'property',
+  FAVORITES: 'favorites',
 };
 
 export const MAX_COUNT_IMAGES = 6;

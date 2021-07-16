@@ -19,6 +19,7 @@ function Card({place, offer, onOfferChange}) {
         'place-card' : true,
         'cities__place-card': place === PlaceMark.PLACE_CARD,
         'near-places__card': place === PlaceMark.PROPERTY,
+        'favorites__card': place === PlaceMark.FAVORITES,
       })}
       onMouseEnter={getNewActiveOfferId}
     >
@@ -30,10 +31,20 @@ function Card({place, offer, onOfferChange}) {
           'place-card__image-wrapper': true,
           'cities__image-wrapper': place === PlaceMark.PLACE_CARD,
           'near-places__card': place === PlaceMark.PROPERTY,
+          'favorites__card': place === PlaceMark.FAVORITES,
         })}
       >
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
+          <img
+            className={cx({
+              'place-card__image': true,
+              'favorites__image': place === PlaceMark.FAVORITES,
+            })}
+            src={previewImage}
+            width="260"
+            height="200"
+            alt="Place"
+          />
         </Link>
       </div>
       <div className="place-card__info">
@@ -42,7 +53,7 @@ function Card({place, offer, onOfferChange}) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark id={id} isFavorite={isFavorite} />
+          <Bookmark id={id} isFavorite={isFavorite} place={PlaceMark.PLACE_CARD} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
