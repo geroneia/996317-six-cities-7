@@ -29,4 +29,4 @@ CitiesList.propTypes = {
   cities: PropTypes.arrayOf(propType.city).isRequired,
 };
 
-export default CitiesList;
+export default React.memo(CitiesList, (prevProps, nextProps) => prevProps === nextProps);

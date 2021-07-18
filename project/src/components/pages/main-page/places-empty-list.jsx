@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function PlacesEmptyList({name}) {
-
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">
@@ -12,7 +11,7 @@ function PlacesEmptyList({name}) {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <section className="cities__map map" />
       </div>
     </div>
   );
@@ -22,4 +21,4 @@ PlacesEmptyList.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default PlacesEmptyList;
+export default React.memo(PlacesEmptyList, (prevProps, nextProps) => prevProps === nextProps);
