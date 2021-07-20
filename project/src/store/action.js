@@ -47,8 +47,8 @@ export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
   payload: offers,
 }));
 
-export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (offers) => ({
-  payload: offers,
+export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (name) => ({
+  payload: name,
 }));
 
 export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({

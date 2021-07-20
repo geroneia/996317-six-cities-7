@@ -19,6 +19,56 @@ import {
   ActionType
 } from './action';
 
+const offers =  [{
+  'bedrooms': 3,
+  'city': {
+    'location': {
+      'latitude': 52.38333,
+      'longitude': 4.9,
+      'zoom': 10,
+    },
+    'name': 'Amsterdam',
+  },
+  'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+  'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+  'host': {
+    'avatar_url': 'img/avatar-angelina.jpg',
+    'id': 3,
+    'is_pro': true,
+    'name': 'Angelina',
+  },
+  'id': 1,
+  'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
+  'is_favorite': false,
+  'is_premium': true,
+  'location': {
+    'latitude': 52.3909553943508,
+    'longitude': 4.85309666406198,
+    'zoom': 8,
+  },
+  'max_adults': 4,
+  'preview_image': 'img/apartment-01.jpg',
+  'price': 120,
+  'rating': 4.8,
+  'title': 'Beautiful & luxurious studio at great location',
+  'type': 'apartment',
+},
+];
+
+const reviews = [{
+  'comment': 'Fugiat et cupidatat irure occaecat ex.',
+  'date': '2020-08-08T22:13:00.569Z',
+  'id': 1,
+  'rating': 4,
+  'user': {
+    'avatar_url': 'img/avatar-angelina.jpg',
+    'id': 4,
+    'is_pro': false,
+    'name': 'Angelina',
+  },
+},
+];
+
 describe('Actions', () => {
   it('action creator for redirecting to route returns action with correct payload', () => {
     const url =  '/:id?';
@@ -67,286 +117,63 @@ describe('Actions', () => {
     expect(sortOffers(type)).toEqual(expectedAction);
   });
   it('action creator for sorting offers returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.LOAD_OFFERS,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(loadOffers(mockOffers)).toEqual(expectedAction);
+    expect(loadOffers(offers)).toEqual(expectedAction);
   });
   it('action creator for filling offers list returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.FILL_OFFERS_LIST,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(fillOffersList(mockOffers)).toEqual(expectedAction);
+    expect(fillOffersList(offers)).toEqual(expectedAction);
   });
 
   it('action creator for loading favorite offers list returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.LOAD_FAVORITES,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(loadFavorites(mockOffers)).toEqual(expectedAction);
+    expect(loadFavorites(offers)).toEqual(expectedAction);
   });
 
   it('action creator for loading offer details returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.LOAD_OFFER_DETAILS,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(loadOfferDetails(mockOffers)).toEqual(expectedAction);
+    expect(loadOfferDetails(offers)).toEqual(expectedAction);
   });
 
   it('action creator for loading nearby offers list returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.LOAD_NEARBY_OFFERS,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(loadNearbyOffers(mockOffers)).toEqual(expectedAction);
+    expect(loadNearbyOffers(offers)).toEqual(expectedAction);
   });
 
   it('action creator for loading reviews returns action with correct payload', () => {
-    const mockReviews = [{
-      'comment': 'Fugiat et cupidatat irure occaecat ex.',
-      'date': '2020-08-08T22:13:00.569Z',
-      'id': 1,
-      'rating': 4,
-      'user': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 4,
-        'is_pro': false,
-        'name': 'Angelina',
-      },
-    },
-    ];
     const expectedAction = {
       type: ActionType.LOAD_REVIEWS,
-      payload: mockReviews,
+      payload: reviews,
     };
-    expect(loadReviews(mockReviews)).toEqual(expectedAction);
+    expect(loadReviews(reviews)).toEqual(expectedAction);
   });
-  it('action creator for cleaning offer details returns action undefined payload', () => {
+  it('action creator for cleaning offer details returns action with undefined payload', () => {
     const expectedAction = {
       type: ActionType.CLEAR_OFFER_DETAILS,
     };
     expect(clearOfferDetails()).toEqual(expectedAction);
   });
   it('action creator for toggling favorite status returns action with correct payload', () => {
-    const mockOffers =  [{
-      'bedrooms': 3,
-      'city': {
-        'location': {
-          'latitude': 52.38333,
-          'longitude': 4.9,
-          'zoom': 10,
-        },
-        'name': 'Amsterdam',
-      },
-      'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-      'goods': ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
-      'host': {
-        'avatar_url': 'img/avatar-angelina.jpg',
-        'id': 3,
-        'is_pro': true,
-        'name': 'Angelina',
-      },
-      'id': 1,
-      'images': ['img/apartment-01.jpg', 'img/apartment-02.jpg'],
-      'is_favorite': false,
-      'is_premium': true,
-      'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8,
-      },
-      'max_adults': 4,
-      'preview_image': 'img/apartment-01.jpg',
-      'price': 120,
-      'rating': 4.8,
-      'title': 'Beautiful & luxurious studio at great location',
-      'type': 'apartment',
-    },
-    ];
     const expectedAction = {
       type: ActionType.TOGGLE_FAVORITE_STATUS,
-      payload: mockOffers,
+      payload: offers,
     };
-    expect(toggleFavoriteStatus(mockOffers)).toEqual(expectedAction);
+    expect(toggleFavoriteStatus(offers)).toEqual(expectedAction);
   });
   it('action creator for requiring aothorization status returns action with correct status', () => {
     const status =  'AUTH';
@@ -367,7 +194,7 @@ describe('Actions', () => {
     };
     expect(getAuthInfo(authInfo)).toEqual(expectedAction);
   });
-  it('action creator for logout returns action undefined payload', () => {
+  it('action creator for logout returns action with undefined payload', () => {
     const expectedAction = {
       type: ActionType.LOGOUT,
     };

@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers, loadFavorites, toggleFavoriteStatus} from '../action';
-import {adaptToClient,getInitialOffers, getCityOffers, getSortAction, replaceOffer} from '../../utils';
+import {adaptToClient, getInitialOffers, getCityOffers, getSortAction, replaceOffer} from '../../utils';
 
 const initialState = {
   popularOffers: [],
@@ -23,7 +23,6 @@ const initialState = {
 
 const data = createReducer(initialState, (builder) => {
   builder
-
     .addCase(loadOffers, (state, action) => {
       state.offers = {
         data: adaptToClient(action.payload),
@@ -61,7 +60,7 @@ const data = createReducer(initialState, (builder) => {
     .addCase(loadReviews, (state, action) => {
       state.reviews = adaptToClient(action.payload);
     })
-    .addCase(clearOfferDetails, (state, action) => {
+    .addCase(clearOfferDetails, (state) => {
       state.offerDetails = {
         data: {},
         isLoaded: false,
