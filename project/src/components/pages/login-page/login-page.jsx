@@ -54,6 +54,7 @@ function LogInPage(props) {
                   id="email"
                   placeholder="Email"
                   autoComplete="email"
+                  data-testid="email"
                   required
                 />
               </div>
@@ -67,6 +68,7 @@ function LogInPage(props) {
                   id="password"
                   placeholder="Password"
                   autoComplete="current-password"
+                  data-testid="password"
                   required
                 />
               </div>
