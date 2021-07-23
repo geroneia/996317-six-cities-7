@@ -21,11 +21,12 @@ describe('Application Routing', () => {
     const createFakeStore = configureStore({});
     store = createFakeStore({
       USER: {authorizationStatus: AuthorizationStatus.AUTH, authInfo: {}},
-      DATA: {  popularOffers: [],
+      DATA: {
+        popularOffers: [],
         sortedOffers: [],
         favoriteOffers: {
           data: [],
-          isLoaded: true,
+          isLoaded: false,
         },
         offers: {
           data: [],
@@ -36,18 +37,20 @@ describe('Application Routing', () => {
           isLoaded: true,
         },
         nearbyOffers: [],
-        reviews: []},
-      APP: {  city: {
-        'location': {
-          'latitude': 48.8589507,
-          'longitude': 2.2770205,
-          'zoom': 10,
-        },
-        'name': 'Paris',
+        reviews: [],
       },
-      cities,
-      sortType: 'Popular',
-      activeOfferId: null},
+      APP: {
+        city: {
+          'location': {
+            'latitude': 48.8589507,
+            'longitude': 2.2770205,
+            'zoom': 10,
+          },
+          'name': 'Paris',
+        },
+        cities,
+        sortType: 'Popular',
+        activeOfferId: null},
     });
 
     fakeApp = (
@@ -66,16 +69,16 @@ describe('Application Routing', () => {
     expect(screen.getAllByText(/Sign in/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/Sign in/i)[1]).toBeInTheDocument();
   });
-  // it('should render "FavoritesPage" when user navigate to "/favorites"', () => {
-  //   history.push(AppRoute.FAVORITES);
-  //   render(fakeApp);
-
-  //   expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();
-  // });
-  it('should render "Main" when user navigate to "/"', () => {
+  it('should render "MainPage" when user navigate to "/"', () => {
     history.push(AppRoute.MAIN);
     render(fakeApp);
 
     expect(screen.getByText('No places to stay available')).toBeInTheDocument();
+  });
+  it('should render "NotFound" when user navigate to "404"', () => {
+    history.push('/non-existent-route');
+    render(fakeApp);
+
+    expect(screen.getByText('Go to main page')).toBeInTheDocument();
   });
 });

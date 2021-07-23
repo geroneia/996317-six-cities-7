@@ -4,22 +4,22 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../const';
 import PageHeader from '../../common/page-header/page-header';
 import FavoriteCity from './favorite-city';
-import {sortOffersByTown} from '../../../utils';
-import {getFavoriteOffers} from '../../../store/data/selectors';
+import {getFavoritesLoadStatus, getFavoritesLength, getSortedFavorites} from '../../../store/data/selectors';
 import {fetchFavoritesList} from '../../../store/api-actions';
 import LoadingPage from '../loading-page/loading-page';
 import FavoritesEmptyPage from './favorites-empty-page';
 
 function FavoritesPage() {
-  const {data, isLoaded} = useSelector(getFavoriteOffers);
-  const favoriteOffers = sortOffersByTown(data);
-  const dispatch = useDispatch();
+  const isLoaded = useSelector(getFavoritesLoadStatus);
+  const favoritesLength = useSelector(getFavoritesLength);
+  const favoriteOffers = useSelector(getSortedFavorites);
   const cities = Object.keys(favoriteOffers);
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFavoritesList());
   }, [dispatch]);
 
-  if (!data.length) {
+  if (!favoritesLength) {
     return <FavoritesEmptyPage />;
   }
 
