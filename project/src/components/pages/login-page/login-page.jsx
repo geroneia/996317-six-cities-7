@@ -5,7 +5,7 @@ import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
 import {validateEmail, validatePassword} from '../../../utils';
-import {withErrorAlert} from '../../common/with-error-alert/with-error-alert';
+import {withErrorAlert} from '../../../hocs/with-error-alert';
 import PropTypes from 'prop-types';
 
 function LogInPage(props) {

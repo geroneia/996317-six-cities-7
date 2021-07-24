@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../pages/main-page/main-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
-import NotFound from '../pages/not-found-page/not-found-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 import OfferPage from '../pages/offer-page/offer-page';
 import LogInPage from '../pages/login-page/login-page';
 import LoadingPage from '../pages/loading-page/loading-page';
@@ -36,7 +36,7 @@ function App() {
         render={({match}) => <OfferPage id={+match.params.id} />}
       />
       <Route exact path={AppRoute.NOT_FOUND}>
-        <NotFound />
+        <NotFoundPage />
       </Route>
       <Route path={AppRoute.MAIN}>
         <MainPage />
