@@ -13,7 +13,7 @@ function FavoriteCity(props) {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={AppRoute.MAIN}>
+          <Link className="locations__item-link" to={`${AppRoute.MAIN}/${city}`}>
             <span>{city}</span>
           </Link>
         </div>

@@ -17,7 +17,7 @@ function FavoritesPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFavoritesList());
-  }, [dispatch]);
+  }, [dispatch, favoritesLength, favoriteOffers]);
 
   if (!favoritesLength) {
     return <FavoritesEmptyPage />;
