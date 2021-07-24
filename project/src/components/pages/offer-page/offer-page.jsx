@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import PageHeader from '../../common/page-header/page-header';
@@ -30,7 +31,6 @@ function OfferPage(props) {
   const activeOfferId = useSelector(getActiveOfferId);
   const {id} = props;
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     dispatch(fetchOfferDetails(id));

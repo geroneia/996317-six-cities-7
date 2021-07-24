@@ -9,6 +9,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 export const fetchFavoritesList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITES)
     .then(({data}) => dispatch(loadFavorites(data)))
+    .catch(() => {})
 );
 
 export const fetchOfferDetails = (id) => (dispatch, _getState, api) => (

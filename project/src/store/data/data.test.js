@@ -130,12 +130,15 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, loadOffersAction))
-      .toEqual({...initialState, offers: {
-        data: adaptedOffers,
-        isLoaded: true,
-      },
-      popularOffers: [],
-      sortedOffers: []});
+      .toEqual({
+        ...initialState,
+        offers: {
+          data: adaptedOffers,
+          isLoaded: true,
+        },
+        popularOffers: [],
+        sortedOffers: [],
+      });
   });
   it('toggles favorite status', () => {
     const toggleFavoriteStatusAction = {
@@ -144,12 +147,14 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, toggleFavoriteStatusAction))
-      .toEqual({...initialState, offers: {
-        data: [adaptedOffers],
-        isLoaded: true,
-      },
-      popularOffers: [adaptedOffers],
-      sortedOffers: [adaptedOffers],
+      .toEqual({
+        ...initialState,
+        offers: {
+          data: [adaptedOffers],
+          isLoaded: true,
+        },
+        popularOffers: [adaptedOffers],
+        sortedOffers: [adaptedOffers],
       });
   });
   it('should update favoriteOffers by load offers', () => {
@@ -159,10 +164,12 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, loadFavoritesAction))
-      .toEqual({...initialState, favoriteOffers: {
-        data: adaptedOffers,
-        isLoaded: true,
-      }});
+      .toEqual({
+        ...initialState,
+        favoriteOffers: {
+          data: adaptedOffers,
+          isLoaded: true,
+        }});
   });
   it('should update offerDetails by load offerDetails', () => {
     const loadOfferDetailsAction = {
@@ -171,10 +178,12 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, loadOfferDetailsAction))
-      .toEqual({...initialState, offerDetails: {
-        data: adaptedOffers,
-        isLoaded: true,
-      }});
+      .toEqual({
+        ...initialState,
+        offerDetails: {
+          data: adaptedOffers,
+          isLoaded: true,
+        }});
   });
   it('should update nearbyOffers by load offer', () => {
     const loadNearbyOffersAction = {
@@ -183,7 +192,10 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, loadNearbyOffersAction))
-      .toEqual({...initialState, nearbyOffers: adaptedOffers});
+      .toEqual({
+        ...initialState,
+        nearbyOffers: adaptedOffers,
+      });
   });
   it('should update reviews by load reviews', () => {
     const loadReviewsAction = {
@@ -192,7 +204,10 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, loadReviewsAction))
-      .toEqual({...initialState, reviews: adaptedReviews});
+      .toEqual({
+        ...initialState,
+        reviews: adaptedReviews,
+      });
   });
   it('should clear offerDetails', () => {
     const clearOfferDetailsAction = {
@@ -200,12 +215,14 @@ describe('Reducer: data', () => {
     };
 
     expect(data(initialState, clearOfferDetailsAction))
-      .toEqual({...initialState, offerDetails: {
-        data: {},
-        isLoaded: false,
-      },
-      nearbyOffers: [],
-      reviews: [],
+      .toEqual({
+        ...initialState,
+        offerDetails: {
+          data: {},
+          isLoaded: false,
+        },
+        nearbyOffers: [],
+        reviews: [],
       });
   });
   it('should fill offersList according to payload content', () => {
@@ -222,7 +239,11 @@ describe('Reducer: data', () => {
     };
 
     expect(data(state, fillOffersListAction))
-      .toEqual({...state, popularOffers: adaptedOffers, sortedOffers: adaptedOffers});
+      .toEqual({
+        ...state,
+        popularOffers: adaptedOffers,
+        sortedOffers: adaptedOffers,
+      });
 
     const stateWithEmptyOffersList = {
       ...initialState,
@@ -233,7 +254,11 @@ describe('Reducer: data', () => {
     };
 
     expect(data(stateWithEmptyOffersList, fillOffersListAction))
-      .toEqual({...stateWithEmptyOffersList, popularOffers: [], sortedOffers: []});
+      .toEqual({
+        ...stateWithEmptyOffersList,
+        popularOffers: [],
+        sortedOffers: [],
+      });
   });
   it('should fill sorted offers according to payload content', () => {
     const state = {
@@ -246,6 +271,9 @@ describe('Reducer: data', () => {
     };
 
     expect(data(state, sortOffersAction))
-      .toEqual({...state, sortedOffers: adaptedOffers});
+      .toEqual({
+        ...state,
+        sortedOffers: adaptedOffers,
+      });
   });
 });

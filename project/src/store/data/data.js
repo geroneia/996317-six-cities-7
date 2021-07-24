@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers, loadFavorites, toggleFavoriteStatus} from '../action';
+import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers, loadFavorites, toggleFavoriteStatus, clearFavorites} from '../action';
 import {adaptToClient, getInitialOffers, getCityOffers, getSortAction, replaceOffer} from '../../utils';
 
 const initialState = {
@@ -41,11 +41,20 @@ const data = createReducer(initialState, (builder) => {
       if (state.offerDetails.isLoaded) {
         state.offerDetails.data = adaptToClient(action.payload);
       }
+      if (state.favoriteOffers.isLoaded) {
+        state.favoriteOffers.data = replaceOffer(state.favoriteOffers.data, adaptToClient(action.payload));
+      }
     })
     .addCase(loadFavorites, (state, action) => {
       state.favoriteOffers = {
         data: adaptToClient(action.payload),
         isLoaded: true,
+      };
+    })
+    .addCase(clearFavorites, (state) => {
+      state.favoriteOffers = {
+        data: [],
+        isLoaded: false,
       };
     })
     .addCase(loadOfferDetails, (state, action) => {

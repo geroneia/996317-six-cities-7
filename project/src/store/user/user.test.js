@@ -20,18 +20,27 @@ describe('Reducer: user', () => {
     };
 
     expect(user(state, requiredAuthorizationAction))
-      .toEqual({...initialState, authorizationStatus: AuthorizationStatus.AUTH});
+      .toEqual({
+        ...initialState,
+        authorizationStatus: AuthorizationStatus.AUTH,
+      });
   });
 
   it('should update authorizationStatus to "NO_AUTH"', () => {
-    const state = {...initialState, authorizationStatus: AuthorizationStatus.NO_AUTH};
+    const state = {
+      ...initialState,
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    };
     const requiredAuthorizationAction = {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: AuthorizationStatus.NO_AUTH,
     };
 
     expect(user(state, requiredAuthorizationAction))
-      .toEqual({...initialState, authorizationStatus: AuthorizationStatus.NO_AUTH});
+      .toEqual({
+        ...initialState,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
   });
   it('should update auothorization info by load new one', () => {
     const getAuthInfoAction = {
@@ -49,6 +58,10 @@ describe('Reducer: user', () => {
       type: ActionType.LOGOUT,
     };
 
-    expect(user(initialState, logoutAction)).toEqual({...initialState, authorizationStatus: AuthorizationStatus.NO_AUTH});
+    expect(user(initialState, logoutAction))
+      .toEqual({
+        ...initialState,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      });
   });
 });

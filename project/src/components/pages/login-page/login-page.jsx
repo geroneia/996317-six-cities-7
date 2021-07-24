@@ -15,7 +15,6 @@ function LogInPage(props) {
   const dispatch = useDispatch();
   const {onError} = props;
 
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const isEmailValid = validateEmail(loginRef.current.value);

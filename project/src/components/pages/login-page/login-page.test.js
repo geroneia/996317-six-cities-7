@@ -55,15 +55,15 @@ describe('Component: LogInPage', () => {
       </Provider>,
     );
 
-    expect(screen.getAllByText(/Sign in/i)[0]).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
+    expect(screen.getAllByText('Sign in')[0]).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(screen.getByRole('button').textContent).toBe('Sign in');
 
     userEvent.type(screen.getByTestId('email'), 'Oliver.conner@gmail.com');
     userEvent.type(screen.getByTestId('password'), '12345678');
 
-    expect(screen.getByDisplayValue(/Oliver.conner@gmail.com/i)).toBeInTheDocument();
-    expect(screen.getByDisplayValue(/12345678/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue('Oliver.conner@gmail.com')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('12345678')).toBeInTheDocument();
   });
 });

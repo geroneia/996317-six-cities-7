@@ -10,6 +10,7 @@ export const ActionType = {
   LOAD_OFFERS: 'data/loadOffers',
   FILL_OFFERS_LIST: 'data/fillOffersList',
   LOAD_FAVORITES: 'data/loadFavorites',
+  CLEAR_FAVORITES: 'data/clearFavorites',
   LOAD_OFFER_DETAILS: 'data/loadOfferDetails',
   LOAD_NEARBY_OFFERS: 'data/loadNerbyOffers',
   LOAD_REVIEWS: 'data/loadReviews',
@@ -54,6 +55,8 @@ export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (name) =
 export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({
   payload: offers,
 }));
+
+export const clearFavorites = createAction(ActionType.CLEAR_FAVORITES);
 
 export const loadOfferDetails = createAction(ActionType.LOAD_OFFER_DETAILS, (offer) => ({
   payload: offer,

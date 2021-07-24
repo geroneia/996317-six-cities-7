@@ -5,6 +5,7 @@ import LoadingPage from './loading-page';
 describe('Component: LoadingPage', () => {
   it('should render correctly', () => {
     render(<LoadingPage />);
-    expect(screen.getByText(/oading/i)).toBeInTheDocument();
+    expect(screen.getByText('L')).toBeInTheDocument();
+    expect(screen.getByText('oading')).toBeInTheDocument();
   });
 });

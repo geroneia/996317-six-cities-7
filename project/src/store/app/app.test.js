@@ -33,14 +33,27 @@ describe('Reducer: app', () => {
     };
     const name = 'Dusseldorf';
 
-    expect(app(initialState, changeCity(name))).toEqual({...initialState, city: currentCity, sortType: 'Popular'});
+    expect(app(initialState, changeCity(name)))
+      .toEqual({
+        ...initialState,
+        city: currentCity,
+        sortType: 'Popular',
+      });
   });
   it('should set new active offer`s id', () => {
     const id = 1;
-    expect(app(initialState, setActiveOfferId(id))).toEqual({...initialState, activeOfferId: id});
+    expect(app(initialState, setActiveOfferId(id)))
+      .toEqual({
+        ...initialState,
+        activeOfferId: id,
+      });
   });
   it('should set new sort type', () => {
     const type = 'Price: low to high';
-    expect(app(initialState, setSortType(type))).toEqual({...initialState, sortType: type});
+    expect(app(initialState, setSortType(type)))
+      .toEqual({
+        ...initialState,
+        sortType: type,
+      });
   });
 });
