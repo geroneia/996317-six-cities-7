@@ -18,7 +18,7 @@ function FavoriteCity(props) {
         </div>
       </div>
       <div className="favorites__places">
-        {favoriteOffers.map((offer) => <Card key={offer.id} offer={offer} place={place} />)}
+        {favoriteOffers.map((offer) => <Card key={`${place}:${offer.id}`} offer={offer} place={place} />)}
       </div>
     </li>
   );

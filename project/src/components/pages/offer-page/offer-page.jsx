@@ -18,13 +18,13 @@ import {clearOfferDetails} from '../../../store/action';
 import PremiumMark from '../../common/premium-mark/premium-mark';
 import {PlaceMark} from '../../../const';
 import {getAuthorizationStatus} from '../../../store/user/selectors';
-import {getReviews, getOfferDetails, getNearbyOffers} from '../../../store/data/selectors';
+import {getSortedReviews, getOfferDetails, getNearbyOffers} from '../../../store/data/selectors';
 import {getCity, getActiveOfferId} from '../../../store/app/selectors';
 import Bookmark from '../../common/bookmark/bookmark';
 
 function OfferPage(props) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
-  const reviews = useSelector(getReviews);
+  const reviews = useSelector(getSortedReviews);
   const city = useSelector(getCity);
   const {data, isLoaded} = useSelector(getOfferDetails);
   const nearbyOffers = useSelector(getNearbyOffers);

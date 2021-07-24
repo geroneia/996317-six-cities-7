@@ -12,7 +12,7 @@ function NearPlacesList({offers}) {
       <div className="near-places__list places__list">
         {offers.map((offer) => (
           <Card
-            key={offer.id}
+            key={`${place}:${offer.id}`}
             offer={offer}
             place={place}
           />

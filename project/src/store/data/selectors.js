@@ -14,7 +14,8 @@ export const getFavoritesLoadStatus = (state) => state[NameSpace.DATA].favoriteO
 export const getOfferDetailsLoadStatus = (state) => state[NameSpace.DATA].offerDetails.isLoaded;
 export const getSortedFavorites = createSelector(
   [getFavoriteOffers],
-  (favoriteOffers) => {
+  (offers) => {
+    const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
     const sortedOffers = {};
     const cities = Object.values(Cities).map(({name}) => name);
 
@@ -33,5 +34,5 @@ export const getSortedFavorites = createSelector(
 
 export const getSortedReviews = createSelector(
   [getReviews],
-  (reviews) => reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, 10),
+  (reviews) => reviews.slice(0, 10).sort((a, b) => new Date(b.date) - new Date(a.date)),
 );
