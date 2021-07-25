@@ -8,7 +8,8 @@ import {
   SHAKE_ANIMATION_TIMEOUT,
   MILLISECONDS_IN_SECOND,
   MIN_MESAGE_LENGTH,
-  MAX_MESSAGE_LENGTH
+  MAX_MESSAGE_LENGTH,
+  MAX_MESSAGE_COUNT
 } from './const';
 
 export const getRatingInPercent = (rating) =>
@@ -34,11 +35,12 @@ const getChangedCase = (data) => {
 
 export const adaptToClient = (data) => getChangedCase(JSON.parse(JSON.stringify(data)));
 
-export const sortOffersByTown = (offers) => {
+export const getSortedOffers = (offers) => {
+  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
   const sortedOffers = {};
   const cities = Object.values(Cities).map(({name}) => name);
 
-  offers.forEach((offer) => {
+  favoriteOffers.forEach((offer) => {
     const currentCity = offer.city.name;
 
     if (cities.includes(currentCity.toString()) && typeof sortedOffers[currentCity] === 'undefined') {
@@ -106,3 +108,5 @@ export const replaceOffer = (offers, offer) => {
     ...offers.slice((offers.findIndex((el) => el.id === offer.id)) + 1)];
   return offersUpdateOffer;
 };
+
+export const getMessages = (reviews) => reviews.slice(0, MAX_MESSAGE_COUNT).sort((a, b) => new Date(b.date) - new Date(a.date));
