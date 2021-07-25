@@ -5,7 +5,7 @@ import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
 import {validateEmail, validatePassword} from '../../../utils';
-import {withErrorAlert} from '../../common/with-error-alert/with-error-alert';
+import {withErrorAlert} from '../../../hocs/with-error-alert';
 import PropTypes from 'prop-types';
 
 function LogInPage(props) {
@@ -14,7 +14,6 @@ function LogInPage(props) {
   const {name} = useSelector(getCity);
   const dispatch = useDispatch();
   const {onError} = props;
-
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -53,6 +52,8 @@ function LogInPage(props) {
                   name="email"
                   id="email"
                   placeholder="Email"
+                  autoComplete="email"
+                  data-testid="email"
                   required
                 />
               </div>
@@ -65,6 +66,8 @@ function LogInPage(props) {
                   name="password"
                   id="password"
                   placeholder="Password"
+                  autoComplete="current-password"
+                  data-testid="password"
                   required
                 />
               </div>

@@ -10,7 +10,7 @@ function OffersList({offers, onOfferChange}) {
     <>
       {offers.map((offer) => (
         <Card
-          key={offer.id}
+          key={`${place}:${offer.id}`}
           offer={offer}
           onOfferChange={onOfferChange}
           place={place}

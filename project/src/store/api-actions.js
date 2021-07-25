@@ -4,11 +4,13 @@ import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data)))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchFavoritesList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITES)
     .then(({data}) => dispatch(loadFavorites(data)))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchOfferDetails = (id) => (dispatch, _getState, api) => (
@@ -30,7 +32,7 @@ export const fetchReviewsList = (id) => (dispatch, _getState, api) => (
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (

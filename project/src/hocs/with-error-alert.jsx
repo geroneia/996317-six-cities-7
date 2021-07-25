@@ -1,5 +1,5 @@
 import React from 'react';
-import {SHAKE_ANIMATION_TIMEOUT, MILLISECONDS_IN_SECOND} from '../../../const';
+import {SHAKE_ANIMATION_TIMEOUT, MILLISECONDS_IN_SECOND} from '../const';
 
 export const withErrorAlert = (Component) => {
   const {displayName, name} = Component;

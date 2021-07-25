@@ -35,11 +35,10 @@ const getChangedCase = (data) => {
 export const adaptToClient = (data) => getChangedCase(JSON.parse(JSON.stringify(data)));
 
 export const sortOffersByTown = (offers) => {
-  const favoriteOffers = offers.filter(({isFavorite}) => isFavorite);
   const sortedOffers = {};
   const cities = Object.values(Cities).map(({name}) => name);
 
-  favoriteOffers.forEach((offer) => {
+  offers.forEach((offer) => {
     const currentCity = offer.city.name;
 
     if (cities.includes(currentCity.toString()) && typeof sortedOffers[currentCity] === 'undefined') {

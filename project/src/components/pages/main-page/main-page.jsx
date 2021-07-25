@@ -4,7 +4,7 @@ import PageHeader from '../../common/page-header/page-header';
 import OffersList from '../main-page/offers-list';
 import Map from '../../map/map';
 import CitiesList from './cities-list';
-import NotFound from '../not-found-page/not-found-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import {useParams} from 'react-router-dom';
 import {changeCity, fillOffersList, setSortType, sortOffers, setActiveOfferId} from '../../../store/action';
 import Sort from './sort';
@@ -37,7 +37,7 @@ function MainPage() {
   }, [id, city.name, dispatch]);
 
   if (!validateId(id)) {
-    return <NotFound />;
+    return <NotFoundPage />;
   }
 
   return (
