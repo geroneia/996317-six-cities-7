@@ -25,4 +25,4 @@ OffersList.propTypes = {
   onOfferChange: PropTypes.func.isRequired,
 };
 
-export default React.memo(OffersList, (prevProps, nextProps) => prevProps === nextProps);
+export default OffersList;
