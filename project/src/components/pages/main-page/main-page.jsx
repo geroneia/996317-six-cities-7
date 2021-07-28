@@ -30,7 +30,7 @@ function MainPage() {
   };
 
   useEffect(() => {
-    if (validateId(id) && id !== city.name && typeof id !== 'undefined') {
+    if (typeof id !== 'undefined' && validateId(id) && id !== city.name) {
       dispatch(changeCity(id));
       dispatch(fillOffersList(id));
     } else {
@@ -38,7 +38,7 @@ function MainPage() {
     }
   }, [id, city.name, dispatch]);
 
-  if (!validateId && typeof id === 'undefined') {
+  if (typeof id === 'undefined' || !validateId) {
     return <NotFoundPage />;
   }
 
