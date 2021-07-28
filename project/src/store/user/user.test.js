@@ -1,4 +1,4 @@
-import {user} from './user';
+import user from './user';
 import {ActionType} from '../action';
 import {AuthorizationStatus} from '../../const';
 

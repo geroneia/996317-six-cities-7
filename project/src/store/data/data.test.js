@@ -1,4 +1,4 @@
-import {data} from './data';
+import data from './data';
 import {ActionType} from '../action';
 
 const initialState = {
