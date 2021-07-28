@@ -8,6 +8,7 @@ import {PlaceMark} from '../../../const';
 function FavoriteCity(props) {
   const {city, favoriteOffers} = props;
   const place = PlaceMark.FAVORITES;
+
   return(
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">

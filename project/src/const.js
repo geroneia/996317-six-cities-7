@@ -1,9 +1,10 @@
 export const AppRoute = {
   MAIN: '/:id?',
+  MAIN_INIT: '/Paris',
   LOGIN: '/login',
   FAVORITES: '/favorites',
   ROOM: '/offer',
-  NOT_FOUND: '/notFound',
+  NOT_FOUND: '/not-found',
 };
 
 export const RATINGS = ['terribly', 'badly', 'not bad', 'good', 'perfect'];

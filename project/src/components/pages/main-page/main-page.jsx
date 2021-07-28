@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import PageHeader from '../../common/page-header/page-header';
+import Header from '../../common/header/header';
 import OffersList from '../main-page/offers-list';
 import Map from '../../map/map';
 import CitiesList from './cities-list';
@@ -30,19 +30,21 @@ function MainPage() {
   };
 
   useEffect(() => {
-    if (validateId(id) && id !== city.name && typeof id !== 'undefined' && id !== ':id') {
+    if (validateId(id) && id !== city.name && typeof id !== 'undefined') {
       dispatch(changeCity(id));
       dispatch(fillOffersList(id));
+    } else {
+      return <NotFoundPage />;
     }
   }, [id, city.name, dispatch]);
 
-  if (!validateId(id)) {
+  if (!validateId && typeof id === 'undefined') {
     return <NotFoundPage />;
   }
 
   return (
     <div className="page page--gray page--main">
-      <PageHeader />
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

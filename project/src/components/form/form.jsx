@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
 import {validateMessage} from '../../utils';
 
+const emptyUserComment = {rating: '', message: ''};
+
 function Form({id}) {
   const formRef = useRef();
   const dispatch = useDispatch();
 
-  const emptyUserComment = {rating: '', message: ''};
   const [userComment, setUserComment] = useState(emptyUserComment);
   const [canSubmit, toggleSubmissionAbility] = useState(true);
   const [disableInput, setdisableInput] = useState(false);
@@ -43,7 +44,6 @@ function Form({id}) {
 
   useEffect(() => {
     toggleSubmissionAbility(!(validateMessage(message) && rating.length));
-
   }, [message, rating.length]);
 
   return (
@@ -88,10 +88,6 @@ function Form({id}) {
 
 Form.propTypes = {
   id: PropTypes.number.isRequired,
-  commentPost: PropTypes.shape({
-    message: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  }),
 };
 
 export default Form;

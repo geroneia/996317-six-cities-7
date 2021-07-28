@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import PageHeader from '../../common/page-header/page-header';
+import Header from '../../common/header/header';
 import Gallery from './gallery';
 import ReviewsList from '../../reviewes/review-list/review-list';
 import Form from '../../form/form';
 import Host from './host';
 import {getRatingInPercent, getType}from '../../../utils';
-import * as propType from '../../../prop-types';
 import PropTypes from 'prop-types';
 import Map from '../../map/map';
 import NearPlacesList from './near-places-list';
@@ -22,14 +20,13 @@ import {getSortedReviews, getOfferDetails, getNearbyOffers} from '../../../store
 import {getCity, getActiveOfferId} from '../../../store/app/selectors';
 import Bookmark from '../../common/bookmark/bookmark';
 
-function OfferPage(props) {
+function OfferPage({id}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const reviews = useSelector(getSortedReviews);
   const city = useSelector(getCity);
   const {data, isLoaded} = useSelector(getOfferDetails);
   const nearbyOffers = useSelector(getNearbyOffers);
   const activeOfferId = useSelector(getActiveOfferId);
-  const {id} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,10 +36,7 @@ function OfferPage(props) {
     return () => {
       dispatch(clearOfferDetails());
     };
-  }, [
-    id,
-    dispatch,
-  ]);
+  }, [id, dispatch]);
 
   if (!isLoaded) {
     return <LoadingPage />;
@@ -67,7 +61,7 @@ function OfferPage(props) {
 
   return (
     <div className="page" key={id}>
-      <PageHeader />
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <Gallery images={images} type={type} />
@@ -147,10 +141,6 @@ function OfferPage(props) {
 
 OfferPage.propTypes = {
   id: PropTypes.number.isRequired,
-  offerDetails: PropTypes.shape({
-    data: propType.offer,
-    isLoaded: PropTypes.bool.isRequired,
-  }),
 };
 
 export default OfferPage;

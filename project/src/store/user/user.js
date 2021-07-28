@@ -21,4 +21,4 @@ const user = createReducer(initialState, (builder) => {
     });
 });
 
-export {user};
+export default user;

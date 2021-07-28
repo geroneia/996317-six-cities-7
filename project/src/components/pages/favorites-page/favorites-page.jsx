@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../../const';
-import PageHeader from '../../common/page-header/page-header';
+import Header from '../../common/header/header';
 import FavoriteCity from './favorite-city';
 import {getFavoritesLoadStatus, getFavoriteOffers, getSortedFavorites} from '../../../store/data/selectors';
 import {fetchFavoritesList} from '../../../store/api-actions';
@@ -16,6 +16,7 @@ function FavoritesPage() {
   const favoriteOffers = useSelector(getSortedFavorites);
   const cities = Object.keys(favoriteOffers);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchFavoritesList());
     return () => {
@@ -33,7 +34,7 @@ function FavoritesPage() {
 
   return (
     <div className="page">
-      <PageHeader />
+      <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -45,7 +46,7 @@ function FavoritesPage() {
         </div>
       </main>
       <footer className="footer container">
-        <Link className="footer__logo-link" to={AppRoute.MAIN}>
+        <Link className="footer__logo-link" to={AppRoute.MAIN_INIT}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </Link>
       </footer>

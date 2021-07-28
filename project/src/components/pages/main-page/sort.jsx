@@ -7,10 +7,11 @@ const types = Object.values(SortTypes);
 function Sort({sortType, onSortChange}) {
   const [opened, setOpened] = useState(false);
   const handleMenuClick = () => setOpened(true);
-  const handleSortClick = ({target: {dataset : {type}}}) => {
+  const handleSortClick = ({target: {dataset: {type}}}) => {
     onSortChange(type);
     setOpened(false);
   };
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>

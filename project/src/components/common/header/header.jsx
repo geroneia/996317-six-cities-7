@@ -5,21 +5,22 @@ import {useSelector, useDispatch} from 'react-redux';
 import {logout} from '../../../store/api-actions';
 import {getAuthorizationStatus, getAuthInfo} from '../../../store/user/selectors';
 
-function PageHeader() {
+function Header() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const authInfo = useSelector(getAuthInfo);
   const {avatarUrl, email, name} = authInfo;
   const dispatch = useDispatch();
+
   const handleLogoutClick = (evt) => {
-    evt.preventDefault();
     dispatch(logout());
   };
+
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link className="header__logo-link" to={AppRoute.MAIN}>
+            <Link className="header__logo-link" to={AppRoute.MAIN_INIT}>
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </Link>
           </div>
@@ -65,4 +66,4 @@ function PageHeader() {
   );
 }
 
-export default React.memo(PageHeader);
+export default React.memo(Header);
