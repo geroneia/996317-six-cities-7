@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import PageHeader from '../../common/page-header/page-header';
+import Header from '../../common/header/header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
@@ -32,7 +32,7 @@ function LogInPage(props) {
 
   return (
     <div className="page page--gray page--login">
-      <PageHeader />
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

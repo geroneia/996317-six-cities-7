@@ -13,8 +13,8 @@ import {PlaceMark} from '../../../const';
 function Bookmark({id, isFavorite, place}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const dispatch = useDispatch();
-  const isFavoritesLoad = useSelector(getFavoritesLoadStatus);
-  const isOfferDetailsLoad = useSelector(getOfferDetailsLoadStatus);
+  const isFavoritesLoaded = useSelector(getFavoritesLoadStatus);
+  const isOfferDetailsLoaded = useSelector(getOfferDetailsLoadStatus);
   let status = +isFavorite;
   const handleFavoriteStatus = () => {
     if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
@@ -22,10 +22,11 @@ function Bookmark({id, isFavorite, place}) {
     } else {
       status = status === 0 ? 1 : 0;
       dispatch(postFavoritesStatus(id, status));
-      isFavoritesLoad && dispatch(fetchFavoritesList());
-      isOfferDetailsLoad && dispatch(fetchOfferDetails(id));
+      isFavoritesLoaded && dispatch(fetchFavoritesList());
+      isOfferDetailsLoaded && dispatch(fetchOfferDetails(id));
     }
   };
+
   return (
     <button
       onClick={handleFavoriteStatus}

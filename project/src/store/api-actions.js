@@ -1,9 +1,21 @@
-import {loadOffers, loadOfferDetails, redirectToRoute, loadNearbyOffers, loadReviews, requireAuthorization, getAuthInfo, logout as closeSession, loadFavorites, toggleFavoriteStatus} from './action';
+import {
+  loadOffers,
+  loadOfferDetails,
+  redirectToRoute,
+  loadNearbyOffers,
+  loadReviews,
+  requireAuthorization,
+  getAuthInfo,
+  logout as closeSession,
+  loadFavorites,
+  toggleFavoriteStatus
+} from './action';
 import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data)))
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN_INIT)))
     .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
@@ -42,7 +54,8 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(getAuthInfo(data));
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN_INIT)))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const postReview = (id, comment, rating) => (dispatch, _getState, api) => (

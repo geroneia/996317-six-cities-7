@@ -1,6 +1,23 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {loadOffers, loadOfferDetails, loadNearbyOffers, loadReviews, clearOfferDetails, fillOffersList, sortOffers, loadFavorites, toggleFavoriteStatus, clearFavorites} from '../action';
-import {adaptToClient, getInitialOffers, getCityOffers, getSortAction, replaceOffer} from '../../utils';
+import {
+  loadOffers,
+  loadOfferDetails,
+  loadNearbyOffers,
+  loadReviews,
+  clearOfferDetails,
+  fillOffersList,
+  sortOffers,
+  loadFavorites,
+  toggleFavoriteStatus,
+  clearFavorites
+} from '../action';
+import {
+  adaptToClient,
+  getInitialOffers,
+  getCityOffers,
+  getSortAction,
+  replaceOffer
+} from '../../utils';
 
 const initialState = {
   popularOffers: [],
@@ -86,4 +103,4 @@ const data = createReducer(initialState, (builder) => {
     });
 });
 
-export {data};
+export default data;

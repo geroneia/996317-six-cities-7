@@ -22,66 +22,38 @@ export const ActionType = {
 };
 
 
-export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
-  payload: url,
-}));
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({payload: url}));
 
-export const changeCity = createAction(ActionType.CHANGE_CITY, (name) => ({
-  payload: name,
-}));
+export const changeCity = createAction(ActionType.CHANGE_CITY, (name) => ({payload: name}));
 
-export const setSortType = createAction(ActionType.SET_SORT_TYPE, (type) => ({
-  payload: type,
-}));
+export const setSortType = createAction(ActionType.SET_SORT_TYPE, (type) => ({payload: type}));
 
-export const setActiveOfferId = createAction(ActionType.SET_ACTIVE_OFFER, (id) => ({
-  payload: id,
-}));
+export const setActiveOfferId = createAction(ActionType.SET_ACTIVE_OFFER, (id) => ({payload: id}));
 
 export const clearForm = createAction(ActionType.CLEAR_FORM);
 
-export const sortOffers = createAction(ActionType.SORT_OFFERS, (type) => ({
-  payload: type,
-}));
+export const sortOffers = createAction(ActionType.SORT_OFFERS, (type) => ({payload: type}));
 
-export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
-  payload: offers,
-}));
+export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({payload: offers}));
 
-export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (name) => ({
-  payload: name,
-}));
+export const fillOffersList = createAction(ActionType.FILL_OFFERS_LIST, (name) => ({payload: name}));
 
-export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({
-  payload: offers,
-}));
+export const loadFavorites = createAction(ActionType.LOAD_FAVORITES, (offers) => ({payload: offers}));
 
 export const clearFavorites = createAction(ActionType.CLEAR_FAVORITES);
 
-export const loadOfferDetails = createAction(ActionType.LOAD_OFFER_DETAILS, (offer) => ({
-  payload: offer,
-}));
+export const loadOfferDetails = createAction(ActionType.LOAD_OFFER_DETAILS, (offer) => ({payload: offer}));
 
-export const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) => ({
-  payload: offers,
-}));
+export const loadNearbyOffers = createAction(ActionType.LOAD_NEARBY_OFFERS, (offers) => ({payload: offers}));
 
-export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
-  payload: reviews,
-}));
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({payload: reviews}));
 
 export const clearOfferDetails = createAction(ActionType.CLEAR_OFFER_DETAILS);
 
-export const toggleFavoriteStatus = createAction(ActionType.TOGGLE_FAVORITE_STATUS, (offer) => ({
-  payload: offer,
-}));
+export const toggleFavoriteStatus = createAction(ActionType.TOGGLE_FAVORITE_STATUS, (offer) => ({payload: offer}));
 
-export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
-  payload: status,
-}));
+export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({payload: status}));
 
-export const getAuthInfo = createAction(ActionType.GET_AUTH_INFO, (authInfo) => ({
-  payload: authInfo,
-}));
+export const getAuthInfo = createAction(ActionType.GET_AUTH_INFO, (authInfo) => ({payload: authInfo}));
 
 export const logout = createAction(ActionType.LOGOUT);

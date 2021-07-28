@@ -4,7 +4,6 @@ import {
   SortTypes,
   AuthorizationStatus,
   DEFAULT_CITY,
-  MAX_COUNT_REVIEWS,
   SHAKE_ANIMATION_TIMEOUT,
   MILLISECONDS_IN_SECOND,
   MIN_MESAGE_LENGTH,
@@ -58,11 +57,11 @@ export const getDateTime = (dateInISO) => dateInISO.split('T')[0];
 
 export const getDate = (dateInISO) => new Date(dateInISO).toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
 
-const getSortedLowToHighPrice = (offers) => offers.sort((a, b) => a.price - b.price);
+const getSortedLowToHighPrice = (offers) => offers.sort((prev, next) => prev.price - next.price);
 
-const getSortedHighToLowPrice = (offers) => offers.sort((a, b) => b.price - a.price);
+const getSortedHighToLowPrice = (offers) => offers.sort((prev, next) => next.price - prev.price);
 
-const getSortedHighToLowRating = (offers) => offers.sort((a, b) => b.rating - a.rating);
+const getSortedHighToLowRating = (offers) => offers.sort((prev, next) => next.rating - prev.rating);
 
 export const getSortAction = (offers, type) => {
   switch (type) {
@@ -82,9 +81,7 @@ export const isCheckedAuth = (authorizationStatus) =>
 
 export const getInitialOffers = (data) => getCityOffers(adaptToClient(data), DEFAULT_CITY.name);
 
-export const getAdaptedReviews = (reviews) => reviews.sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, MAX_COUNT_REVIEWS);
-
-export const validateId = (id) => !id || id === ':id' || Object.keys(Cities).includes(id.toUpperCase());
+export const validateId = (id) => Object.keys(Cities).includes(id.toUpperCase());
 
 export const shake = (target) => {
   target.style.animation = `shake ${SHAKE_ANIMATION_TIMEOUT / MILLISECONDS_IN_SECOND}s`;
@@ -103,10 +100,12 @@ export const validateEmail = (email) => {
 export const validatePassword = (password) => !!password.trim();
 
 export const replaceOffer = (offers, offer) => {
-  const offersUpdateOffer = [...offers.slice(0, (offers.findIndex((el) => el.id === offer.id))),
+  const offersUpdateOffer = [...offers.slice(0, (offers.findIndex(({id}) => id === offer.id))),
     offer,
     ...offers.slice((offers.findIndex((el) => el.id === offer.id)) + 1)];
   return offersUpdateOffer;
 };
 
-export const getMessages = (reviews) => reviews.slice(0, MAX_MESSAGE_COUNT).sort((a, b) => new Date(b.date) - new Date(a.date));
+export const getMessages = (reviews) => reviews
+  .slice(0, MAX_MESSAGE_COUNT)
+  .sort((prev, next) => new Date(next.date) - new Date(prev.date));
