@@ -75,10 +75,4 @@ describe('Application Routing', () => {
 
     expect(screen.getByText('No places to stay available')).toBeInTheDocument();
   });
-  it('should render "NotFound" when user navigate to "404"', () => {
-    history.push('/non-existent-route');
-    render(fakeApp);
-
-    expect(screen.getByText('Go to main page')).toBeInTheDocument();
-  });
 });
