@@ -8,7 +8,8 @@ import {
   getAuthInfo,
   logout as closeSession,
   loadFavorites,
-  toggleFavoriteStatus
+  toggleFavoriteStatus,
+  errorReport
 } from './action';
 import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
 
@@ -16,7 +17,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
     .then(({data}) => dispatch(loadOffers(data)))
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN_INIT)))
-    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
+    .catch(() => dispatch(errorReport(true)))
 );
 
 export const fetchFavoritesList = () => (dispatch, _getState, api) => (
@@ -28,7 +29,7 @@ export const fetchFavoritesList = () => (dispatch, _getState, api) => (
 export const fetchOfferDetails = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(loadOfferDetails(data)))
-    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
+    .catch(() => dispatch(errorReport(true)))
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (

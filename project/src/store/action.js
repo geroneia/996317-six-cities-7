@@ -19,6 +19,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   GET_AUTH_INFO: 'user/getAuthtInfo',
   LOGOUT: 'user/logout',
+  ERROR_REPORT: 'data/errorReport',
 };
 
 
@@ -57,3 +58,5 @@ export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATI
 export const getAuthInfo = createAction(ActionType.GET_AUTH_INFO, (authInfo) => ({payload: authInfo}));
 
 export const logout = createAction(ActionType.LOGOUT);
+
+export const errorReport = createAction(ActionType.ERROR_REPORT);

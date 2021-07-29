@@ -10,18 +10,26 @@ import LogInPage from '../pages/login-page/login-page';
 import LoadingPage from '../pages/loading-page/loading-page';
 import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
-import {getDataLoadStatus} from '../../store/data/selectors';
+import {getDataLoadStatus, getErrorStatus} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/user/selectors';
 
 function App() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
   const isLoaded = useSelector(getDataLoadStatus);
+  const isError = useSelector(getErrorStatus);
+
+  if (isError) {
+    return (
+      <NotFoundPage />
+    );
+  }
 
   if (isCheckedAuth(authorizationStatus) || !isLoaded) {
     return (
       <LoadingPage />
     );
   }
+
   return (
     <Switch>
       <Route exact path={AppRoute.LOGIN}>
@@ -35,7 +43,7 @@ function App() {
         path={`${AppRoute.ROOM}/:id`}
         render={({match}) => <OfferPage id={+match.params.id} />}
       />
-      <Route path={AppRoute.MAIN}>
+      <Route exact path={AppRoute.MAIN}>
         <MainPage />
       </Route>
       <Route>

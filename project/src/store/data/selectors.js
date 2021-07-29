@@ -12,6 +12,7 @@ export const getReviews = (state) => state[NameSpace.DATA].reviews;
 export const getDataLoadStatus = (state) => state[NameSpace.DATA].offers.isLoaded;
 export const getFavoritesLoadStatus = (state) => state[NameSpace.DATA].favoriteOffers.isLoaded;
 export const getOfferDetailsLoadStatus = (state) => state[NameSpace.DATA].offerDetails.isLoaded;
+export const getErrorStatus = (state) =>  state[NameSpace.DATA].isError;
 
 export const getSortedFavorites = createSelector([getFavoriteOffers], utils.getSortedOffers);
 export const getSortedReviews = createSelector([getReviews], utils.getMessages);

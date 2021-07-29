@@ -33,8 +33,6 @@ function MainPage() {
     if (typeof id !== 'undefined' && validateId(id) && id !== city.name) {
       dispatch(changeCity(id));
       dispatch(fillOffersList(id));
-    } else {
-      return <NotFoundPage />;
     }
   }, [id, city.name, dispatch]);
 

@@ -9,7 +9,8 @@ import {
   sortOffers,
   loadFavorites,
   toggleFavoriteStatus,
-  clearFavorites
+  clearFavorites,
+  errorReport
 } from '../action';
 import {
   adaptToClient,
@@ -36,6 +37,7 @@ const initialState = {
   },
   nearbyOffers: [],
   reviews: [],
+  isError: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -100,6 +102,9 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(sortOffers, (state, action) => {
       state.sortedOffers = getSortAction(state.popularOffers, action.payload);
+    })
+    .addCase(errorReport, (state, action) => {
+      state.isError = (action.payload);
     });
 });
 
