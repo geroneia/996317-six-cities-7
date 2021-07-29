@@ -18,6 +18,7 @@ const initialState = {
   },
   nearbyOffers: [],
   reviews: [],
+  isError: false,
 };
 
 const testOffers =  [{
