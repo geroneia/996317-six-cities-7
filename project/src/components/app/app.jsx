@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import MainPage from '../pages/main-page/main-page';
@@ -8,23 +8,20 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import OfferPage from '../pages/offer-page/offer-page';
 import LogInPage from '../pages/login-page/login-page';
 import LoadingPage from '../pages/loading-page/loading-page';
-import {isCheckedAuth} from '../../utils';
 import PrivateRoute from '../private-route/private-route';
+import {redirectToRoute} from '../../store/action';
 import {getDataLoadStatus, getErrorStatus} from '../../store/data/selectors';
-import {getAuthorizationStatus} from '../../store/user/selectors';
 
 function App() {
-  const authorizationStatus = useSelector(getAuthorizationStatus);
-  const isLoaded = useSelector(getDataLoadStatus);
   const isError = useSelector(getErrorStatus);
+  const isLoaded = useSelector(getDataLoadStatus);
+  const dispatch = useDispatch();
 
   if (isError) {
-    return (
-      <NotFoundPage />
-    );
+    dispatch(redirectToRoute(AppRoute.NOT_FOUND));
   }
 
-  if (isCheckedAuth(authorizationStatus) || !isLoaded) {
+  if (!isLoaded && !isError) {
     return (
       <LoadingPage />
     );
@@ -48,6 +45,9 @@ function App() {
       </Route>
       <Route exact path={AppRoute.MAIN}>
         <MainPage />
+      </Route>
+      <Route>
+        <NotFoundPage />
       </Route>
     </Switch>
   );

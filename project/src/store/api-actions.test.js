@@ -1,13 +1,12 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../services/api';
 import {ActionType} from './action';
-import {APIRoute, AuthorizationStatus} from '../const';
+import {APIRoute} from '../const';
 import {
   fetchFavoritesList,
   fetchOfferDetails,
   fetchNearbyList,
   fetchReviewsList,
-  checkAuth,
   postReview,
   postFavoritesStatus
 } from './api-actions';
@@ -19,24 +18,6 @@ describe('Async operations', () => {
     api = createAPI(() => {});
   });
 
-  it('should make a correct API call to GET /login', () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const checkAuthLoader = checkAuth();
-
-    apiMock
-      .onGet(APIRoute.LOGIN)
-      .reply(200, [{fake: true}]);
-
-    return checkAuthLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.REQUIRED_AUTHORIZATION,
-          payload: AuthorizationStatus.AUTH,
-        });
-      });
-  });
   it('should make a correct API call to GET /favorites', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();

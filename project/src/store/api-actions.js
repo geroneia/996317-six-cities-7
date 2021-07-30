@@ -9,15 +9,22 @@ import {
   logout as closeSession,
   loadFavorites,
   toggleFavoriteStatus,
-  dropToInit as clearOffersList
+  dropToInit as clearOffersList,
+  errorReport
 } from './action';
-import {AuthorizationStatus, AppRoute, APIRoute} from '../const';
+import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
 import {setTokenFromLocalStorage} from '../utils';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(loadOffers(data)))
-    // .then(() => dispatch(redirectToRoute(AppRoute.MAIN_INIT)))
+    .then(({data}) => {
+      dispatch(loadOffers(data));
+      dispatch(redirectToRoute(AppRoute.MAIN_INIT));
+      dispatch(errorReport(false));
+    })
+    .catch(({response}) => {
+      response.status === HttpCode.NOT_FOUND && dispatch(redirectToRoute(AppRoute.NOT_FOUND)) && dispatch(errorReport(true));
+    })
 );
 
 export const fetchFavoritesList = () => (dispatch, _getState, api) => {
@@ -30,7 +37,7 @@ export const fetchFavoritesList = () => (dispatch, _getState, api) => {
 export const fetchOfferDetails = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.OFFERS}/${id}`)
     .then(({data}) => dispatch(loadOfferDetails(data)))
-    .catch(() => {})
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
@@ -49,9 +56,9 @@ export const checkAuth = () => (dispatch, _getState, api) => {
     .then(({data}) => {
       dispatch(getAuthInfo(data));
       dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(redirectToRoute(AppRoute.MAIN_INIT));
     })
-    .catch(() => {dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
+    .catch(() =>  {
+      dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
       dispatch(redirectToRoute(AppRoute.MAIN_INIT));
     });
 };
