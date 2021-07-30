@@ -141,23 +141,6 @@ describe('Reducer: data', () => {
         sortedOffers: [],
       });
   });
-  it('toggles favorite status', () => {
-    const toggleFavoriteStatusAction = {
-      type: ActionType.TOGGLE_FAVORITE_STATUS,
-      payload: adaptedOffers,
-    };
-
-    expect(data(initialState, toggleFavoriteStatusAction))
-      .toEqual({
-        ...initialState,
-        offers: {
-          data: [adaptedOffers],
-          isLoaded: true,
-        },
-        popularOffers: [adaptedOffers],
-        sortedOffers: [adaptedOffers],
-      });
-  });
   it('should update favoriteOffers by load offers', () => {
     const loadFavoritesAction = {
       type: ActionType.LOAD_FAVORITES,
