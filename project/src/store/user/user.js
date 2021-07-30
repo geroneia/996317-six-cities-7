@@ -18,6 +18,7 @@ const user = createReducer(initialState, (builder) => {
     })
     .addCase(logout, (state) => {
       state.authorizationStatus = AuthorizationStatus.NO_AUTH;
+      state.authInfo = {};
     });
 });
 

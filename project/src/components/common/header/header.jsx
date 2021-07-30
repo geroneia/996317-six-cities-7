@@ -66,4 +66,4 @@ function Header() {
   );
 }
 
-export default React.memo(Header);
+export default Header;

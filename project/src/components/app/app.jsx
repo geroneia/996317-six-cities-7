@@ -43,11 +43,11 @@ function App() {
         path={`${AppRoute.ROOM}/:id`}
         render={({match}) => <OfferPage id={+match.params.id} />}
       />
+      <Route exact path={AppRoute.NOT_FOUND}>
+        <NotFoundPage />
+      </Route>
       <Route exact path={AppRoute.MAIN}>
         <MainPage />
-      </Route>
-      <Route>
-        <NotFoundPage />
       </Route>
     </Switch>
   );

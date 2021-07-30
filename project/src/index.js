@@ -6,15 +6,13 @@ import {Provider} from 'react-redux';
 import {Router as BrowserRouter} from 'react-router-dom';
 import App from './components/app/app';
 import rootReducer from './store/root-reducer';
-import {requireAuthorization} from './store/action';
+// import {requireAuthorization} from './store/action';
 import {checkAuth, fetchOffersList} from './store/api-actions';
-import {AuthorizationStatus} from './const';
+// import {AuthorizationStatus} from './const';
 import {redirect} from './store/middlewares/redirect';
 import browserHistory from './browser-history';
 
-const api = createAPI(
-  () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
-);
+const api = createAPI();
 
 const store = configureStore({
   reducer: rootReducer,

@@ -10,7 +10,8 @@ import {
   loadFavorites,
   toggleFavoriteStatus,
   clearFavorites,
-  errorReport
+  errorReport,
+  dropToInit as clearOffersList
 } from '../action';
 import {
   adaptToClient,
@@ -51,10 +52,6 @@ const data = createReducer(initialState, (builder) => {
       state.sortedOffers = getInitialOffers(action.payload);
     })
     .addCase(toggleFavoriteStatus, (state, action) => {
-      state.offers = {
-        data: replaceOffer(state.offers.data, adaptToClient(action.payload)),
-        isLoaded: true,
-      };
       state.popularOffers = replaceOffer(state.popularOffers, adaptToClient(action.payload));
       state.sortedOffers = replaceOffer(state.sortedOffers, adaptToClient(action.payload));
       if (state.offerDetails.isLoaded) {
@@ -105,6 +102,14 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(errorReport, (state, action) => {
       state.isError = (action.payload);
+    })
+    .addCase(clearOffersList, (state) => {
+      state.popularOffers = state.offers.data;
+      state.sortedOffers = state.offers.data;
+      state.favoriteOffers = {
+        data: [],
+        isLoaded: false,
+      };
     });
 });
 

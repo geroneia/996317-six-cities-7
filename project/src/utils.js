@@ -109,3 +109,7 @@ export const replaceOffer = (offers, offer) => {
 export const getMessages = (reviews) => reviews
   .slice(0, MAX_MESSAGE_COUNT)
   .sort((prev, next) => new Date(next.date) - new Date(prev.date));
+
+export const setTokenFromLocalStorage = (api) => {
+  api.defaults.headers['x-token'] = localStorage.getItem('token') ?? '';
+};
