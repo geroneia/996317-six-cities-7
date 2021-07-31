@@ -19,6 +19,7 @@ const initialState = {
   nearbyOffers: [],
   reviews: [],
   isError: false,
+  isConnect: true,
 };
 
 const testOffers =  [{
