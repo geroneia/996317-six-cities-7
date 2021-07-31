@@ -4,6 +4,7 @@ import Header from '../../common/header/header';
 import {login} from '../../../store/api-actions';
 import {Link} from 'react-router-dom';
 import {getCity} from '../../../store/app/selectors';
+import {getConnectionStatus} from '../../../store/data/selectors';
 import {validateEmail, validatePassword} from '../../../utils';
 import {withErrorAlert} from '../../../hocs/with-error-alert';
 import PropTypes from 'prop-types';
@@ -12,6 +13,7 @@ function LogInPage(props) {
   const loginRef = useRef();
   const passwordRef = useRef();
   const {name} = useSelector(getCity);
+  const isConnect = useSelector(getConnectionStatus);
   const dispatch = useDispatch();
   const {onError} = props;
 
@@ -37,6 +39,10 @@ function LogInPage(props) {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
+            {!isConnect &&
+            <p className="login__help alert">
+            Please, check your internet-connection and <b>try again</b>.
+            </p>}
             <form
               className="login__form form"
               action=""

@@ -30,8 +30,8 @@ function Card({place, offer, onOfferChange}) {
         className={cx({
           'place-card__image-wrapper': true,
           'cities__image-wrapper': place === PlaceMark.PLACE_CARD,
-          'near-places__card': place === PlaceMark.PROPERTY,
-          'favorites__card': place === PlaceMark.FAVORITES,
+          'near-places__image-wrapper': place === PlaceMark.PROPERTY,
+          'favorites__image-wrapper': place === PlaceMark.FAVORITES,
         })}
       >
         <Link to={`/offer/${id}`}>

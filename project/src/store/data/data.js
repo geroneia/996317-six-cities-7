@@ -11,6 +11,7 @@ import {
   toggleFavoriteStatus,
   clearFavorites,
   errorReport,
+  connectionErrorReport,
   dropToInit as clearOffersList
 } from '../action';
 import {
@@ -39,6 +40,7 @@ const initialState = {
   nearbyOffers: [],
   reviews: [],
   isError: false,
+  isConnect: true,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -102,6 +104,9 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(errorReport, (state, action) => {
       state.isError = (action.payload);
+    })
+    .addCase(connectionErrorReport, (state, action) => {
+      state.isConnect = (action.payload);
     })
     .addCase(clearOffersList, (state) => {
       state.popularOffers = state.offers.data;

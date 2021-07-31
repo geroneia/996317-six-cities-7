@@ -18,7 +18,7 @@ function Gallery({images, type}) {
 }
 
 Gallery.propTypes = {
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   type: PropTypes.string.isRequired,
 };
 

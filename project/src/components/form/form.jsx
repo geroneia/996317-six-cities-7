@@ -1,22 +1,24 @@
 import React, {useRef, useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Rating from '../common/rating/rating';
 import {RATINGS} from '../../const';
 import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
 import {validateMessage} from '../../utils';
+import {getConnectionStatus} from '../../store/data/selectors';
 
 const emptyUserComment = {rating: '', message: ''};
 
 function Form({id}) {
   const formRef = useRef();
   const dispatch = useDispatch();
+  const isConnect = useSelector(getConnectionStatus);
 
   const [userComment, setUserComment] = useState(emptyUserComment);
   const [canSubmit, toggleSubmissionAbility] = useState(true);
-  const [disableInput, setdisableInput] = useState(false);
-  const disableForm = () => setdisableInput(true);
-  const enableForm = () => setdisableInput(false);
+  const [disableInput, setDisableInput] = useState(false);
+  const disableForm = () => setDisableInput(true);
+  const enableForm = () => setDisableInput(false);
   const onRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
   const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
   const {message, rating} = userComment;
@@ -25,7 +27,11 @@ function Form({id}) {
     evt.preventDefault();
     if (!validateMessage(message) || !rating.length)
     {
-      onEror();
+      onError();
+    }
+    else if (!isConnect) {
+      toggleSubmissionAbility(true);
+      enableForm();
     } else {
       toggleSubmissionAbility(true);
       disableForm();
@@ -37,7 +43,7 @@ function Form({id}) {
     }
   };
 
-  const onEror = (evt) => {
+  const onError = () => {
     toggleSubmissionAbility(false);
     enableForm();
   };
@@ -77,9 +83,15 @@ function Form({id}) {
         disabled={disableInput}
       />
       <div className="reviews__button-wrapper">
-        <p className="reviews__help">
+        {!isConnect ? (
+          <p className="reviews__help alert">
+            Please, check your internet-connection and <b>try again</b>.
+          </p>
+        ) : (
+          <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-        </p>
+          </p>
+        )}
         <button className="reviews__submit form__submit button" type="submit" disabled={canSubmit}>Submit</button>
       </div>
     </form>

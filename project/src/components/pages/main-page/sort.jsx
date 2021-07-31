@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {SortTypes} from '../../../const';
+import {SortType} from '../../../const';
 
-const types = Object.values(SortTypes);
+const types = Object.values(SortType);
 
 function Sort({sortType, onSortChange}) {
   const [opened, setOpened] = useState(false);

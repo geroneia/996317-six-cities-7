@@ -1,13 +1,12 @@
 import {
   RATINGS,
   Cities,
-  SortTypes,
+  SortType,
   AuthorizationStatus,
   DEFAULT_CITY,
   SHAKE_ANIMATION_TIMEOUT,
   MILLISECONDS_IN_SECOND,
-  MIN_MESAGE_LENGTH,
-  MAX_MESSAGE_LENGTH,
+  MessageLength,
   MAX_MESSAGE_COUNT
 } from './const';
 
@@ -65,11 +64,11 @@ const getSortedHighToLowRating = (offers) => offers.sort((prev, next) => next.ra
 
 export const getSortAction = (offers, type) => {
   switch (type) {
-    case SortTypes.PRICE_LOW_HIGH:
+    case SortType.PRICE_LOW_HIGH:
       return getSortedLowToHighPrice(offers);
-    case SortTypes.PRICE_HIGH_LOW:
+    case SortType.PRICE_HIGH_LOW:
       return getSortedHighToLowPrice(offers);
-    case SortTypes.TOP_RATED:
+    case SortType.TOP_RATED:
       return getSortedHighToLowRating(offers);
     default:
       return offers;
@@ -90,7 +89,7 @@ export const shake = (target) => {
   }, SHAKE_ANIMATION_TIMEOUT);
 };
 
-export const validateMessage = (text) => !!text.length && text.length >= MIN_MESAGE_LENGTH && text.length <= MAX_MESSAGE_LENGTH;
+export const validateMessage = (text) => !!text.length && text.length >= MessageLength.MIN_MESSAGE_LENGTH && text.length <= MessageLength.MAX_MESSAGE_LENGTH;
 
 export const validateEmail = (email) => {
   const regEx = /\S+@\S+\.\S+/;

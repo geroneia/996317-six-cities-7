@@ -10,7 +10,8 @@ import {
   loadFavorites,
   toggleFavoriteStatus,
   dropToInit as clearOffersList,
-  errorReport
+  errorReport,
+  connectionErrorReport
 } from './action';
 import {AuthorizationStatus, AppRoute, APIRoute, HttpCode} from '../const';
 import {setTokenFromLocalStorage} from '../utils';
@@ -70,14 +71,21 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(getAuthInfo(data));
       dispatch(requireAuthorization(AuthorizationStatus.AUTH));
     })
+    .then(() => dispatch(connectionErrorReport(true)))
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN_INIT)))
-    .catch(() => {})
+    .catch(() => {
+      dispatch(connectionErrorReport(false));
+    })
 );
 
 export const postReview = (id, comment, rating) => (dispatch, _getState, api) => {
   setTokenFromLocalStorage(api);
   return api.post(`${APIRoute.REVIEWS}/${id}`, {comment, rating})
-    .then(({data}) => dispatch(loadReviews(data)));
+    .then(({data}) => dispatch(loadReviews(data)))
+    .then(() => dispatch(connectionErrorReport(true)))
+    .catch((error) => {
+      dispatch(connectionErrorReport(false));
+    });
 };
 
 export const postFavoritesStatus = (id, status) => (dispatch, _getState, api) => {

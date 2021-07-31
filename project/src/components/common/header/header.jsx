@@ -11,7 +11,7 @@ function Header() {
   const {avatarUrl, email, name} = authInfo;
   const dispatch = useDispatch();
 
-  const handleLogoutClick = (evt) => {
+  const handleLogoutClick = () => {
     dispatch(logout());
   };
 

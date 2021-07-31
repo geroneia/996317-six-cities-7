@@ -20,6 +20,7 @@ export const ActionType = {
   GET_AUTH_INFO: 'user/getAuthtInfo',
   LOGOUT: 'user/logout',
   ERROR_REPORT: 'data/errorReport',
+  CONNECTION_ERROR_REPORT: 'data/connectionErrorReport',
   CLEAR_OFFERS_LIST: 'data/clearOffersList',
 };
 
@@ -61,5 +62,7 @@ export const getAuthInfo = createAction(ActionType.GET_AUTH_INFO, (authInfo) => 
 export const logout = createAction(ActionType.LOGOUT);
 
 export const errorReport = createAction(ActionType.ERROR_REPORT);
+
+export const connectionErrorReport = createAction(ActionType.CONNECTION_ERROR_REPORT);
 
 export const dropToInit = createAction(ActionType.CLEAR_OFFERS_LIST);

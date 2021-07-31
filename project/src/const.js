@@ -66,7 +66,7 @@ export const URL_MARKER_DEFAULT = '../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../img/pin-active.svg';
 
-export const SortTypes = {
+export const SortType = {
   DEFAULT: 'Popular',
   PRICE_LOW_HIGH: 'Price: low to high',
   PRICE_HIGH_LOW: 'Price: high to low',
@@ -100,16 +100,15 @@ export const PlaceMark = {
   FAVORITES: 'favorites',
 };
 
-export const MAX_COUNT_IMAGES = 6;
+export const MessageLength = {
+  MIN_MESSAGE_LENGTH: 50,
+  MAX_MESSAGE_LENGTH: 300,
+};
 
-export const MAX_COUNT_REVIEWS = 6;
+export const MAX_COUNT_IMAGES = 6;
 
 export const SHAKE_ANIMATION_TIMEOUT = 600;
 
 export const MILLISECONDS_IN_SECOND = 1000;
-
-export const MAX_MESSAGE_LENGTH = 300;
-
-export const MIN_MESAGE_LENGTH = 50;
 
 export const MAX_MESSAGE_COUNT = 10;
