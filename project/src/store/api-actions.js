@@ -82,7 +82,6 @@ export const postReview = (id, comment, rating) => (dispatch, _getState, api) =>
   setTokenFromLocalStorage(api);
   return api.post(`${APIRoute.REVIEWS}/${id}`, {comment, rating})
     .then(({data}) => dispatch(loadReviews(data)))
-    .then(() => dispatch(connectionErrorReport(true)))
     .catch((error) => {
       dispatch(connectionErrorReport(false));
     });
@@ -100,5 +99,6 @@ export const logout = () => (dispatch, _getState, api) => {
   return api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(closeSession()))
-    .then(() => dispatch(clearOffersList()));
+    .then(() => dispatch(clearOffersList()))
+    .then(() => dispatch(connectionErrorReport(true)));
 };

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import {postReview} from '../../store/api-actions';
 import {validateMessage} from '../../utils';
 import {getConnectionStatus} from '../../store/data/selectors';
+import {connectionErrorReport} from '../../store/action';
 
 const emptyUserComment = {rating: '', message: ''};
 
@@ -19,8 +20,14 @@ function Form({id}) {
   const [disableInput, setDisableInput] = useState(false);
   const disableForm = () => setDisableInput(true);
   const enableForm = () => setDisableInput(false);
-  const onRatingChange = ({target: {value}}) => setUserComment({...userComment, rating: value});
-  const handleMessageChange = ({target: {value}}) => setUserComment({...userComment, message: value});
+  const onRatingChange = ({target: {value}}) =>
+    setUserComment({...userComment, rating: value},
+      !isConnect && dispatch(connectionErrorReport(true)),
+    );
+  const handleMessageChange = ({target: {value}}) =>
+    setUserComment({...userComment, message: value},
+      !isConnect && dispatch(connectionErrorReport(true)),
+    );
   const {message, rating} = userComment;
 
   const handleSubmit = (evt) => {
